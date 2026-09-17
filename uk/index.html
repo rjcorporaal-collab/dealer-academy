@@ -456,6 +456,37 @@
   .btn:disabled{opacity:.42;cursor:not-allowed}
   .navhint{font-size:14.5px;color:var(--ink-faint);flex:1 1 100%;order:3}
 
+  /* ---------- account / voortgangsregistratie ---------- */
+  .acctbtn{
+    font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--yellow);color:#006933;border:1.5px solid var(--yellow);
+    border-radius:var(--r);padding:5px 11px;cursor:pointer;
+  }
+  .acctbtn:hover{background:#FFE740;border-color:#FFE740}
+  .acctpaneel{
+    position:fixed;z-index:60;right:16px;top:calc(env(safe-area-inset-top, 0px) + 64px);
+    width:min(340px, calc(100vw - 32px));
+    background:var(--surface);border:1px solid var(--line-strong);border-top:4px solid var(--green);
+    border-radius:var(--r);padding:18px 19px;box-shadow:0 10px 30px rgba(0,0,0,.18);
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .acct-kop{font-family:var(--display);font-weight:800;font-size:16px;color:var(--ink-strong)}
+  .acct-tekst{font-size:14.5px;line-height:1.45;color:var(--ink-soft)}
+  .acct-tekst b{color:var(--ink-strong)}
+  .acct-label{font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-faint);margin-top:2px}
+  .acct-veld{
+    font-family:var(--body);font-size:15px;color:var(--ink);background:var(--surface);
+    border:1px solid var(--line-strong);border-radius:var(--r);padding:9px 11px;width:100%;
+  }
+  .acct-veld:focus{border-color:var(--green-bright);outline:none}
+  .acct-rij{display:flex;gap:8px;margin-top:4px}
+  .acct-klein{font-size:13.5px;padding:9px 14px;flex:1}
+  .acct-melding{font-size:13.5px;line-height:1.4;color:var(--ink-soft);
+    border-left:3px solid var(--line-strong);padding:7px 0 7px 11px}
+  .acct-melding.goed{border-left-color:var(--good);color:var(--ink)}
+  .acct-melding.fout{border-left-color:var(--bad);color:var(--ink)}
+
   :focus-visible{outline:3px solid var(--green-bright);outline-offset:2px}
   @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
 
@@ -478,6 +509,7 @@
     <span class="sub" id="sub"></span>
     <span class="right">
       <span class="count" id="count"></span>
+      <span id="acctslot"></span>
       <button class="themebtn" id="themebtn" type="button"></button>
     </span>
   </div>
@@ -523,6 +555,8 @@ function renderChrome(){
   document.getElementById("themebtn").textContent = L.theme;
   const done = MODULES.filter(m => passed(m.id)).length;
   document.getElementById("count").textContent = done + " / " + MODULES.length + " " + L.completed;
+  document.getElementById("acctslot").innerHTML = accountKnopHTML();
+  wireAccount();
 
   const tabs = document.getElementById("tabs");
   let html = '<button class="tab" role="tab" type="button" data-intro="1" aria-selected="' +
@@ -936,6 +970,7 @@ function showScore(m){
   m.quiz.forEach((q, i) => { if (answered[i] === q.correct) score++; });
   state.results[m.id] = { score };
   save();
+  bewaarVoortgang(m, score);
   const pass = score >= 3;
   document.getElementById("score-slot").innerHTML =
     '<div class="score ' + (pass ? "pass" : "fail") + '" style="margin-top:20px">' +
@@ -954,7 +989,190 @@ document.getElementById("themebtn").addEventListener("click", () => {
   document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
 });
 
-function boot(){ load(); render(); }
+function boot(){ load(); render(); sbStart(); }
+/* ---------------------------------------------------------------
+   Voortgangsregistratie via Supabase — optioneel.
+
+   Zonder ingevulde sleutels hieronder verandert er niets: de training
+   blijft de voortgang in de browser bewaren, precies zoals nu. Zodra
+   CONFIG is ingevuld en de pagina niet in de Claude-sandbox draait,
+   logt de medewerker in met een e-maillink en wordt elke afgeronde
+   module ook in Supabase vastgelegd.
+
+   De anon-sleutel hoort in de paginacode; die is publiceerbaar. De
+   service_role-sleutel hoort daar NOOIT — die geeft volledige toegang
+   tot de database en omzeilt alle beveiligingsregels.
+---------------------------------------------------------------- */
+const CONFIG = {
+  supabaseUrl:     "",   // https://<project-ref>.supabase.co
+  supabaseAnonKey: ""    // de publiceerbare anon-sleutel
+};
+
+const SB_VERSIE = "2.116.0";
+let sb = null;
+let sessie = null;
+let sbBezig = false;
+
+function sbGeconfigureerd(){
+  return !!(CONFIG.supabaseUrl && CONFIG.supabaseAnonKey) &&
+         !/(^|\.)claudeusercontent\.com$/i.test(location.hostname);
+}
+
+function laadScript(src){
+  return new Promise(function(res, rej){
+    const s = document.createElement("script");
+    s.src = src;
+    s.onload = res;
+    s.onerror = function(){ rej(new Error("kon niet laden: " + src)); };
+    document.head.appendChild(s);
+  });
+}
+
+async function sbStart(){
+  if (!sbGeconfigureerd()) return;
+  try {
+    await laadScript("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@" + SB_VERSIE + "/dist/umd/supabase.js");
+    sb = window.supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseAnonKey);
+    const r = await sb.auth.getSession();
+    sessie = (r.data && r.data.session) || null;
+    sb.auth.onAuthStateChange(async function(_gebeurtenis, s){
+      sessie = s;
+      if (s) await haalVoortgang();
+      render();
+    });
+    if (sessie) await haalVoortgang();
+  } catch (e) {
+    console.warn("Voortgangsregistratie niet beschikbaar:", e.message);
+    sb = null;
+  }
+  render();
+}
+
+async function haalVoortgang(){
+  if (!sb || !sessie) return;
+  const r = await sb.from("voortgang").select("module_id, score").eq("editie", EDITIE);
+  if (r.error){ console.warn("ophalen mislukt:", r.error.message); return; }
+  (r.data || []).forEach(function(rij){
+    const huidig = state.results[rij.module_id];
+    if (!huidig || rij.score > huidig.score) state.results[rij.module_id] = { score: rij.score };
+  });
+  save();
+}
+
+async function bewaarVoortgang(m, score){
+  if (!sb || !sessie) return;
+  const r = await sb.from("voortgang").upsert({
+    user_id:      sessie.user.id,
+    email:        sessie.user.email,
+    dealer:       dealerNaam(),
+    editie:       EDITIE,
+    module_id:    m.id,
+    module_nr:    m.n,
+    module_titel: m.railTitle.replace(/&[a-z]+;/g, "").trim(),
+    score:        score
+  }, { onConflict: "user_id,editie,module_id" });
+  if (r.error) console.warn("opslaan mislukt:", r.error.message);
+}
+
+function dealerNaam(){
+  try { return localStorage.getItem("rc-dealer") || null; } catch (e) { return null; }
+}
+function zetDealerNaam(v){
+  try { localStorage.setItem("rc-dealer", v); } catch (e) {}
+}
+
+/* ---------- de knop in de balk en het inlogpaneel ---------- */
+
+function accountKnopHTML(){
+  if (!sbGeconfigureerd()) return "";
+  if (sessie) return '<button class="acctbtn" id="acct" type="button" title="' +
+    esc(sessie.user.email) + '">' + esc(L.sb.ingelogdAls) + '</button>';
+  return '<button class="acctbtn" id="acct" type="button">' + L.sb.inloggen + '</button>';
+}
+
+function wireAccount(){
+  const knop = document.getElementById("acct");
+  if (knop) knop.addEventListener("click", toonAccountPaneel);
+}
+
+function sluitPaneel(){
+  const p = document.getElementById("acctpaneel");
+  if (p) p.remove();
+}
+
+function toonAccountPaneel(){
+  sluitPaneel();
+  const p = document.createElement("div");
+  p.className = "acctpaneel";
+  p.id = "acctpaneel";
+
+  if (sessie){
+    p.innerHTML =
+      '<div class="acct-kop">' + L.sb.ingelogdKop + '</div>' +
+      '<p class="acct-tekst"><b>' + esc(sessie.user.email) + '</b>' +
+        (dealerNaam() ? '<br>' + esc(dealerNaam()) : '') + '</p>' +
+      '<p class="acct-tekst">' + L.sb.ingelogdUitleg + '</p>' +
+      '<div class="acct-rij"><button class="btn ghost acct-klein" id="uitloggen" type="button">' +
+        L.sb.uitloggen + '</button>' +
+      '<button class="btn ghost acct-klein" id="sluit" type="button">' + L.sb.sluiten + '</button></div>';
+  } else {
+    p.innerHTML =
+      '<div class="acct-kop">' + L.sb.inlogKop + '</div>' +
+      '<p class="acct-tekst">' + L.sb.inlogUitleg + '</p>' +
+      '<label class="acct-label" for="acct-mail">' + L.sb.email + '</label>' +
+      '<input class="acct-veld" id="acct-mail" type="email" autocomplete="email" placeholder="naam@bedrijf.nl">' +
+      '<label class="acct-label" for="acct-dealer">' + L.sb.dealer + '</label>' +
+      '<input class="acct-veld" id="acct-dealer" type="text" autocomplete="organization" value="' +
+        esc(dealerNaam() || "") + '">' +
+      '<div class="acct-rij"><button class="btn next acct-klein" id="stuurlink" type="button">' +
+        L.sb.stuurLink + '</button>' +
+      '<button class="btn ghost acct-klein" id="sluit" type="button">' + L.sb.sluiten + '</button></div>' +
+      '<p class="acct-melding" id="acct-melding" hidden></p>';
+  }
+
+  document.body.appendChild(p);
+  document.getElementById("sluit").addEventListener("click", sluitPaneel);
+
+  const uit = document.getElementById("uitloggen");
+  if (uit) uit.addEventListener("click", async function(){
+    await sb.auth.signOut();
+    sessie = null;
+    sluitPaneel();
+    render();
+  });
+
+  const stuur = document.getElementById("stuurlink");
+  if (stuur) stuur.addEventListener("click", async function(){
+    const mail = document.getElementById("acct-mail").value.trim();
+    const dealer = document.getElementById("acct-dealer").value.trim();
+    const melding = document.getElementById("acct-melding");
+    if (!mail || mail.indexOf("@") < 1){
+      melding.hidden = false;
+      melding.className = "acct-melding fout";
+      melding.textContent = L.sb.geenMail;
+      return;
+    }
+    if (dealer) zetDealerNaam(dealer);
+    stuur.disabled = true;
+    melding.hidden = false;
+    melding.className = "acct-melding";
+    melding.textContent = L.sb.bezig;
+    const r = await sb.auth.signInWithOtp({
+      email: mail,
+      options: { emailRedirectTo: location.href.split("#")[0] }
+    });
+    stuur.disabled = false;
+    if (r.error){
+      melding.className = "acct-melding fout";
+      melding.textContent = L.sb.mislukt + " " + r.error.message;
+    } else {
+      melding.className = "acct-melding goed";
+      melding.textContent = L.sb.verstuurd.replace("{email}", mail);
+    }
+  });
+}
+
+const EDITIE = "uk";
 
 const L = {
   sub: "Trade Counter Academy",
@@ -986,6 +1204,23 @@ const L = {
   nextPhase: "Next step →",
   nextModule: "Next module →",
   finish: "Training complete",
+  sb: {
+    inloggen: "Sign in",
+    ingelogdAls: "Signed in",
+    inlogKop: "Save your progress",
+    inlogUitleg: "Sign in with your work email. Your progress is then saved, and you can pick up where you left off on another machine.",
+    email: "Email address",
+    dealer: "Stockist or branch",
+    stuurLink: "Send sign-in link",
+    sluiten: "Close",
+    bezig: "Sending…",
+    verstuurd: "We have sent a sign-in link to {email}. Open it on this device.",
+    mislukt: "Could not send:",
+    geenMail: "Enter a valid email address.",
+    ingelogdKop: "You are signed in",
+    ingelogdUitleg: "Every module you pass is recorded automatically.",
+    uitloggen: "Sign out"
+  },
   ph: {
     hook: "The situation",
     goals: "Outcomes",
