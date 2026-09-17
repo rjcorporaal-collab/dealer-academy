@@ -1,0 +1,1655 @@
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Repair Care Dealer Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=Inter+Tight:wght@400;500;600;700&display=swap">
+<style>
+  /* ---------------------------------------------------------------
+     Repair Care brand tokens, taken from repair-care.co.uk:
+     green #007F3E, dark green #006933, bright green #00A651,
+     signal yellow #FFDC00 with green text, 5px radius,
+     Inter 800 for headings and Inter Tight for body copy.
+     Every component styles through a token, so the dark theme is a
+     token swap only — no component-level theme selectors.
+  ---------------------------------------------------------------- */
+  :root{
+    --green:#007F3E;
+    --green-bright:#00A651;
+    --yellow:#FFDC00;
+    --yellow-tint:#FFF8D1;
+
+    --ground:#F0F0F0;
+    --surface:#FFFFFF;
+    --surface-alt:#F5F6F5;
+    --ink:#333333;
+    --ink-strong:#1C1C1C;
+    --ink-soft:#5E6B64;
+    --ink-faint:#8A928D;
+    --line:#DCDCDC;
+    --line-strong:#C6CCC8;
+
+    /* green bands: top bar, module header, remember block, table heads */
+    --band-bg:#007F3E;
+    --band-ink:#FFFFFF;
+    --band-rule:rgba(255,255,255,.22);
+    --band-chip-bg:rgba(255,255,255,.18);
+    --band-chip-ink:#FFFFFF;
+    --bar-bg:#006933;
+    --tab-ink:rgba(255,255,255,.76);
+    --tab-ink-on:#FFFFFF;
+
+    /* dark green panel: the video block */
+    --panel-bg:#006933;
+    --panel-ink:#FFFFFF;
+    --panel-rule:rgba(255,255,255,.2);
+    --panel-link:#FFDC00;
+
+    /* green used as text/accent on light surfaces */
+    --accent-ink:#007F3E;
+    --tint:#E5F2EB;
+    --pill-bg:#007F3E;
+    --pill-ink:#FFFFFF;
+
+    --good:#007F3E;
+    --good-tint:#E5F2EB;
+    --bad:#C4321F;
+    --bad-tint:#FAE7E3;
+
+    --r:5px;
+    --display:"Inter","Helvetica Neue",Arial,sans-serif;
+    --body:"Inter Tight","Inter","Segoe UI",system-ui,sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --green:#00A651;
+      --green-bright:#2FC172;
+      --ground:#0D120F;
+      --surface:#161D18;
+      --surface-alt:#1B241E;
+      --ink:#DCE4DE;
+      --ink-strong:#F2F6F3;
+      --ink-soft:#A8B3AC;
+      --ink-faint:#7E8A83;
+      --line:#2A342E;
+      --line-strong:#3B4840;
+
+      --band-bg:#123024;
+      --band-ink:#F2F6F3;
+      --band-rule:#2A342E;
+      --band-chip-bg:#0D120F;
+      --band-chip-ink:#A8B3AC;
+      --bar-bg:#101812;
+      --tab-ink:#A8B3AC;
+      --tab-ink-on:#F2F6F3;
+
+      --panel-bg:#1B241E;
+      --panel-ink:#DCE4DE;
+      --panel-rule:#2A342E;
+      --panel-link:#2FC172;
+
+      --accent-ink:#2FC172;
+      --tint:#152C22;
+      --pill-bg:#152C22;
+      --pill-ink:#2FC172;
+
+      --good:#2FC172;
+      --good-tint:#12291E;
+      --bad:#E9755C;
+      --bad-tint:#2E1A16;
+      --yellow-tint:#2B2712;
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --green:#00A651;
+    --green-bright:#2FC172;
+    --ground:#0D120F;
+    --surface:#161D18;
+    --surface-alt:#1B241E;
+    --ink:#DCE4DE;
+    --ink-strong:#F2F6F3;
+    --ink-soft:#A8B3AC;
+    --ink-faint:#7E8A83;
+    --line:#2A342E;
+    --line-strong:#3B4840;
+
+    --band-bg:#123024;
+    --band-ink:#F2F6F3;
+    --band-rule:#2A342E;
+    --band-chip-bg:#0D120F;
+    --band-chip-ink:#A8B3AC;
+    --bar-bg:#101812;
+    --tab-ink:#A8B3AC;
+    --tab-ink-on:#F2F6F3;
+
+    --panel-bg:#1B241E;
+    --panel-ink:#DCE4DE;
+    --panel-rule:#2A342E;
+    --panel-link:#2FC172;
+
+    --accent-ink:#2FC172;
+    --tint:#152C22;
+    --pill-bg:#152C22;
+    --pill-ink:#2FC172;
+
+    --good:#2FC172;
+    --good-tint:#12291E;
+    --bad:#E9755C;
+    --bad-tint:#2E1A16;
+    --yellow-tint:#2B2712;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:var(--body);font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:var(--display);font-weight:800;margin:0;line-height:1.15;text-wrap:balance}
+  p{margin:0}
+
+  /* ---------- top bar ---------- */
+  .topbar{position:sticky;top:env(safe-area-inset-top, 0px);z-index:30;background:var(--band-bg);color:var(--band-ink)}
+  .topbar-inner{max-width:1060px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .logo{display:inline-flex;align-items:center;gap:7px;background:#fff;border:2px solid #00A651;border-radius:4px;padding:4px 9px 4px 6px}
+  .logo-mark{width:15px;height:15px;border-radius:2px;background:#FFDC00;border:2px solid #00A651;flex:0 0 auto}
+  .logo-text{font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:-0.02em;color:#007F3E;text-transform:uppercase}
+  .topbar .sub{font-family:var(--display);font-weight:700;font-size:13.5px;opacity:.9}
+  .topbar .right{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .count{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.04em;opacity:.92;font-variant-numeric:tabular-nums}
+  .themebtn{
+    font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    background:transparent;color:inherit;border:1.5px solid var(--band-rule);
+    border-radius:var(--r);padding:5px 11px;cursor:pointer;
+  }
+  .themebtn:hover{border-color:currentColor}
+
+  /* ---------- module tabs ---------- */
+  .tabs{background:var(--bar-bg)}
+  .tabs-inner{max-width:1060px;margin:0 auto;padding:0 20px;display:flex;gap:2px;overflow-x:auto}
+  .tab{
+    flex:0 0 auto;cursor:pointer;border:none;background:transparent;color:var(--tab-ink);
+    font-family:var(--display);font-weight:700;font-size:13.5px;
+    padding:12px 16px;border-bottom:4px solid transparent;white-space:nowrap;
+    display:flex;align-items:center;gap:8px;
+  }
+  .tab:hover{color:var(--tab-ink-on)}
+  .tab[aria-selected="true"]{color:var(--tab-ink-on);border-bottom-color:var(--yellow)}
+  .tab .tick{color:var(--yellow);font-size:12px}
+
+  /* ---------- page ---------- */
+  .page{max-width:1060px;margin:0 auto;padding-left:20px;padding-right:20px;padding-block:0 60px}
+
+  .modhead{background:var(--band-bg);color:var(--band-ink);border-radius:0 0 var(--r) var(--r);padding:26px 28px 24px;margin-bottom:22px}
+  .chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px}
+  .chip{
+    font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.07em;text-transform:uppercase;
+    padding:4px 10px;border-radius:var(--r);background:var(--band-chip-bg);color:var(--band-chip-ink);
+  }
+  .chip.solid{background:var(--yellow);color:#006933}
+  .modhead h1{font-size:clamp(24px,3.4vw,34px);letter-spacing:-0.02em}
+
+  /* ---------- phase blocks ---------- */
+  .phases{list-style:none;margin:0 0 22px;padding:0;display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+  .phase-btn{
+    width:100%;cursor:pointer;text-align:left;
+    background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--line-strong);
+    border-radius:var(--r);padding:10px 11px 11px;
+    font-family:var(--body);color:var(--ink-soft);
+    display:flex;flex-direction:column;gap:4px;min-height:76px;
+    transition:border-color .15s ease,background .15s ease;
+  }
+  .phase-btn:hover{border-top-color:var(--green-bright)}
+  .phase-btn .pn{
+    font-family:var(--display);font-weight:800;font-size:12px;color:var(--ink-faint);
+    font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:5px;
+  }
+  .phase-btn .pl{font-family:var(--display);font-weight:700;font-size:12.5px;line-height:1.25;color:var(--ink-soft)}
+  .phase-btn.done{border-top-color:var(--green-bright)}
+  .phase-btn.done .pn .dot{color:var(--green-bright)}
+  .phase-btn[aria-current="true"]{background:var(--band-bg);border-color:var(--band-bg);border-top-color:var(--yellow)}
+  .phase-btn[aria-current="true"] .pn,.phase-btn[aria-current="true"] .pl{color:var(--band-ink)}
+
+  /* ---------- content block ---------- */
+  .block{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .block-head{background:var(--surface-alt);border-bottom:1px solid var(--line);padding:14px 28px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .block-head .step{font-family:var(--display);font-weight:800;font-size:12px;color:var(--accent-ink);letter-spacing:.09em;text-transform:uppercase}
+  .block-head h2{font-size:19px;color:var(--ink-strong)}
+  .block-body{padding:26px 28px 28px;display:flex;flex-direction:column;gap:20px}
+
+  .lede{font-size:19px;line-height:1.55;color:var(--ink-strong)}
+  .lede em{color:var(--ink-soft);font-style:italic}
+
+  ol.goals{margin:0;padding:0;list-style:none;counter-reset:g;display:flex;flex-direction:column;gap:11px}
+  ol.goals li{counter-increment:g;display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;font-size:17px}
+  ol.goals li::before{
+    content:counter(g);display:grid;place-items:center;width:26px;height:26px;border-radius:var(--r);
+    background:var(--pill-bg);color:var(--pill-ink);font-family:var(--display);font-weight:800;font-size:13px;
+  }
+
+  /* video */
+  .video{background:var(--panel-bg);color:var(--panel-ink);border-radius:var(--r);overflow:hidden}
+  .video-top{
+    display:flex;gap:16px;align-items:center;padding:20px 22px;flex-wrap:wrap;
+    color:inherit;text-decoration:none;
+  }
+  .video-top:hover .playbtn{transform:scale(1.06)}
+  .video-top:hover .vt{text-decoration:underline;text-underline-offset:3px}
+  .playbtn{
+    flex:0 0 auto;width:54px;height:54px;border-radius:var(--r);border:none;
+    background:var(--yellow);color:#006933;display:grid;place-items:center;transition:transform .15s ease;
+  }
+  .playbtn svg{width:20px;height:20px;margin-left:3px;display:block}
+  .video-meta{display:flex;flex-direction:column;min-width:0}
+  .video-meta .vt{font-family:var(--display);font-weight:800;font-size:17px;line-height:1.25}
+  .video-meta .vd{font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.05em;opacity:.82;margin-top:4px;text-transform:uppercase}
+  .video-task{padding:15px 22px 19px;border-top:1px solid var(--panel-rule);font-size:16px;line-height:1.5}
+  .frame{aspect-ratio:16/9;width:100%;max-width:100%;border:0;display:block;background:#000}
+  .video-caption{padding:15px 22px 0;display:flex;flex-direction:column;gap:4px}
+  .video-caption .vd a{color:var(--panel-link);text-decoration:underline;text-underline-offset:3px}
+  .fallback{padding:12px 22px 16px;font-size:14px}
+  .fallback a{color:var(--panel-link);text-decoration:underline;text-underline-offset:3px}
+
+  /* core */
+  .core{display:flex;flex-direction:column;gap:22px}
+  .core h3{font-size:18px;color:var(--accent-ink);margin-bottom:7px}
+  .core p{color:var(--ink);font-size:16.5px}
+  .core p strong{color:var(--ink-strong);font-weight:600}
+
+  .benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .benefit{background:var(--tint);border-radius:var(--r);padding:17px 18px;border-top:4px solid var(--green)}
+  .benefit .b-h{font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:8px}
+  .benefit p{font-size:15.5px;line-height:1.5;color:var(--ink)}
+
+  /* counter */
+  .askrow{display:flex;flex-direction:column;gap:10px}
+  .ask{
+    display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start;
+    background:var(--surface-alt);border-radius:var(--r);padding:14px 16px;font-size:16px;
+    border-left:4px solid var(--green-bright);
+  }
+  .ask .q{
+    display:grid;place-items:center;width:26px;height:26px;border-radius:var(--r);
+    background:var(--pill-bg);color:var(--pill-ink);font-family:var(--display);font-weight:800;font-size:14px;
+  }
+  .ask .a b{color:var(--ink-strong);font-weight:600}
+
+  .tablewrap{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;font-size:15.5px;min-width:420px}
+  th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--band-bg);color:var(--band-ink);font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;border-bottom:none}
+  thead th:first-child{border-radius:var(--r) 0 0 0}
+  thead th:last-child{border-radius:0 var(--r) 0 0}
+  td:first-child{font-weight:600;color:var(--ink-strong)}
+  td .art{font-family:var(--display);font-weight:600;font-size:12.5px;color:var(--accent-ink);display:block;font-variant-numeric:tabular-nums;margin-top:2px}
+
+  .note{background:var(--surface-alt);border-radius:var(--r);padding:15px 17px;font-size:15.5px;line-height:1.55;color:var(--ink)}
+  .note strong{color:var(--ink-strong);font-weight:600}
+  .saythis{background:var(--yellow-tint);border-left:4px solid var(--yellow);border-radius:0 var(--r) var(--r) 0;padding:16px 19px}
+  .saythis .lbl{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent-ink);display:block;margin-bottom:7px}
+  .saythis p{font-size:17.5px;font-style:italic;color:var(--ink-strong)}
+
+  /* quiz */
+  .quiz{display:flex;flex-direction:column;gap:20px}
+  .q-card{border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .q-card .q-t{
+    background:var(--surface-alt);padding:14px 17px;
+    font-family:var(--display);font-weight:700;font-size:16.5px;line-height:1.35;color:var(--ink-strong);
+    display:grid;grid-template-columns:26px 1fr;gap:11px;align-items:start;
+  }
+  .q-card .q-n{
+    display:grid;place-items:center;width:24px;height:24px;border-radius:var(--r);
+    background:var(--pill-bg);color:var(--pill-ink);font-size:12px;font-weight:800;
+  }
+  .opts{display:flex;flex-direction:column;gap:8px;padding:14px 17px}
+  .opt{
+    display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;text-align:left;width:100%;
+    cursor:pointer;font-family:var(--body);font-size:16px;line-height:1.45;color:var(--ink);
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;
+    transition:border-color .14s ease,background .14s ease;
+  }
+  .opt:hover:not(:disabled){border-color:var(--green-bright);background:var(--surface-alt)}
+  .opt:disabled{cursor:default}
+  .opt .k{
+    display:grid;place-items:center;width:24px;height:24px;border-radius:var(--r);
+    background:var(--surface-alt);color:var(--ink-faint);font-family:var(--display);font-weight:800;font-size:12.5px;
+  }
+  .opt.picked-good{border-color:var(--good);background:var(--good-tint)}
+  .opt.picked-bad{border-color:var(--bad);background:var(--bad-tint)}
+  .opt.reveal-good{border-color:var(--good);border-style:dashed}
+  .opt.picked-good .k,.opt.reveal-good .k{background:var(--good);color:#fff}
+  .opt.picked-bad .k{background:var(--bad);color:#fff}
+  .fb{margin:0 17px 16px;font-size:15.5px;line-height:1.5;color:var(--ink);border-left:4px solid var(--line-strong);padding:10px 0 10px 14px}
+  .fb.good{border-left-color:var(--good)}
+  .fb.bad{border-left-color:var(--bad)}
+  .fb b{color:var(--ink-strong);font-weight:600}
+
+  .score{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-radius:var(--r);padding:18px 20px;background:var(--surface-alt);border:1px solid var(--line)}
+  .score .big{font-family:var(--display);font-weight:800;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+  .score .verdict{font-size:16px;color:var(--ink)}
+  .score .verdict b{color:var(--ink-strong);font-weight:600}
+  .score.pass{border-color:var(--good);background:var(--good-tint)}
+  .score.pass .big{color:var(--good)}
+  .score.fail{border-color:var(--bad);background:var(--bad-tint)}
+  .score.fail .big{color:var(--bad)}
+
+  /* remember */
+  .remember{background:var(--band-bg);color:var(--band-ink);border-radius:var(--r);padding:24px 26px}
+  .remember .lbl{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:.11em;text-transform:uppercase;opacity:.8;display:block;margin-bottom:9px}
+  .remember p{font-family:var(--display);font-weight:800;font-size:20px;line-height:1.35}
+  .links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .links li{font-size:16px;display:flex;gap:9px;align-items:baseline}
+  .links a{color:var(--accent-ink);text-decoration:none;border-bottom:2px solid var(--tint);font-weight:500}
+  .links a:hover{border-bottom-color:var(--yellow)}
+  .links .dur{font-family:var(--display);font-weight:600;font-size:12px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+
+  .verify{
+    display:inline-block;font-family:var(--display);font-weight:700;font-size:10.5px;letter-spacing:.05em;
+    background:var(--yellow);color:#006933;border-radius:3px;padding:2px 7px;vertical-align:middle;
+  }
+
+  /* ---------- figures (inline SVG, no external assets) ---------- */
+  .fig{margin:0;background:var(--surface-alt);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 14px}
+  .fig svg{display:block;width:100%;height:auto;max-width:100%;overflow:visible}
+  .fig figcaption{font-size:14px;line-height:1.45;color:var(--ink-soft);margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}
+  .fig figcaption b{color:var(--ink-strong);font-weight:600}
+  .fig text{font-family:var(--display);font-weight:700}
+
+  .sv-wood{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.5}
+  .sv-grain{stroke:var(--line-strong);stroke-width:1;opacity:.55}
+  .sv-rot{fill:var(--bad);opacity:.5}
+  .sv-prime{stroke:var(--green-bright);stroke-width:3;fill:none;stroke-linecap:round}
+  .sv-fill{fill:var(--accent-ink);opacity:.35}
+  .sv-paint{stroke:var(--accent-ink);stroke-width:2.5;fill:none;stroke-linecap:round}
+  .sv-lbl{font-size:11px;fill:var(--ink-soft)}
+  .sv-num{font-size:10px;fill:var(--band-ink)}
+  .sv-numbg{fill:var(--band-bg)}
+  .sv-crack{stroke:var(--bad);stroke-width:2;fill:none;stroke-linecap:round}
+  .sv-track{stroke:var(--line-strong);stroke-width:3;stroke-linecap:round}
+  .sv-done{stroke:var(--accent-ink);stroke-width:3;stroke-linecap:round}
+  .sv-dot{fill:var(--accent-ink)}
+  .sv-dot-open{fill:var(--surface);stroke:var(--accent-ink);stroke-width:2.5}
+  .sv-drop{fill:var(--green-bright)}
+
+  @keyframes figIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .fig-stage{animation:figIn .45s ease backwards}
+  .fig-stage:nth-of-type(2){animation-delay:.35s}
+  .fig-stage:nth-of-type(3){animation-delay:.7s}
+  .fig-stage:nth-of-type(4){animation-delay:1.05s}
+
+  @keyframes woodShift{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+  @keyframes patchStretch{0%,100%{transform:scaleX(1)}50%{transform:scaleX(1.13)}}
+  @keyframes crackPulse{0%,100%{opacity:.35}50%{opacity:1}}
+  .an-shift{animation:woodShift 4.5s ease-in-out infinite}
+  .an-stretch{animation:patchStretch 4.5s ease-in-out infinite;transform-origin:left center}
+  .an-crack{animation:crackPulse 4.5s ease-in-out infinite}
+
+  @keyframes soak{0%{transform:translateY(0);opacity:0}25%{opacity:1}100%{transform:translateY(26px);opacity:0}}
+  .an-soak{animation:soak 3s ease-in infinite}
+  .an-soak:nth-of-type(2){animation-delay:1s}
+  .an-soak:nth-of-type(3){animation-delay:2s}
+
+  @keyframes runAlong{0%{stroke-dashoffset:var(--len)}100%{stroke-dashoffset:0}}
+  .an-run{stroke-dasharray:var(--len);animation:runAlong 1.4s ease-out .2s backwards}
+
+  /* step strip */
+  .stepstrip{display:flex;flex-wrap:wrap;gap:7px;align-items:stretch}
+  .stepchip{
+    flex:1 1 118px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+    padding:10px 11px;display:flex;flex-direction:column;gap:5px;
+  }
+  .stepchip .sn{
+    width:21px;height:21px;border-radius:4px;display:grid;place-items:center;
+    background:var(--tint);color:var(--accent-ink);font-family:var(--display);font-weight:800;font-size:11px;
+  }
+  .stepchip .sl{font-size:13.5px;line-height:1.3;color:var(--ink)}
+  .stepchip.hi{border-color:var(--yellow);border-width:2px;background:var(--yellow-tint)}
+  .stepchip.hi .sn{background:var(--yellow);color:#006933}
+  .stepchip.hi .sl{color:var(--ink-strong);font-weight:600}
+
+  /* icons */
+  .ico{width:15px;height:15px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .benefit .b-h{display:flex;align-items:center;gap:7px}
+  .why-ico{
+    width:36px;height:36px;border-radius:var(--r);background:var(--tint);color:var(--accent-ink);
+    display:grid;place-items:center;margin-bottom:12px;
+  }
+  .why-ico .ico{width:19px;height:19px}
+
+  /* ---------- intro page ---------- */
+  .hero{background:var(--band-bg);color:var(--band-ink);border-radius:0 0 var(--r) var(--r);padding:38px 30px 34px;margin-bottom:22px}
+  .hero .kicker{font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.78;display:block;margin-bottom:12px}
+  .hero h1{font-size:clamp(27px,4.2vw,42px);letter-spacing:-0.025em;margin-bottom:14px}
+  .hero .promise{font-size:19px;line-height:1.5;max-width:60ch;opacity:.94}
+  .hero .stamp{
+    display:inline-block;margin-top:20px;background:var(--yellow);color:#006933;
+    font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.03em;
+    border-radius:var(--r);padding:8px 14px;
+  }
+
+  .why{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .why-card{background:var(--surface-alt);border-radius:var(--r);border-left:4px solid var(--green);padding:18px 19px}
+  .why-card h3{font-size:16.5px;color:var(--ink-strong);margin-bottom:8px}
+  .why-card p{font-size:15.5px;line-height:1.5;color:var(--ink)}
+
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .fact{background:var(--tint);border-radius:var(--r);padding:16px 17px;text-align:left}
+  .fact .fn{font-family:var(--display);font-weight:800;font-size:26px;line-height:1;color:var(--accent-ink);font-variant-numeric:tabular-nums}
+  .fact .fl{font-size:14.5px;line-height:1.4;color:var(--ink);margin-top:7px}
+
+  .closing{
+    background:var(--surface-alt);border-radius:var(--r);padding:20px 22px;
+    font-size:17.5px;line-height:1.5;color:var(--ink-strong);border-left:4px solid var(--yellow);
+  }
+  .intro-note{font-size:14px;line-height:1.5;color:var(--ink-faint)}
+
+  /* phase nav */
+  .phasenav{display:flex;justify-content:space-between;gap:12px;margin-top:20px;flex-wrap:wrap;align-items:center}
+  .btn{font-family:var(--display);font-weight:800;font-size:17px;cursor:pointer;border-radius:var(--r);padding:13px 26px;border:2px solid transparent}
+  .btn.ghost{background:transparent;border-color:var(--line-strong);color:var(--ink-soft)}
+  .btn.ghost:hover:not(:disabled){border-color:var(--green);color:var(--accent-ink)}
+  .btn.next{background:var(--yellow);color:#007F3E}
+  .btn.next:hover:not(:disabled){background:#FFE740}
+  .btn:disabled{opacity:.42;cursor:not-allowed}
+  .navhint{font-size:14.5px;color:var(--ink-faint);flex:1 1 100%;order:3}
+
+  :focus-visible{outline:3px solid var(--green-bright);outline-offset:2px}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+
+  @media (max-width: 860px){
+    .phases{grid-template-columns:repeat(4,1fr)}
+    .benefits,.why{grid-template-columns:1fr}
+    .facts{grid-template-columns:repeat(2,1fr)}
+    .modhead,.block-head,.block-body,.hero{padding-left:20px;padding-right:20px}
+  }
+  @media (max-width: 480px){
+    .phases{grid-template-columns:repeat(2,1fr)}
+    .facts{grid-template-columns:1fr}
+    .btn{width:100%;text-align:center}
+  }
+</style>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="logo"><span class="logo-mark"></span><span class="logo-text">Repair Care</span></span>
+    <span class="sub" id="sub"></span>
+    <span class="right">
+      <span class="count" id="count"></span>
+      <button class="themebtn" id="themebtn" type="button"></button>
+    </span>
+  </div>
+</header>
+<nav class="tabs"><div class="tabs-inner" id="tabs" role="tablist"></div></nav>
+
+<div class="page">
+  <div id="modhead"></div>
+  <ol class="phases" id="phases"></ol>
+  <section class="block" id="block"></section>
+  <div class="phasenav" id="phasenav"></div>
+</div>
+<script>
+let state = { view: "intro", current: 0, phase: 0, results: {}, seen: {} };
+let KEY = "rc-academy";
+
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+function load(){ try{ const s = localStorage.getItem(KEY); if (s) state = Object.assign(state, JSON.parse(s)); }catch(e){} }
+
+const esc = s => String(s).replace(/&(?![a-z#][a-z0-9]*;)/gi,"&amp;").replace(/</g,"&lt;");
+const passed = id => { const r = state.results[id]; return r && r.score >= 3; };
+
+function phasesOf(){
+  return [
+    { key:"hook",    label:L.ph.hook },
+    { key:"goals",   label:L.ph.goals },
+    { key:"video",   label:L.ph.video },
+    { key:"core",    label:L.ph.core },
+    { key:"counter", label:L.ph.counter },
+    { key:"quiz",    label:L.ph.quiz },
+    { key:"close",   label:L.ph.close }
+  ];
+}
+
+function seenKey(m, i){ return m.id + ":" + i; }
+function scrollTop(){ window.scrollTo({ top: 0, behavior: "smooth" }); }
+
+function goIntro(){ state.view = "intro"; save(); render(); scrollTop(); }
+function goModule(i, phase){ state.view = "module"; state.current = i; state.phase = phase || 0; save(); render(); scrollTop(); }
+
+function renderChrome(){
+  document.getElementById("sub").textContent = L.sub;
+  document.getElementById("themebtn").textContent = L.theme;
+  const done = MODULES.filter(m => passed(m.id)).length;
+  document.getElementById("count").textContent = done + " / " + MODULES.length + " " + L.completed;
+
+  const tabs = document.getElementById("tabs");
+  let html = '<button class="tab" role="tab" type="button" data-intro="1" aria-selected="' +
+    (state.view === "intro") + '">' + INTRO.tab + '</button>';
+  html += MODULES.map((m, i) =>
+    '<button class="tab" role="tab" type="button" data-i="' + i + '" aria-selected="' +
+      (state.view === "module" && i === state.current) + '">' +
+      m.n + ' &middot; ' + m.railTitle + (passed(m.id) ? ' <span class="tick">&#10003;</span>' : '') +
+    '</button>').join('');
+  tabs.innerHTML = html;
+  tabs.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => {
+    if (b.dataset.intro) goIntro(); else goModule(+b.dataset.i, 0);
+  }));
+}
+
+/* ---------------------------------------------------------------
+   Inline SVG icons and figures. Everything is drawn with paths and
+   theme tokens, so the page carries no image files and stays small.
+---------------------------------------------------------------- */
+const ICONS = {
+  coins:    '<circle cx="9" cy="9" r="5"/><path d="M14.5 6.2a5 5 0 0 1 0 11.6M6 20h9"/>',
+  clock:    '<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.3l3.3 2"/>',
+  shield:   '<path d="M12 3.2 19 6v6c0 4-3 7-7 8.8C8 19 5 16 5 12V6Z"/><path d="M9 12l2.2 2.2L15.4 10"/>',
+  receipt:  '<path d="M6 3.5h12v17l-2.4-1.6-2.4 1.6-2.4-1.6-2.4 1.6L6 20.5Z"/><path d="M9.2 8.5h5.6M9.2 12.5h5.6"/>',
+  chat:     '<path d="M20 12.8c0 3.6-3.6 6.5-8 6.5a9.6 9.6 0 0 1-2.6-.35L4.5 20.5l1.1-3.1A6.2 6.2 0 0 1 4 12.8c0-3.6 3.6-6.5 8-6.5s8 2.9 8 6.5Z"/><path d="M12 10v.2M12 12.6v.2"/>',
+  person:   '<circle cx="12" cy="8.2" r="3.6"/><path d="M5.4 20c.6-3.5 3.4-5.5 6.6-5.5s6 2 6.6 5.5"/>',
+  wrench:   '<path d="M15.6 4.8a4.6 4.6 0 0 0-5.9 5.9L4 16.4l3.1 3.1 5.7-5.7a4.6 4.6 0 0 0 5.9-5.9l-2.7 2.7-2.3-2.3Z"/>',
+  layers:   '<path d="M12 3.6 3.8 8 12 12.4 20.2 8Z"/><path d="M3.8 12.6 12 17l8.2-4.4M3.8 16.6 12 21l8.2-4.4"/>',
+  cert:     '<path d="M7 3.6h10v11.8l-5 2.6-5-2.6Z"/><path d="M9.6 9.2 11.5 11l3.2-3.4"/><path d="M9 18.4v2.6l3-1.4 3 1.4v-2.6"/>',
+  alert:    '<path d="M12 4.5 21 19.5H3Z"/><path d="M12 10.2v3.6M12 16.4v.2"/>',
+  spark:    '<path d="M12 3.5 13.9 9l5.6 1.9-5.6 1.9L12 18.4 10.1 12.8 4.5 10.9 10.1 9Z"/>',
+  grid:     '<path d="M4.5 4.5h6v6h-6ZM13.5 4.5h6v6h-6ZM4.5 13.5h6v6h-6ZM13.5 13.5h6v6h-6Z"/>'
+};
+function ico(name){
+  return '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[name] || ICONS.spark) + '</svg>';
+}
+
+function figWrap(svg, cap){
+  return '<figure class="fig">' + svg + (cap ? '<figcaption>' + cap + '</figcaption>' : '') + '</figure>';
+}
+
+/* Cross-section of a repair, built up in four stages. */
+function figCross(f){
+  const W = 118, G = 12;
+  const stage = (i, label) => {
+    const x = i * (W + G);
+    const notch = 'M' + (x + 6) + ' 30 h' + (W - 12) + ' v20 h-30 v14 h-24 v-14 h-32 Z';
+    let inner = '';
+    if (i === 0){
+      inner = '<rect x="' + (x + 6) + '" y="30" width="' + (W - 12) + '" height="34" rx="2" class="sv-wood"/>' +
+              '<path d="M' + (x + 44) + ' 34 q10 -3 20 2 q9 5 16 0 v26 h-36 Z" class="sv-rot"/>';
+    } else if (i === 1){
+      inner = '<path d="' + notch + '" class="sv-wood"/>';
+    } else if (i === 2){
+      inner = '<path d="' + notch + '" class="sv-wood"/>' +
+              '<path d="M' + (x + 82) + ' 50 h-24 v14 h-24" class="sv-prime"/>';
+    } else {
+      inner = '<rect x="' + (x + 6) + '" y="30" width="' + (W - 12) + '" height="34" rx="2" class="sv-wood"/>' +
+              '<path d="M' + (x + 82) + ' 50 h-24 v14 h-24 v-14 Z" class="sv-fill"/>' +
+              '<path d="M' + (x + 10) + ' 27 h' + (W - 20) + '" class="sv-paint"/>';
+    }
+    const grain = '<path d="M' + (x + 12) + ' 38 h' + (W - 24) + 'M' + (x + 12) + ' 45 h30" class="sv-grain"/>';
+    return '<g class="fig-stage">' + inner + grain +
+      '<rect x="' + (x + 6) + '" y="76" width="16" height="16" rx="4" class="sv-numbg"/>' +
+      '<text x="' + (x + 14) + '" y="87" text-anchor="middle" class="sv-num">' + (i + 1) + '</text>' +
+      '<text x="' + (x + 28) + '" y="87" class="sv-lbl">' + label + '</text></g>';
+  };
+  const svg = '<svg viewBox="0 0 ' + (4 * W + 3 * G) + ' 96" role="img" aria-label="' + esc(f.alt) + '">' +
+    f.labels.map((l, i) => stage(i, l)).join('') + '</svg>';
+  return figWrap(svg, f.cap);
+}
+
+/* Rigid filler cracks, elastic repair moves with the timber. */
+function figFlex(f){
+  const panel = (x, title, note, elastic) => {
+    const block = '<rect x="' + (x + 4) + '" y="26" width="96" height="36" rx="2" class="sv-wood"/>';
+    const moving = '<g class="an-shift"><rect x="' + (x + 112) + '" y="26" width="96" height="36" rx="2" class="sv-wood"/>' +
+      '<path d="M' + (x + 120) + ' 34 h80M' + (x + 120) + ' 54 h52" class="sv-grain"/></g>';
+    const patch = elastic
+      ? '<g class="an-stretch"><rect x="' + (x + 100) + '" y="26" width="12" height="36" class="sv-fill"/></g>'
+      : '<rect x="' + (x + 100) + '" y="26" width="12" height="36" class="sv-fill"/>' +
+        '<path d="M' + (x + 112) + ' 26 l4 9 l-4 9 l4 9 l-4 9" class="sv-crack an-crack"/>';
+    return '<g>' + block +
+      '<path d="M' + (x + 12) + ' 34 h80M' + (x + 12) + ' 54 h52" class="sv-grain"/>' +
+      moving + patch +
+      '<text x="' + (x + 4) + '" y="16" class="sv-lbl">' + title + '</text>' +
+      '<text x="' + (x + 4) + '" y="78" class="sv-lbl">' + note + '</text></g>';
+  };
+  const svg = '<svg viewBox="0 0 470 84" role="img" aria-label="' + esc(f.alt) + '">' +
+    panel(0, f.left, f.leftNote, false) +
+    '<path d="M235 20 v52" stroke="var(--line-strong)" stroke-width="1" stroke-dasharray="3 4"/>' +
+    panel(250, f.right, f.rightNote, true) + '</svg>';
+  return figWrap(svg, f.cap);
+}
+
+/* Working time versus curing time on one track. */
+function figTime(f){
+  const X0 = 14, X1 = 452, len = X1 - X0;
+  const marks = f.marks.map((m, i) => {
+    const x = X0 + m.x * len;
+    const anchor = i === 0 ? 'start' : (i === f.marks.length - 1 ? 'end' : 'middle');
+    return '<g><circle cx="' + x + '" cy="34" r="' + (m.open ? 5.5 : 6) + '" class="' + (m.open ? 'sv-dot-open' : 'sv-dot') + '"/>' +
+      '<text x="' + x + '" y="22" text-anchor="' + anchor + '" class="sv-lbl">' + m.t + '</text>' +
+      '<text x="' + x + '" y="54" text-anchor="' + anchor + '" class="sv-lbl" opacity=".8">' + m.l + '</text></g>';
+  }).join('');
+  const svg = '<svg viewBox="0 0 470 64" role="img" aria-label="' + esc(f.alt) + '">' +
+    '<path d="M' + X0 + ' 34 H' + X1 + '" class="sv-track"/>' +
+    '<path d="M' + X0 + ' 34 H' + X1 + '" class="sv-done an-run" style="--len:' + len + '"/>' +
+    marks + '</svg>';
+  return figWrap(svg, f.cap);
+}
+
+/* The working sequence, with the most-skipped step called out. */
+function figSteps(f){
+  const chips = f.items.map((s, i) =>
+    '<div class="stepchip' + (i === f.hi ? ' hi' : '') + '"><span class="sn">' + (i + 1) + '</span>' +
+    '<span class="sl">' + s + '</span></div>').join('');
+  return '<figure class="fig"><div class="stepstrip">' + chips + '</div>' +
+    (f.cap ? '<figcaption>' + f.cap + '</figcaption>' : '') + '</figure>';
+}
+
+/* Primer soaking into the timber. */
+function figSoak(f){
+  const drops = [90, 200, 310].map(x =>
+    '<g class="an-soak"><ellipse cx="' + x + '" cy="30" rx="5" ry="7" class="sv-drop"/></g>').join('');
+  const fibres = [];
+  for (let i = 0; i < 14; i++){
+    const x = 40 + i * 28;
+    fibres.push('<path d="M' + x + ' 44 v30" class="sv-grain"/>');
+  }
+  const svg = '<svg viewBox="0 0 470 92" role="img" aria-label="' + esc(f.alt) + '">' +
+    '<text x="4" y="16" class="sv-lbl">' + f.top + '</text>' +
+    drops +
+    '<rect x="14" y="42" width="442" height="34" rx="2" class="sv-wood"/>' +
+    fibres.join('') +
+    '<rect x="14" y="42" width="442" height="12" class="sv-fill"/>' +
+    '<text x="466" y="88" text-anchor="end" class="sv-lbl">' + f.bottom + '</text></svg>';
+  return figWrap(svg, f.cap);
+}
+
+/* The training levels as a rising staircase. */
+function figLadder(f){
+  const n = f.items.length, w = 470 / n, base = 132;
+  const steps = f.items.map((it, i) => {
+    const h = 34 + i * 26, x = i * w, y = base - h;
+    return '<g class="fig-stage"><rect x="' + (x + 3) + '" y="' + y + '" width="' + (w - 6) + '" height="' + h + '" rx="3" ' +
+      'fill="var(--tint)" stroke="var(--accent-ink)" stroke-width="1.5"/>' +
+      '<text x="' + (x + 12) + '" y="' + (y + 19) + '" class="sv-lbl" style="fill:var(--accent-ink)">' + it.n + '</text>' +
+      '<text x="' + (x + 12) + '" y="' + (y + 34) + '" class="sv-lbl">' + it.l + '</text></g>';
+  }).join('');
+  const svg = '<svg viewBox="0 0 470 140" role="img" aria-label="' + esc(f.alt) + '">' + steps +
+    '<path d="M0 ' + base + ' H470" stroke="var(--line-strong)" stroke-width="1.5"/></svg>';
+  return figWrap(svg, f.cap);
+}
+
+/* One-series horizontal bar chart: where a product sits in the range.
+   Every bar is labelled directly, so there is no axis and no legend;
+   the highlighted bar carries the yellow signal marker. */
+function figBars(f){
+  const rowH = 32, pad = 8, labelW = 158, x0 = labelW, x1 = 406;
+  const max = Math.max.apply(null, f.items.map(i => i.v));
+  const rows = f.items.map((it, i) => {
+    const y = pad + i * rowH;
+    const w = Math.max(4, (it.v / max) * (x1 - x0));
+    const on = i === f.hi;
+    const strong = on ? ' style="fill:var(--ink-strong)"' : '';
+    return '<g><title>' + it.l + ': ' + it.t + '</title>' +
+      '<text x="' + (labelW - 12) + '" y="' + (y + 19) + '" text-anchor="end" class="sv-lbl"' + strong + '>' + it.l + '</text>' +
+      '<rect x="' + x0 + '" y="' + (y + 7) + '" width="' + w.toFixed(1) + '" height="17" rx="4" ' +
+        (on ? 'fill="var(--accent-ink)"' : 'fill="var(--tint)" stroke="var(--accent-ink)" stroke-width="1.5"') + '/>' +
+      (on ? '<rect x="' + x0 + '" y="' + (y + 7) + '" width="5" height="17" rx="2.5" fill="var(--yellow)"/>' : '') +
+      '<text x="' + (x0 + w + 9).toFixed(1) + '" y="' + (y + 19) + '" class="sv-lbl"' + strong + '>' + it.t + '</text></g>';
+  }).join('');
+  const h = pad * 2 + f.items.length * rowH;
+  return figWrap('<svg viewBox="0 0 470 ' + h + '" role="img" aria-label="' + esc(f.alt) + '">' +
+    rows + '<path d="M' + x0 + ' ' + pad + ' V' + (h - pad) + '" stroke="var(--line-strong)" stroke-width="1"/></svg>', f.cap);
+}
+
+const FIGS = { cross:figCross, flex:figFlex, time:figTime, steps:figSteps, soak:figSoak, ladder:figLadder, bars:figBars };
+
+function figuresFor(m, key){
+  if (!m.fig || !m.fig[key]) return '';
+  return m.fig[key].map(f => (FIGS[f.t] ? FIGS[f.t](f) : '')).join('');
+}
+
+/* The Claude artifact sandbox refuses third-party iframes, so an embed there
+   renders an empty grey box. Anywhere else — a local file, your own server, an
+   LMS — the embed works. The page detects which it is and renders accordingly. */
+const CAN_EMBED = !/(^|\.)claudeusercontent\.com$/i.test(location.hostname);
+
+function videoBlock(v){
+  const watch = 'https://www.youtube.com/watch?v=' + v.id;
+
+  if (!CAN_EMBED){
+    return '<div class="video">' +
+      '<a class="video-top" href="' + watch + '" target="_blank" rel="noopener">' +
+        '<span class="playbtn" aria-hidden="true">' +
+          '<svg viewBox="0 0 18 18"><path d="M2 1.5 16 9 2 16.5Z" fill="currentColor"/></svg>' +
+        '</span>' +
+        '<span class="video-meta"><span class="vt">' + v.title + '</span>' +
+        '<span class="vd">' + L.channel + ' &middot; ' + v.dur + ' &middot; ' + L.openYT + '</span></span>' +
+      '</a>' +
+      '<div class="video-task"><b>' + L.watchTask + '</b> ' + v.task + '</div>' +
+    '</div>';
+  }
+
+  return '<div class="video">' +
+    '<iframe class="frame" src="https://www.youtube-nocookie.com/embed/' + v.id + '?rel=0" ' +
+      'title="' + esc(v.title) + '" loading="lazy" ' +
+      'allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>' +
+    '<div class="video-caption"><span class="vt">' + v.title + '</span>' +
+    '<span class="vd">' + L.channel + ' &middot; ' + v.dur + ' &middot; ' +
+      '<a href="' + watch + '" target="_blank" rel="noopener">' + L.openYT + '</a></span></div>' +
+    '<div class="video-task"><b>' + L.watchTask + '</b> ' + v.task + '</div>' +
+  '</div>';
+}
+
+function phaseBody(m, key){
+  if (key === "hook") return '<p class="lede">' + m.hook + '</p>' + figuresFor(m, "hook");
+
+  if (key === "goals") return '<ol class="goals">' + m.goals.map(g => '<li><span>' + g + '</span></li>').join('') + '</ol>';
+
+  if (key === "video") return videoBlock(m.video);
+
+  if (key === "core"){
+    let h = '<div class="core">' + m.core.map(k => '<div><h3>' + k.h + '</h3><p>' + k.p + '</p></div>').join('') + '</div>';
+    h += figuresFor(m, "core");
+    if (m.levels){
+      h += '<div class="tablewrap"><table><thead><tr>' + m.levelHead.map(x => '<th>' + x + '</th>').join('') + '</tr></thead><tbody>' +
+        m.levels.map(r => '<tr>' + r.map((c, i) => '<td' + (i === 0 ? ' style="white-space:normal"' : '') + '>' + c + '</td>').join('') + '</tr>').join('') +
+        '</tbody></table></div>';
+    }
+    h += '<div><h3 style="font-family:var(--display);font-size:18px;color:var(--accent-ink);margin-bottom:12px">' + L.benefitsTitle + '</h3><div class="benefits">' +
+      m.benefits.map(b => '<div class="benefit"><div class="b-h">' + ico(b.icon) + b.h + '</div><p>' + b.p + '</p></div>').join('') +
+      '</div></div>';
+    return h;
+  }
+
+  if (key === "counter"){
+    let h = '';
+    if (m.asks){
+      h += '<div class="askrow">' + m.asks.map(a =>
+        '<div class="ask"><span class="q">?</span><span class="a"><b>&ldquo;' + a.q + '&rdquo;</b><br>' + a.a + '</span></div>').join('') + '</div>';
+      h += '<div class="tablewrap"><table><thead><tr><th>' + L.attachHead + '</th><th>' + L.whyHead + '</th></tr></thead><tbody>' +
+        m.attach.map(r => '<tr><td>' + r[0] + (r[1] ? '<span class="art">' + L.art + ' ' + r[1] + '</span>' : '') + '</td><td>' + r[2] + '</td></tr>').join('') +
+        '</tbody></table></div>';
+    }
+    if (m.signals){
+      h += '<div class="tablewrap"><table><thead><tr><th>' + L.saysHead + '</th><th>' + L.recHead + '</th></tr></thead><tbody>' +
+        m.signals.map(r => '<tr><td style="white-space:normal">' + r[0] + '</td><td>' + r[1] + '</td></tr>').join('') +
+        '</tbody></table></div>';
+    }
+    h += figuresFor(m, "counter");
+    h += '<div class="note">' + m.notes + '</div>';
+    if (m.say) h += '<div class="saythis"><span class="lbl">' + L.sayLabel + '</span><p>&ldquo;' + m.say + '&rdquo;</p></div>';
+    return h;
+  }
+
+  if (key === "quiz"){
+    return '<div class="quiz">' + m.quiz.map((q, qi) =>
+      '<div class="q-card" data-q="' + qi + '">' +
+        '<div class="q-t"><span class="q-n">' + (qi + 1) + '</span><span>' + q.q + '</span></div>' +
+        '<div class="opts">' + q.opts.map((o, oi) =>
+          '<button class="opt" type="button" data-q="' + qi + '" data-o="' + oi + '">' +
+            '<span class="k">' + "ABC"[oi] + '</span><span>' + o[0] + '</span></button>').join('') +
+        '</div><div class="fb-slot"></div>' +
+      '</div>').join('') + '</div><div id="score-slot"></div>';
+  }
+
+  if (key === "close"){
+    return '<div class="remember"><span class="lbl">' + L.rememberLabel + '</span><p>' + m.remember + '</p></div>' +
+      '<div><h3 style="font-family:var(--display);font-size:15px;color:var(--ink-strong);margin-bottom:12px">' + L.furtherTitle + '</h3>' +
+      '<ul class="links">' + m.links.map(l =>
+        '<li><a href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + '</a>' +
+        (l[2] ? '<span class="dur">' + l[2] + '</span>' : '') + '</li>').join('') + '</ul></div>';
+  }
+  return '';
+}
+
+let answered = {};
+
+function render(){
+  renderChrome();
+  if (state.view === "intro") renderIntro();
+  else renderModule();
+}
+
+function renderIntro(){
+  document.getElementById("phases").hidden = true;
+
+  document.getElementById("modhead").innerHTML =
+    '<div class="hero">' +
+      '<span class="kicker">' + INTRO.kicker + '</span>' +
+      '<h1>' + INTRO.title + '</h1>' +
+      '<p class="promise">' + INTRO.promise + '</p>' +
+      '<span class="stamp">' + INTRO.stamp + '</span>' +
+    '</div>';
+
+  document.getElementById("block").innerHTML =
+    '<div class="block-head"><span class="step">' + INTRO.readLabel + '</span><h2>' + INTRO.whyTitle + '</h2></div>' +
+    '<div class="block-body">' +
+      '<div class="why">' + INTRO.why.map(w =>
+        '<div class="why-card"><span class="why-ico">' + ico(w.icon) + '</span><h3>' + w.h + '</h3><p>' + w.p + '</p></div>').join('') + '</div>' +
+      '<div><h3 style="font-family:var(--display);font-size:18px;color:var(--accent-ink);margin-bottom:12px">' + INTRO.benefitsTitle + '</h3>' +
+      '<div class="benefits">' + INTRO.benefits.map(b =>
+        '<div class="benefit"><div class="b-h">' + ico(b.icon) + b.h + '</div><p>' + b.p + '</p></div>').join('') + '</div></div>' +
+      '<div><h3 style="font-family:var(--display);font-size:18px;color:var(--accent-ink);margin-bottom:12px">' + INTRO.howTitle + '</h3>' +
+      '<div class="facts">' + INTRO.facts.map(f =>
+        '<div class="fact"><div class="fn">' + f.n + '</div><div class="fl">' + f.l + '</div></div>').join('') + '</div></div>' +
+      (INTRO.route ? FIGS.steps(INTRO.route) : '') +
+      '<div class="closing">' + INTRO.closing + '</div>' +
+      '<p class="intro-note">' + INTRO.note + '</p>' +
+    '</div>';
+
+  document.getElementById("phasenav").innerHTML =
+    '<span></span><button class="btn next" type="button" id="start">' + INTRO.start + '</button>';
+  document.getElementById("start").addEventListener("click", () => goModule(0, 0));
+}
+
+function renderModule(){
+  const m = MODULES[state.current];
+  const ps = phasesOf();
+  if (state.phase >= ps.length) state.phase = 0;
+  const cur = ps[state.phase];
+  answered = {};
+
+  document.getElementById("modhead").innerHTML =
+    '<div class="modhead"><div class="chips">' +
+      '<span class="chip solid">' + m.type + '</span>' +
+      '<span class="chip">' + L.module + ' ' + m.n + '</span>' +
+      '<span class="chip">' + m.duur + '</span>' +
+    '</div><h1>' + m.title + '</h1></div>';
+
+  const phasesEl = document.getElementById("phases");
+  phasesEl.hidden = false;
+  phasesEl.innerHTML = ps.map((p, i) => {
+    const done = state.seen[seenKey(m, i)] && i !== state.phase;
+    return '<li><button class="phase-btn' + (done ? ' done' : '') + '" type="button" data-p="' + i + '"' +
+      ' aria-current="' + (i === state.phase) + '">' +
+      '<span class="pn">' + String(i + 1).padStart(2, "0") + (done ? ' <span class="dot">&#10003;</span>' : '') + '</span>' +
+      '<span class="pl">' + p.label + '</span></button></li>';
+  }).join('');
+  phasesEl.querySelectorAll(".phase-btn").forEach(b =>
+    b.addEventListener("click", () => { state.phase = +b.dataset.p; save(); render(); }));
+
+  document.getElementById("block").innerHTML =
+    '<div class="block-head"><span class="step">' + L.step + ' ' + (state.phase + 1) + '/' + ps.length + '</span>' +
+    '<h2>' + cur.label + '</h2></div>' +
+    '<div class="block-body">' + phaseBody(m, cur.key) + '</div>';
+
+  state.seen[seenKey(m, state.phase)] = true;
+  save();
+
+  renderNav(m, ps);
+  wire(m, cur.key);
+}
+
+function renderNav(m, ps){
+  const last = state.phase === ps.length - 1;
+  const lastModule = state.current === MODULES.length - 1;
+  const nextLabel = last ? (lastModule ? L.finish : L.nextModule) : L.nextPhase;
+  document.getElementById("phasenav").innerHTML =
+    '<button class="btn ghost" type="button" id="prev">' + L.back + '</button>' +
+    '<button class="btn next" type="button" id="next"' + (last && lastModule ? ' disabled' : '') + '>' + nextLabel + '</button>' +
+    '<span class="navhint" id="hint"></span>';
+
+  document.getElementById("prev").addEventListener("click", () => {
+    if (state.phase > 0){ state.phase--; save(); render(); scrollTop(); }
+    else if (state.current > 0) goModule(state.current - 1, phasesOf().length - 1);
+    else goIntro();
+  });
+  const nextBtn = document.getElementById("next");
+  nextBtn.addEventListener("click", () => {
+    if (state.phase < ps.length - 1){ state.phase++; save(); render(); scrollTop(); }
+    else if (state.current < MODULES.length - 1) goModule(state.current + 1, 0);
+  });
+
+  if (ps[state.phase].key === "quiz" && !passed(m.id)){
+    nextBtn.disabled = true;
+    document.getElementById("hint").textContent = L.quizHint;
+  }
+}
+
+function wire(m, key){
+  if (key !== "quiz") return;
+
+  document.querySelectorAll(".opt").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const qi = +btn.dataset.q, oi = +btn.dataset.o;
+      if (answered[qi] !== undefined) return;
+      answered[qi] = oi;
+      const q = m.quiz[qi];
+      const card = document.querySelector('.q-card[data-q="' + qi + '"]');
+      const right = oi === q.correct;
+      card.querySelectorAll(".opt").forEach(o => {
+        o.disabled = true;
+        const k = +o.dataset.o;
+        if (k === oi) o.classList.add(right ? "picked-good" : "picked-bad");
+        else if (k === q.correct && !right) o.classList.add("reveal-good");
+      });
+      card.querySelector(".fb-slot").innerHTML =
+        '<div class="fb ' + (right ? "good" : "bad") + '"><b>' + (right ? L.correct : L.wrong) + '</b> ' + q.opts[oi][1] +
+        (right ? '' : '<br><b>' + L.rightIs + ' ' + "ABC"[q.correct] + ':</b> ' + q.opts[q.correct][1]) + '</div>';
+      if (Object.keys(answered).length === m.quiz.length) showScore(m);
+    });
+  });
+}
+
+function showScore(m){
+  let score = 0;
+  m.quiz.forEach((q, i) => { if (answered[i] === q.correct) score++; });
+  state.results[m.id] = { score };
+  save();
+  const pass = score >= 3;
+  document.getElementById("score-slot").innerHTML =
+    '<div class="score ' + (pass ? "pass" : "fail") + '" style="margin-top:20px">' +
+      '<span class="big">' + score + '/' + m.quiz.length + '</span>' +
+      '<span class="verdict">' + (pass ? L.passText : L.failText) + '</span>' +
+      '<button class="btn ghost" type="button" id="retry" style="margin-left:auto;font-size:14px;padding:9px 18px">' + L.retry + '</button>' +
+    '</div>';
+  document.getElementById("retry").addEventListener("click", () => render());
+  renderChrome();
+  renderNav(m, phasesOf());
+}
+
+document.getElementById("themebtn").addEventListener("click", () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const dark = cur ? cur === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
+});
+
+function boot(){ load(); render(); }
+
+const L = {
+  sub: "Dealer Academy",
+  theme: "Thema",
+  completed: "afgerond",
+  module: "Module",
+  step: "Stap",
+  play: "Video afspelen",
+  channel: "YouTube · Repair Care NL",
+  watchTask: "Kijkopdracht:",
+  openYT: "opent in een nieuw tabblad",
+  benefitsTitle: "Wat levert het de klant op?",
+  attachHead: "Gaat standaard mee",
+  whyHead: "Waarom",
+  art: "art.",
+  saysHead: "Klant zegt…",
+  recHead: "Jij adviseert…",
+  sayLabel: "De zin die werkt",
+  rememberLabel: "Onthoud dit",
+  furtherTitle: "Verdieping",
+  correct: "Goed.",
+  wrong: "Niet helemaal.",
+  rightIs: "Het juiste antwoord is",
+  passText: "<b>Module afgerond.</b> Je kunt dit morgen aan de balie gebruiken.",
+  failText: "<b>Nog niet gehaald.</b> Kijk de video terug en probeer het opnieuw — je hebt 3 van de 4 nodig.",
+  retry: "Opnieuw",
+  quizHint: "Beantwoord alle vier de vragen en haal 3 van de 4 om verder te gaan.",
+  back: "← Terug",
+  nextPhase: "Volgende stap →",
+  nextModule: "Volgende module →",
+  finish: "Training afgerond",
+  ph: {
+    hook: "De situatie",
+    goals: "Leerdoelen",
+    video: "Video",
+    core: "De kern",
+    counter: "Aan de balie",
+    quiz: "Checkvragen",
+    close: "Onthoud dit"
+  }
+};
+
+const INTRO = {
+  tab: "Welkom",
+  kicker: "Repair Care Dealer Academy",
+  title: "Jij staat op de plek waar het besluit valt",
+  promise: "Acht korte modules over de producten en diensten waar jouw klanten het vaakst naar vragen. Geen productcatalogus, maar antwoorden die je morgen aan de balie gebruikt — en die je meer omzet per klant opleveren.",
+  stamp: "8 modules · ongeveer 40 minuten in totaal",
+  readLabel: "Lees dit eerst",
+  whyTitle: "Waarom Repair Care deze training heeft gemaakt",
+  why: [
+    { h: "De klant komt met een probleem, niet met een artikelnummer", icon:"chat",
+      p: "Een schilder loopt binnen met een weggerotte onderdorpel en een steiger die er één dag staat. Wat hij meeneemt, hangt af van wat jij in dertig seconden kunt uitleggen. Op dat moment wordt beslist of het een reparatie wordt of een vervanging — en of het goed gaat." },
+    { h: "De meeste klachten zijn geen productfouten", icon:"alert",
+      p: "Als een reparatie loslaat, is er bijna altijd een stap overgeslagen: geen voorstrijk, verkeerd uitgefreesd, het verkeerde product voor de situatie. En die klacht komt niet bij Repair Care binnen — die komt bij jou aan de balie." },
+    { h: "Repair Care is een systeem, geen losse koker", icon:"layers",
+      p: "Product, werkwijze, opleiding en garantie horen bij elkaar. Verkoop je er één onderdeel van zonder de rest, dan werkt het systeem niet zoals het bedoeld is. Deze training laat zien hoe die onderdelen samenhangen." }
+  ],
+  benefitsTitle: "Wat het jou oplevert",
+  benefits: [
+    { h: "Meer per bon", icon:"receipt",
+      p: "De voorstrijk, de mengbekers, het gereedschap: artikelen die nu blijven liggen omdat er niet naar gevraagd wordt. Je leert precies welke vraag je stelt en waarom de klant er blij mee is." },
+    { h: "Minder gedoe achteraf", icon:"shield",
+      p: "Een klant die het in één keer goed doet, komt niet terug met een klacht, een retour of een discussie. Dat scheelt jou de vervelendste gesprekken van de week." },
+    { h: "Je wordt de adviseur", icon:"person",
+      p: "Klanten komen terug naar de persoon die hun probleem oploste, niet naar het schap. Na deze drie modules kun je een vraag beantwoorden zonder een collega te halen." }
+  ],
+  howTitle: "Hoe het werkt",
+  facts: [
+    { n: "8", l: "modules: zes over een product, twee over onze dienstverlening" },
+    { n: "5 min", l: "per module, inclusief video — te doen tussen twee klanten door" },
+    { n: "4", l: "checkvragen aan het eind, met uitleg bij elk antwoord" },
+    { n: "3 van 4", l: "goed en de module staat op afgerond" }
+  ],
+  closing: "Je hoeft niets te onthouden wat je kunt opzoeken. Wat je na deze training wél paraat hebt: welke vraag je stelt, wat er standaard bij hoort, en in één zin waarom de klant daar beter van wordt.",
+  note: "Je voortgang wordt op dit apparaat bewaard, zodat je halverwege kunt stoppen en later verder gaan. — Deze introductietekst is een voorstel en moet nog worden vastgesteld door Repair Care.",
+  route: { t:"steps", hi:-1,
+    items:["01 · DRY FLEX® 4","02 · DRY FIX® UNI","03 · Opleidingen","04 · DRY FLEX® SF","05 · DRY FLEX® 16","06 · BIO FLEX™","07 · DRY SEAL® MP","08 · Duurzaamheid"],
+    cap:"<b>Van losse koker naar vaste klant.</b> Begin bij 01: dat is het product waar elk gesprek mee begint. De modules 04 tot en met 07 leren je het assortiment uit elkaar te houden; 03 en 08 gaan over wat Repair Care naast producten levert." },
+  start: "Start module 01 →"
+};
+
+const MODULES = [
+  {
+    id: "dry-flex-4", n: "01", type: "Product", duur: "± 5 min",
+    title: "DRY FLEX® 4: houtrot repareren en dezelfde dag doorschilderen",
+    railTitle: "DRY FLEX® 4",
+    hook: "Er staat een schilder aan je balie. Hij heeft een onderhoudsklus met vier kozijnen waarvan de onderdorpels zijn weggerot. De steiger staat er <em>één</em> dag. Hij vraagt: <em>&ldquo;Heb je iets waarmee ik dit vandaag nog kan wegwerken én overschilderen?&rdquo;</em><br><br>Die vraag kun je na deze module in dertig seconden beantwoorden.",
+    goals: [
+      "in je eigen woorden uitleggen wat DRY FLEX® 4 is en waarin het verschilt van gewone plamuur;",
+      "herkennen wanneer DRY FLEX® 4 het juiste advies is — en wanneer niet;",
+      "de drie klantvoordelen noemen waarmee je de schilder overtuigt."
+    ],
+    fig: {
+      core: [
+        { t:"cross", labels:["Houtrot","Uitfrezen","Voorstrijk","Vullen &amp; schilderen"],
+          alt:"Doorsnede van een reparatie in vier stappen",
+          cap:"<b>Zo bouwt een reparatie zich op.</b> Stap 3 is de voorstrijk DRY FIX® UNI — die zit in elke goede reparatie, ook al zie je hem straks niet meer terug." },
+        { t:"flex", left:"Gewone plamuur", leftNote:"scheurt los bij werkend hout",
+          right:"DRY FLEX® 4", rightNote:"beweegt mee, blijft heel",
+          alt:"Harde plamuur scheurt, elastische reparatie beweegt mee",
+          cap:"<b>Hout werkt met vocht en temperatuur.</b> Een harde vulling kan die beweging niet volgen en laat aan de randen los; een elastische reparatie rekt mee. Dit is het antwoord op checkvraag 1." }
+      ],
+      counter: [
+        { t:"time",
+          marks:[{x:0,t:"0 min",l:"A en B mengen"},{x:0.34,t:"20–25 min",l:"verwerken bij 20 °C"},{x:1,t:"na 4 uur",l:"schuren &amp; schilderen",open:true}],
+          alt:"Tijdlijn van verwerkingstijd naar overschilderbaar",
+          cap:"<b>Twee tijden die vaak door elkaar lopen.</b> De 20–25 minuten is verwerkingstijd — zoveel heeft de schilder om de aangemaakte pasta te gebruiken. De 4 uur is wachttijd tot schuren en schilderen." }
+      ]
+    },
+    video: { id:"PsVHQ86JaYU", title:"Instructievideo DRY FLEX® 4", dur:"2:03",
+      task:"Let op twee dingen. <b>(1)</b> Wat gebeurt er met het hout vóórdat de pasta erop gaat? <b>(2)</b> Hoe lang moet de schilder wachten voor hij kan schuren en schilderen?" },
+    core: [
+      { h:"Wat is het?", p:"DRY FLEX® 4 is een tweecomponenten reparatiepasta op epoxybasis waarmee je aangetast en beschadigd hout blijvend herstelt. Je mengt component A en B, drukt de pasta in de uitgefreesde plek en modelleert hem in vorm. Het grote verschil met gewone plamuur: <strong>DRY FLEX® 4 blijft elastisch en beweegt mee met het hout.</strong> Hout werkt met vocht en temperatuur — een harde vulling scheurt daardoor los, DRY FLEX® 4 niet." },
+      { h:"Wanneer adviseer je dit?", p:"<strong>Wél:</strong> houtrot en beschadigingen in kozijnen, ramen, deuren, trappen en meubels; scheuren, kwasten en open verbindingen vullen. Binnen én buiten, en ook op metselwerk, stucwerk, beton en metaal.<br><strong>Let op:</strong> het is een reparatiemateriaal, geen constructief vervangingsmiddel. Is een dorpel over de volle lengte weg, dan is het een deelvervanging — verwijs door naar een opgeleid bedrijf of naar de opleiding (module 3)." }
+    ],
+    benefits: [
+      { h:"Geld", icon:"coins", p:"Repareren in plaats van vervangen. Een kozijn repareren kost fors minder dan een nieuw kozijn, en scoort volgens onafhankelijk onderzoek van CE Delft 2 tot 5 keer beter op milieu-impact (zie module 08)." },
+      { h:"Tijd", icon:"clock", p:"Na circa 4 uur schuur- en overschilderbaar. De schilder werkt dezelfde dag door en zet de steiger één keer neer in plaats van twee keer." },
+      { h:"Zekerheid", icon:"shield", p:"De reparatie beweegt mee met het hout en gaat minimaal tien jaar mee. Geen terugkerende klacht, geen tweede bezoek." }
+    ],
+    asks: [
+      { q:"Hoe diep en hoe groot is de schade?", a:"Bedoeld voor reparatiediktes van ca. <b>5–20 mm bij 10–35 °C</b> en 5–50 mm bij 0–10 °C. Dieper of groter: lamineren of deelvervanging. <span class='verify'>VERIFIEER in de productsheet</span>" },
+      { q:"Binnen of buiten, en bij welke temperatuur?", a:"Verwerkbaar van <b>0 tot 35 °C</b>. Dit is je winterargument: de schilder kan gewoon doorwerken in het koude seizoen." }
+    ],
+    attach: [
+      ["DRY FIX® UNI","2010005","Voorstrijk. Zonder dit geen optimale hechting. De belangrijkste bijverkoop die je doet — zie module 2"],
+      ["DRY FLEX® 4","2022005 · 300 ml + 100 ml","Het reparatiemateriaal zelf"],
+      ["Modelleergereedschap","","Zonder gereedschap geen strakke reparatie"],
+      ["EASY•Q™ WIPES","","Gereedschap reinigen vóórdat de pasta uithardt"]
+    ],
+    notes: "<strong>Verwerkingstijd 20–25 minuten bij 20 °C</strong> — aanmaken wat je in dat halfuur verwerkt, niet de hele koker. Er is ook een <strong>2-in-1</strong> uitvoering: component A en B in één patroon, te verwerken met kitpistool en statische mixer. De voorstrijk blijft nodig. <span class='verify'>VERIFIEER deze uitleg van 2-in-1</span> DRY FLEX® 4 voldoet aan de eisen van KOMO en TNO en staat in de SKH-publicatie over reparatiematerialen — dat argument heb je nodig bij schilders die voor woningcorporaties werken.",
+    say: null,
+    quiz: [
+      { q:"Waarom blijft DRY FLEX® 4 elastisch?", correct:1, opts:[
+        ["Omdat het dan sneller uithardt","Onjuist. De uitharding staat los van de elasticiteit; schuur- en overschilderbaar is het na circa 4 uur."],
+        ["Omdat hout werkt met vocht en temperatuur; een starre vulling zou losscheuren","Juist. Dit is hét verschil met gewone plamuur en de reden dat de reparatie jaren blijft zitten."],
+        ["Omdat het dan makkelijker te schuren is","Onjuist. Het is goed schuurbaar, maar dat is niet waarom het elastisch is."]
+      ]},
+      { q:"Na hoeveel tijd is DRY FLEX® 4 schuur- en overschilderbaar?", correct:1, opts:[
+        ["Na circa 20 minuten","Onjuist. 20–25 minuten bij 20 °C is de <b>verwerkingstijd</b>: de tijd die de schilder heeft om de aangemaakte pasta te verwerken."],
+        ["Na circa 4 uur","Juist — vandaar de naam. Richttijd: temperatuur, laagdikte en luchtvochtigheid beïnvloeden dit."],
+        ["Na 24 uur","Onjuist. Als je dit zegt, laat je het sterkste verkoopargument liggen: dezelfde dag doorwerken."]
+      ]},
+      { q:"Wat gaat er standaard mee met een koker DRY FLEX® 4?", correct:1, opts:[
+        ["Een kwastreiniger","Onvolledig. Reinigen is belangrijk, maar dat bepaalt niet de hechting."],
+        ["DRY FIX® UNI voorstrijk","Juist. Zonder voorstrijk geen optimale hechting aan de ondergrond — en dus risico op een reparatie die loslaat."],
+        ["Niets, het is een compleet systeem in één verpakking","Onjuist. DRY FLEX® 4 is de reparatiepasta; de voorstrijk is een apart product."]
+      ]},
+      { q:"Een schilder zegt: &ldquo;Die epoxy van jullie is me te duur, ik pak gewoon een bus plamuur van tien euro.&rdquo; Wat doe je?", correct:2, opts:[
+        ["Je geeft hem korting op de DRY FLEX® 4","Dat lost het bezwaar niet op en het kost marge. Hij hoort niet waaróm het product meer waard is."],
+        ["Je verkoopt hem de plamuur, klant is koning","Begrijpelijk, maar over een jaar staat hij met een klacht bij jóu aan de balie. Je verliest de herhaalomzet én het vertrouwen."],
+        ["Je rekent het voor: één reparatie die tien jaar meegaat versus terugkomen en opnieuw voorrijden","Juist. Reken in klussen, niet in kokers. Voeg toe dat repareren volgens CE Delft 2 tot 5 keer beter scoort dan vervangen — daar winnen schilders opdrachten mee bij corporaties (module 08)."]
+      ]}
+    ],
+    remember: "DRY FLEX® 4 = houtrot weg, ’s middags schilderen, tien jaar van het probleem af. En er hoort altijd DRY FIX® UNI bij.",
+    links: [
+      ["Productpagina DRY FLEX® 4","https://repair-care.nl/product/dry-flex-4/",""],
+      ["Video: DRY FLEX® 4 2-in-1","https://www.youtube.com/watch?v=qWMp8hXOnlI","2:04"],
+      ["Video: hoekreparatie in 5 slagen afmessen","https://www.youtube.com/watch?v=-bQOHI9Pqr8","1:00"]
+    ]
+  },
+
+  {
+    id: "dry-fix-uni", n: "02", type: "Product", duur: "± 4 min",
+    title: "DRY FIX® UNI: de stap die bepaalt of de reparatie blijft zitten",
+    railTitle: "DRY FIX® UNI",
+    hook: "Een vaste klant komt terug. Boos. De reparatie die hij vorig jaar deed, laat aan de randen los. <em>&ldquo;Dat spul van jullie deugt niet.&rdquo;</em><br><br>Negen van de tien keer is er één stap overgeslagen. Precies de stap waar deze module over gaat — en precies het product dat jíj vorig jaar niet hebt meegegeven.",
+    goals: [
+      "uitleggen wat DRY FIX® UNI doet en waarom het geen &lsquo;extraatje&rsquo; is;",
+      "de juiste volgorde en inwerktijd benoemen als een klant ernaar vraagt;",
+      "DRY FIX® UNI bij élke verkoop van een reparatiepasta aanbieden, met één zin die werkt."
+    ],
+    fig: {
+      core: [
+        { t:"steps", hi:4,
+          items:["Rot hout verwijderen","A en B mengen","Met kwast aanbrengen","20–45 min intrekken","Overtollig afnemen","Reparatiepasta aanbrengen"],
+          cap:"<b>Stap 5 wordt op de bouw het vaakst overgeslagen.</b> Overtollig materiaal afnemen met absorberend papier — daarna gaat de pasta erop zolang het oppervlak nog kleeft." },
+        { t:"soak", top:"DRY FIX® UNI wordt aangebracht", bottom:"gezond hout",
+          alt:"Voorstrijk trekt in de houtvezels",
+          cap:"<b>Waarom het werkt.</b> De voorstrijk is dun en oplosmiddelvrij, dus hij trekt diep in de vezels. Dáár ontstaat de hechting tussen ondergrond en reparatie — niet aan de oppervlakte." }
+      ]
+    },
+    video: { id:"1ziXT-_AyhU", title:"Instructievideo DRY FIX® UNI", dur:"0:55",
+      task:"Kijk hoe het product wordt aangebracht en wat er <b>ná</b> het intrekken gebeurt. Die laatste handeling wordt in de praktijk het vaakst vergeten." },
+    core: [
+      { h:"Wat is het?", p:"Een elastische tweecomponenten voorstrijk. Je brengt hem met een kwast aan op het uitgefreesde, schone hout vóórdat de reparatiepasta erin gaat. Hij trekt in de ondergrond en zorgt voor een <strong>optimale hechting van alle soorten DRY FLEX® en BIO FLEX™</strong>. Vergelijk het met een grondlaag onder lak: je ziet hem straks niet, maar hij bepaalt of het geheel over tien jaar nog vastzit." },
+      { h:"Wanneer adviseer je dit?", p:"Bij <strong>élke</strong> reparatie met DRY FLEX® 4, DRY FLEX® 16 en BIO FLEX™. Eén uitzondering: <strong>DRY FLEX® SF heeft geen voorstrijk nodig</strong> — zie module 04. Geschikt op hout, metselwerk, gips/stuc, beton en metaal — vandaar &lsquo;UNI&rsquo;: één voorstrijk voor alle ondergronden, je hoeft aan de balie niet te kiezen." },
+      { h:"De werkvolgorde die je uitlegt", p:"<strong>1.</strong> Rot hout volledig verwijderen tot op gezond hout · <strong>2.</strong> DRY FIX® UNI mengen en met een kwast aanbrengen · <strong>3.</strong> 20 tot 45 minuten laten intrekken · <strong>4.</strong> Overtollig materiaal afnemen met absorberend papier — <em>dit is de vergeten stap</em> · <strong>5.</strong> Reparatiepasta aanbrengen en modelleren.<br>Potlife na mengen: circa 1 uur. De reparatie moet binnen 24 uur na het voorstrijken volgen." }
+    ],
+    benefits: [
+      { h:"Geld", icon:"coins", p:"Geen faalkosten. Een losgelaten reparatie betekent opnieuw voorrijden, opnieuw steigeren en een ontevreden opdrachtgever — vele malen duurder dan de voorstrijk." },
+      { h:"Tijd", icon:"clock", p:"Vijf minuten werk en een halfuur wachten, terwijl hij ondertussen het volgende kozijn uitfreest. Kost hem in de praktijk geen extra tijd." },
+      { h:"Zekerheid", icon:"shield", p:"Voorstrijken hoort bij de voorgeschreven werkwijze. Werkt hij daarnaar, dan valt de klus binnen de systematiek waarop de tienjarige systeemgarantie rust (module 3)." }
+    ],
+    asks: [
+      { q:"Heb je nog DRY FIX® UNI liggen?", a:"Gewoon <b>rechtstreeks vragen</b>. Niet: &lsquo;wil je er nog iets bij?&rsquo;" },
+      { q:"Op wat voor ondergrond ga je repareren?", a:"Hout, steen, beton of metaal — in <b>alle</b> gevallen is DRY FIX® UNI goed. Dat is een makkelijk en geloofwaardig verhaal." }
+    ],
+    attach: [
+      ["DRY FIX® UNI","2010005 · 200 ml + 100 ml","De voorstrijk zelf"],
+      ["Kwasten","","Voor het aanbrengen"],
+      ["EASY•Q™ mengbekers","","Correct doseren van A en B"],
+      ["Absorberend papier","","Voor het afnemen van het overtollige materiaal — stap 4"]
+    ],
+    notes: "De <strong>potlife van een uur</strong> betekent dat een schilder in één keer kan aanmaken voor meerdere kozijnen. Praktisch argument dat het bezwaar &lsquo;dat kost me tijd&rsquo; wegneemt. DRY FIX® UNI is er in een vernieuwde kleur. <span class='verify'>VERIFIEER het precieze voordeel van de nieuwe kleur</span>",
+    say: "Deze koker is je garantie dat de reparatie blijft zitten. Zonder voorstrijk hecht het niet optimaal en heb je over twee jaar dezelfde klus opnieuw.",
+    quiz: [
+      { q:"Wat doet DRY FIX® UNI?", correct:1, opts:[
+        ["Het versnelt het uitharden van de reparatiepasta","Onjuist. De uithardingstijd wordt bepaald door de pasta zelf, de temperatuur en de laagdikte."],
+        ["Het zorgt voor een optimale hechting van DRY FLEX® en BIO FLEX™ aan de ondergrond","Juist. Het is de verbinding tussen ondergrond en reparatie."],
+        ["Het vult kleine scheurtjes in het hout","Onjuist. Vullen doe je met de reparatiepasta; de voorstrijk trekt in."]
+      ]},
+      { q:"Hoe lang moet DRY FIX® UNI intrekken voordat de reparatiepasta erop gaat?", correct:1, opts:[
+        ["Direct doorwerken","Onjuist. Zonder intrekken doet de voorstrijk zijn werk niet."],
+        ["20 tot 45 minuten, daarna het overtollige materiaal afnemen","Juist. En vergeet het afnemen niet — dat is de stap die in de praktijk het vaakst wordt overgeslagen."],
+        ["Minimaal 24 uur","Onjuist. 24 uur is het maximum waarbinnen de reparatie moet volgen, geen wachttijd."]
+      ]},
+      { q:"Op welke ondergronden kun je DRY FIX® UNI gebruiken?", correct:2, opts:[
+        ["Alleen op hout","Onjuist — en je laat er verkoop mee liggen. Denk aan reparaties in metselwerk en beton."],
+        ["Alleen op hout en metaal","Onvolledig — en net de twee ondergronden die je zou vergeten bij een reparatie in metselwerk of beton."],
+        ["Op hout, metselwerk, gips/stuc, beton en metaal","Juist. Daarom &lsquo;UNI&rsquo;: één voorstrijk voor alle ondergronden — al is bij DRY FLEX® SF helemaal geen voorstrijk nodig."]
+      ]},
+      { q:"Een schilder rekent af met twee kokers DRY FLEX® 4 en zegt: &ldquo;Die voorstrijk sla ik over, ik freés het toch goed uit.&rdquo; Wat doe je?", correct:1, opts:[
+        ["Je laat het gaan — hij is de vakman","Begrijpelijk, maar je laat hem een risico lopen dat bij jou terugkomt als klacht. Goed uitfrezen is noodzakelijk, maar vervangt de hechting niet."],
+        ["Je legt uit dat uitfrezen en voorstrijken twee verschillende dingen zijn: het één verwijdert het rot, het ander zorgt dat de reparatie hécht","Juist. Je corrigeert hem niet, je vult hem aan — en je koppelt het aan iets waar hij wat aan heeft: garantie en geen faalkosten."],
+        ["Je zegt dat hij dan geen garantie meer heeft en rekent af","Inhoudelijk zit je in de buurt, maar zo gebracht klinkt het als een dreigement. Breng het als voordeel voor hem, niet als straf."]
+      ]}
+    ],
+    remember: "Geen koker DRY FLEX® 4, 16 of BIO FLEX™ de deur uit zonder DRY FIX® UNI. De voorstrijk is geen bijverkoop — het is de helft van de reparatie.",
+    links: [
+      ["Productpagina DRY FIX® UNI","https://repair-care.nl/product/dry-fix-uni/",""],
+      ["Video: DRY FIX® doseren","https://www.youtube.com/watch?v=95kA5ol48o0","0:36"],
+      ["Video: DRY FIX® UNI met vernieuwde kleur","https://www.youtube.com/watch?v=IT3TCHdl_6g","0:50"]
+    ]
+  },
+
+  {
+    id: "opleidingen", n: "03", type: "Dienstverlening", duur: "± 5 min",
+    title: "Opleidingen en D.O.E.-certificering: de dienst die jouw omzet vastzet",
+    railTitle: "Opleidingen & D.O.E.",
+    hook: "Twee schilders kopen bij jou. De één haalt af en toe een koker als er iets misgaat. De ander heeft de opleiding van Repair Care gevolgd, verkoopt houtherstel actief aan zijn opdrachtgevers en haalt elke maand een doos.<br><br>Het verschil tussen die twee klanten is <em>één dag opleiding</em>. En jij kunt die doorverwijzing maken.",
+    goals: [
+      "de drie opleidingsniveaus en de D.O.E.-certificering in één minuut uitleggen;",
+      "vertellen wat de tienjarige systeemgarantie is en voor wie die beschikbaar is;",
+      "herkennen welke klant je wanneer doorverwijst naar een opleiding."
+    ],
+    fig: {
+      core: [
+        { t:"ladder",
+          items:[{n:"Niveau 1",l:"Kennismaking"},{n:"Niveau 2",l:"Lamineren"},{n:"Niveau 3",l:"Deelvervanging"},{n:"D.O.E.",l:"Bedrijfscertificering"}],
+          alt:"De opleidingsniveaus als oplopende trap",
+          cap:"<b>Elke trede is één dag.</b> De tienjarige systeemgarantie hangt aan de bovenste trede: alleen D.O.E.-gecertificeerde bedrijven kunnen die aan hun opdrachtgever bieden." }
+      ],
+      counter: [
+        { t:"steps", hi:4,
+          items:["Klant stelt een vraag","Jij verwijst door","Opleidingsdag","Pas + vermelding op de site","Vaste klant"],
+          cap:"<b>Waar het jou om gaat, is de laatste stap.</b> Een opgeleide klant koopt structureel en het hele systeem, in plaats van incidenteel een losse koker." }
+      ]
+    },
+    video: { id:"_RURJ56Y1Vc", title:"Repair Care opleidingen duurzaam houtherstel", dur:"2:01",
+      task:"Let erop <b>hoeveel er in de praktijk wordt gewerkt</b>. Dit is geen klaslokaal met sheets — dat is precies het argument waarmee je een schilder over de streep trekt." },
+    core: [
+      { h:"Wat is het?", p:"Repair Care leidt vakmensen op in duurzaam houtherstel. Geen theoriecursus: deelnemers werken met echte kozijnen en realistische reparaties. Drie niveaus van elk één dag, met daarboven een certificering op bedrijfsniveau. Kleine groepen van 6 tot 8 deelnemers, ruim 250 opleidingsdagen per jaar, in Waalwijk én op locatie bij bedrijven en verkooppunten." },
+      { h:"Waarom D.O.E. zo belangrijk is", p:"Omdat daar de <strong>tienjarige systeemgarantie</strong> aan hangt. Die is uniek: de dekking vervalt niet tijdens de looptijd, hij geldt op de houtreparatie én op het schilderwerk, en er is vrije keuze in het verfsysteem zolang het om A-merken gaat. De systeemgarantie is <strong>alleen beschikbaar voor en via D.O.E.-gecertificeerde bedrijven</strong>. Voor een schilder is dat geen papiertje maar een verkoopargument waarmee hij aanbestedingen wint." },
+      { h:"En wat levert het jóu op?", p:"Een opgeleide klant koopt <strong>structureel</strong> in plaats van incidenteel, en koopt het hele systeem in plaats van losse kokers. Minder klachten aan de balie, want hij werkt volgens de juiste werkwijze. En opleidingen worden ook bij verkooppunten gegeven — jouw vestiging kan opleidingslocatie zijn en een dag lang vol staan met jouw klanten. <span class='verify'>VERIFIEER de aanvraagroute voor dealers</span>" }
+    ],
+    levelHead: ["Niveau","Inhoud","Voor wie"],
+    levels: [
+      ["Niveau 1 — Kennismaking","De basis: hoe houtschade ontstaat, hoe je het voorkomt, de 7-stappen-werkwijze en de veelvoorkomende reparaties","Iedereen die begint met houtherstel"],
+      ["Niveau 2 — Lamineren","Lamineren, plamuurvervanging en complexere reparaties, geoefend op een praktijksimulator","Wie de basis beheerst en verder wil"],
+      ["Niveau 3 — Deelvervanging","Glasvezeltechniek, technisch complexe reparaties en deelvervangingen","De specialist"],
+      ["D.O.E. — Duurzaam Onderhoud Expert","Certificering van het héle bedrijf: voldoende medewerkers op niveau 3 én duurzaam onderhoud geborgd in de bedrijfsprocessen","Onderhoudsbedrijven die willen doorgroeien"]
+    ],
+    benefits: [
+      { h:"Geld", icon:"coins", p:"Minder faalkosten door de juiste werkwijze, en toegang tot grotere opdrachten. Een opgeleide schilder verkóópt houtherstel in plaats van het alleen uit te voeren." },
+      { h:"Tijd", icon:"clock", p:"Sneller werken doordat hij de 7 stappen beheerst en niet hoeft te improviseren. Eén dag investeren, jaren profijt." },
+      { h:"Zekerheid", icon:"shield", p:"Persoonlijk certificaat, vermelding op repair-care.nl als opgeleid bedrijf, en via D.O.E. de tienjarige systeemgarantie richting zijn opdrachtgever." }
+    ],
+    asks: null,
+    signals: [
+      ["&ldquo;Ik doe dit voor het eerst, hoe pak ik dit aan?&rdquo;","Niveau 1 — kennismaking duurzaam onderhoud"],
+      ["&ldquo;Ik krijg die hoek nooit strak&rdquo; of &ldquo;hoe doe je een dorpel over de volle lengte?&rdquo;","Niveau 2 (lamineren) of niveau 3 (deelvervanging)"],
+      ["&ldquo;De corporatie vraagt om tien jaar garantie op het werk&rdquo;","D.O.E.-certificering — dit bedrijf heeft een concreet probleem dat de certificering oplost"]
+    ],
+    notes: "Aanmelden kan via <strong>repair-care.nl/opleidingen</strong>. Noteer naam en bedrijf en geef het door aan je accountmanager. <span class='verify'>VERIFIEER de route voor dealers</span> Naast opleidingen biedt Repair Care ook diensten aan opdrachtgevers: een kosteloze quick scan, een volledige inventarisatie van het gevelhout, projectondersteuning en kwaliteitsbeoordeling. Krijg je een VvE-bestuurder of corporatiemedewerker aan de balie, verwijs dan naar repair-care.nl/diensten.",
+    say: null,
+    quiz: [
+      { q:"Hoeveel opleidingsniveaus zijn er, en hoe lang duurt één niveau?", correct:1, opts:[
+        ["Twee niveaus van een halve dag","Onjuist. Je verkoopt de opleiding dan te licht; het is een volwaardige praktijkdag."],
+        ["Drie niveaus van elk één dag, met daarboven de D.O.E.-certificering op bedrijfsniveau","Juist. Niveau 1 kennismaking, niveau 2 lamineren, niveau 3 deelvervanging."],
+        ["Eén opleiding van een week","Onjuist. Zo klinkt het als een onneembare drempel — schilders kunnen geen week missen."]
+      ]},
+      { q:"Voor wie is de tienjarige systeemgarantie beschikbaar?", correct:1, opts:[
+        ["Voor iedereen die Repair Care-producten koopt","Onjuist, en dit is een gevaarlijke belofte aan de balie. Producten kopen geeft geen garantie op de uitvoering."],
+        ["Alleen voor en via bedrijven met een D.O.E.-certificering","Juist. Daarom is de certificering interessant voor bedrijven die grote opdrachtgevers bedienen."],
+        ["Alleen voor woningcorporaties","Onjuist. De corporatie is vaak de opdrachtgever, maar de certificering ligt bij het uitvoerende bedrijf."]
+      ]},
+      { q:"Wat is het sterkste argument om een schilder naar niveau 1 te sturen?", correct:1, opts:[
+        ["Hij krijgt korting op producten","Onjuist — en niet toezeggen. Daar gaat de opleiding niet over."],
+        ["Hij oefent één dag op echte kozijnen en kan daarna zelf houtherstel aanbieden aan zijn opdrachtgevers","Juist. Praktijk en omzet — de twee dingen die een ondernemende schilder aanspreken."],
+        ["Het staat goed op zijn website","Hij komt inderdaad bij de opgeleide bedrijven te staan, maar als hoofdargument is dat te dun."]
+      ]},
+      { q:"Een schilder moet een offerte maken voor een VvE en er wordt tien jaar garantie op het werk gevraagd. Hij vraagt of dat kan. Wat doe je?", correct:2, opts:[
+        ["Je zegt dat Repair Care tien jaar garantie geeft op de producten","Te snel en niet precies. Het gaat om een systeemgarantie op reparatie én schilderwerk, via de D.O.E.-certificering."],
+        ["Je zegt dat je dat niet weet en verwijst naar de website","Gemiste kans. Dit is precies het moment waarop je van leverancier naar adviseur gaat."],
+        ["Je legt uit dat de systeemgarantie via D.O.E.-gecertificeerde bedrijven loopt en biedt aan hem in contact te brengen met Repair Care","Juist. Je geeft antwoord op zijn échte vraag — die offerte winnen — en zet hem op het pad dat hem een vaste klant maakt."]
+      ]}
+    ],
+    remember: "Een opgeleide klant is een vaste klant. Drie niveaus van één dag, D.O.E. voor het bedrijf, en daar hangt de tienjarige systeemgarantie aan.",
+    links: [
+      ["Alle opleidingen","https://repair-care.nl/opleidingen/",""],
+      ["D.O.E.-certificering","https://repair-care.nl/opleidingen/duurzaam-onderhoud-expert/",""],
+      ["Diensten voor opdrachtgevers","https://repair-care.nl/diensten/",""],
+      ["Video: repareren is milieuvriendelijker dan vervangen","https://www.youtube.com/watch?v=Jy0EUa9cqM8","2:30"]
+    ]
+  }
+  ,{
+    id: "dry-flex-sf", n: "04", type: "Product", duur: "± 4 min",
+    title: "DRY FLEX® SF: het kleine broertje voor kleine gebreken",
+    railTitle: "DRY FLEX® SF",
+    hook: "Een schilder heeft een kozijn kaal geschuurd en ziet overal spijkergaatjes en kleine oneffenheden. Hij wil vanmiddag nog in de grondverf. <em>&ldquo;Moet ik daar nou echt die hele epoxyset voor aanmaken?&rdquo;</em><br><br>Nee. Daar is een apart product voor — en dat weet lang niet iedereen achter de balie.",
+    goals: [
+      "uitleggen waarvoor DRY FLEX® SF wél en niet bedoeld is;",
+      "de grens tussen SF en DRY FLEX® 4 in één zin trekken;",
+      "benoemen waarom hier géén voorstrijk bij hoort."
+    ],
+    video: { id:"Vs5STGvVYcM", title:"Instructievideo DRY FLEX® SF", dur:"1:24",
+      task:"Let op twee dingen. <b>(1)</b> Hoe dun de lagen zijn waarmee gewerkt wordt. <b>(2)</b> Hoe snel er geschuurd kan worden." },
+    core: [
+      { h:"Wat is het?", p:"Een duurzame reparatieplamuur die het beste van plamuur en epoxy combineert. Je vult er zeer snel kleine gebreken en oneffenheden in hout mee. <strong>Verwerkingstijd 7–10 minuten bij 20 °C, na een half uur schuur- en overschilderbaar</strong> (bij 5 °C na een uur). Reparatiedikte 0–6 mm, verwerkbaar van 0 tot 30 °C. Voldoet aan KOMO." },
+      { h:"Wanneer adviseer je dit?", p:"<strong>Wél:</strong> spijker- en schroefgaten, kleine oneffenheden en kleine gebreken, en het bijwerken van beschadigingen in een bestaande DRY FLEX®-reparatie. Binnen en buiten, ook op metselwerk, stucwerk, beton en metaal.<br><strong>Niet:</strong> schade die is ontstaan door houtrot of door spanning in de ondergrond. Dan lost SF het probleem niet op en hoort er DRY FLEX® 4 of 16 in." },
+      { h:"De uitzondering op de voorstrijkregel", p:"Bij DRY FLEX® SF is <strong>geen voorbehandeling met DRY FIX® UNI nodig</strong>. Dat staat zo op de productpagina en het is het enige reparatieproduct in deze training waarvoor dat geldt — bij DRY FLEX® 4, DRY FLEX® 16 en BIO FLEX™ blijft de voorstrijk gewoon verplicht. Weet dit verschil, anders verkoop je een koker die de klant niet nodig heeft. <span class='verify'>VERIFIEER of er in het volledige assortiment nog meer uitzonderingen zijn</span>" }
+    ],
+    benefits: [
+      { h:"Geld", icon:"coins", p:"Geen aparte voorstrijk en een kleine verpakking: de klant lost een klein gebrek op zonder een volledige reparatieset aan te breken." },
+      { h:"Tijd", icon:"clock", p:"Na een half uur schuren en schilderen. Hij blijft in het ritme van zijn schilderwerk in plaats van een dag te wachten." },
+      { h:"Zekerheid", icon:"shield", p:"Een blijvende reparatie, geen tijdelijke oplossing — en hij hardt ook bij lage temperaturen snel uit." }
+    ],
+    asks: [
+      { q:"Hoe diep is het gebrek?", a:"Tot <b>6 mm</b> is dit SF-werk. Dieper betekent DRY FLEX® 4 of 16." },
+      { q:"Waar komt de schade vandaan?", a:"Een spijkergaatje of een oneffenheid: SF. <b>Houtrot of spanning in de ondergrond: geen SF</b> — dan verplaatst hij het probleem alleen maar." }
+    ],
+    attach: [
+      ["DRY FLEX® SF","2027005 · 200 ml + 100 ml","Het product zelf"],
+      ["Plamuurgereedschap","","Voor het strak afmessen van dunne lagen"],
+      ["Schuurpapier","","Na een half uur kan hij al schuren"],
+      ["EASY•Q™ WIPES","","Gereedschap reinigen vóór het uithardt"]
+    ],
+    notes: "<strong>Let op de korte verwerkingstijd van 7–10 minuten.</strong> Aanmaken wat hij in die tien minuten verwerkt, niet meer. Bij 5 °C is het na een uur uitgehard en bij 20 °C na een half uur — dat maakt het een prettig winterproduct voor wie snel door wil. Er is ook een 2-in-1 uitvoering in één patroon. <span class='verify'>VERIFIEER het artikelnummer van de 2-in-1</span>",
+    say: "Voor spijkergaatjes en kleine oneffenheden heb je de grote set niet nodig. Hier is het product dat er speciaal voor is, en je schildert er na een half uur overheen.",
+    fig: {
+      core: [
+        { t:"bars", hi:0,
+          items:[{l:"DRY FLEX® SF",v:0.5,t:"30 min"},{l:"DRY FLEX® 4",v:4,t:"4 uur"},{l:"BIO FLEX™ ALLROUND",v:12,t:"12 uur"},{l:"DRY FLEX® 16",v:16,t:"16 uur"}],
+          alt:"Vergelijking van de tijd tot schuren en schilderen per product",
+          cap:"<b>Hoe lang voordat er geschuurd en geschilderd kan worden</b> (bij 20 °C). Dit is de vraag waarop een schilder zijn dagplanning maakt, dus stel hem altijd." }
+      ],
+      counter: [
+        { t:"time",
+          marks:[{x:0,t:"0 min",l:"A en B mengen"},{x:0.3,t:"7–10 min",l:"verwerken bij 20 °C"},{x:1,t:"na 30 min",l:"schuren &amp; schilderen",open:true}],
+          alt:"Tijdlijn van DRY FLEX SF",
+          cap:"<b>Tien minuten werken, een half uur wachten.</b> Vergelijk dat met DRY FLEX® 4: daar is het 20–25 minuten werken en vier uur wachten." }
+      ]
+    },
+    quiz: [
+      { q:"Tot welke reparatiedikte gebruik je DRY FLEX® SF?", correct:0, opts:[
+        ["Tot 6 mm","Juist. Daarboven is het geen SF-klus meer en ga je naar DRY FLEX® 4 of 16."],
+        ["Tot 20 mm","Onjuist. Dat is het bereik van DRY FLEX® 4 bij normale temperaturen."],
+        ["Tot 50 mm","Onjuist. Dat is DRY FLEX® 16 of BIO FLEX™ — voor de grote reparaties."]
+      ]},
+      { q:"Welke voorbehandeling hoort er bij DRY FLEX® SF?", correct:1, opts:[
+        ["DRY FIX® UNI, net als bij alle andere producten","Onjuist — en je verkoopt de klant iets wat hij hier niet nodig heeft. Bij SF is voorstrijken niet nodig."],
+        ["Geen voorbehandeling; bij SF is voorstrijken niet nodig","Juist. Dit is de uitzondering. Bij DRY FLEX® 4, 16 en BIO FLEX™ blijft de voorstrijk wél verplicht."],
+        ["Een laag grondverf","Onjuist. De reparatie komt juist vóór het schilderwerk."]
+      ]},
+      { q:"Een klant wil SF gebruiken op een plek waar het hout is weggerot. Wat zeg je?", correct:2, opts:[
+        ["Prima, als hij het in dunne lagen aanbrengt","Onjuist. De laagdikte is niet het probleem — de oorzaak van de schade is dat wel."],
+        ["Prima, mits hij eerst voorstrijkt","Onjuist. Voorstrijken verandert niets aan het feit dat SF niet voor houtrot is bedoeld."],
+        ["SF is voor kleine gebreken, niet voor houtrot: eerst het rotte hout weghalen, dan DRY FLEX® 4 of 16","Juist. Hij verplaatst anders alleen het probleem en staat volgend jaar terug aan je balie."]
+      ]},
+      { q:"Situatie. Een klant zegt: &ldquo;Ik heb maar drie spijkergaatjes, moet ik daar echt een set voor kopen?&rdquo; Wat doe je?", correct:1, opts:[
+        ["Je geeft hem een restje uit een geopende koker mee","Doe dat niet. Je hebt geen zicht op de houdbaarheid en bij een klacht sta je met lege handen."],
+        ["Je legt uit dat SF hier juist het kleine, snelle product voor is en dat hij er na een half uur overheen schildert","Juist. Je verkoopt geen set maar een oplossing, en de klant onthoudt dat jij hem niet iets te groots aansmeerde."],
+        ["Je verwijst hem naar gewone plamuur uit het schap","Gemiste kans. Gewone plamuur is geen blijvende reparatie, en je laat de omzet én het adviesmoment liggen."]
+      ]},
+    ],
+    remember: "DRY FLEX® SF = klein gebrek, tot 6 mm, géén voorstrijk, na een half uur schilderen.",
+    links: [
+      ["Productpagina DRY FLEX® SF","https://repair-care.nl/product/dry-flex-sf/",""],
+      ["Video: DRY FLEX® SF 2-in-1","https://www.youtube.com/watch?v=T84wl3nrz_M","1:24"]
+    ]
+  },
+
+  {
+    id: "dry-flex-16", n: "05", type: "Product", duur: "± 5 min",
+    title: "DRY FLEX® 16: bijna twee uur de tijd om het goed te doen",
+    railTitle: "DRY FLEX® 16",
+    hook: "Een schilder moet een dorpel over anderhalve meter lamineren. Met een pasta die na twintig minuten stijf wordt is dat onbegonnen werk: hij is nog niet halverwege of hij kan opnieuw aanmaken.<br><br>Voor precies dat probleem bestaat DRY FLEX® 16.",
+    goals: [
+      "uitleggen waarvoor DRY FLEX® 16 bedoeld is;",
+      "het verschil met DRY FLEX® 4 in één zin benoemen;",
+      "herkennen wanneer je een klant van DRY FLEX® 4 naar 16 stuurt — en wanneer juist niet."
+    ],
+    video: { id:"GOtNZGAJtEM", title:"Instructievideo DRY FLEX® 16", dur:"2:03",
+      task:"Let op de omvang van de reparatie die wordt gemaakt, en op wat er gezegd wordt over de tijd die de verwerker heeft." },
+    core: [
+      { h:"Wat is het?", p:"Een reparatiepasta voor kleine én grote houtreparaties met een <strong>zeer lange verwerkingstijd: 1,5 tot 2 uur bij 20 °C</strong>. Daardoor kan de verwerker rustig grote oppervlakken vullen, lamineren en modelleren zonder dat het materiaal onder zijn handen stijf wordt. Reparatiedikte 5–50 mm. Voldoet aan KOMO en TNO." },
+      { h:"Het verschil met DRY FLEX® 4 — dit is de kern", p:"Beide zijn elastische reparatiepasta's die zich als hout gedragen. Het verschil zit in <strong>waar de tijd zit</strong>. DRY FLEX® 4: kort werken (20–25 min), kort wachten (4 uur). DRY FLEX® 16: lang werken (1,5–2 uur), lang wachten (16 uur). Je kiest dus niet op kwaliteit maar op de vraag: heeft hij tijd nodig <em>tijdens</em> het werk, of <em>erna</em>?" },
+      { h:"Let op de temperatuur", p:"DRY FLEX® 16 is verwerkbaar van <strong>10 tot 35 °C</strong> — niet vanaf 0 °C zoals DRY FLEX® 4. In het koude seizoen is het dus níet het product waarmee je buiten doorwerkt. Voorstrijken met DRY FIX® UNI blijft hier gewoon nodig." }
+    ],
+    benefits: [
+      { h:"Geld", icon:"coins", p:"Geen materiaalverlies doordat aangemaakte pasta stijf wordt voor hij verwerkt is, en grote reparaties in één keer in plaats van in delen." },
+      { h:"Tijd", icon:"clock", p:"Bijna twee uur rustig werken. Het uitharden gebeurt 's nachts, dus bij een meerdaagse klus kost het hem geen dag." },
+      { h:"Zekerheid", icon:"shield", p:"Blijvende, elastische reparatie tot 50 mm dik, en voldoet aan de eisen van KOMO en TNO — het argument voor corporatiewerk." }
+    ],
+    asks: [
+      { q:"Hoe groot is de reparatie, en heb je tijd nodig tijdens het aanbrengen?", a:"Lamineren of een groot oppervlak modelleren: <b>16</b>. Een handvol kleine plekken: DRY FLEX® 4." },
+      { q:"Wanneer moet er geschilderd worden?", a:"Moet het vandaag nog in de verf? Dan is 16 geen optie — <b>16 uur</b> is de wachttijd. Mag het morgen, dan is het juist ideaal." }
+    ],
+    attach: [
+      ["DRY FIX® UNI","2010005","Voorstrijk. Hier wél verplicht, in tegenstelling tot DRY FLEX® SF"],
+      ["DRY FLEX® 16","2021005 · 300 ml + 100 ml","Het reparatiemateriaal zelf"],
+      ["EASY•Q™ doseerpistool","","Voor het gelijkmatig uitbrengen van A en B"],
+      ["Modelleergereedschap","","Bij grote reparaties is strak modelleren het halve werk"]
+    ],
+    notes: "De naam zegt het: <strong>16 uur</strong> tot schuren en schilderen bij 20 °C. Het grootste misverstand aan de balie is dat mensen denken dat de 16 op de verwerkingstijd slaat. Verwerkingstemperatuur is 10–35 °C, dus dit is geen product voor vorstperiodes — daar is DRY FLEX® 4 met zijn bereik vanaf 0 °C geschikter voor.",
+    say: "Vraag niet welk product hij wil, vraag hoeveel tijd hij nodig heeft: tijdens het werk of erna. Dat bepaalt of het de 4 of de 16 wordt.",
+    fig: {
+      core: [
+        { t:"bars", hi:3,
+          items:[{l:"DRY FLEX® SF",v:0.5,t:"30 min"},{l:"DRY FLEX® 4",v:4,t:"4 uur"},{l:"BIO FLEX™ ALLROUND",v:12,t:"12 uur"},{l:"DRY FLEX® 16",v:16,t:"16 uur"}],
+          alt:"Vergelijking van de tijd tot schuren en schilderen per product",
+          cap:"<b>Tijd tot schuren en schilderen</b> (bij 20 °C). DRY FLEX® 16 staat helemaal rechts — dat is de prijs die je betaalt voor bijna twee uur verwerkingstijd." }
+      ],
+      counter: [
+        { t:"time",
+          marks:[{x:0,t:"0 min",l:"A en B mengen"},{x:0.42,t:"1,5–2 uur",l:"verwerken bij 20 °C"},{x:1,t:"na 16 uur",l:"schuren &amp; schilderen",open:true}],
+          alt:"Tijdlijn van DRY FLEX 16",
+          cap:"<b>Hier zit de tijd aan de voorkant.</b> Bijna twee uur om de reparatie te maken, en daarna een nacht om uit te harden." }
+      ]
+    },
+    quiz: [
+      { q:"Hoe lang is de verwerkingstijd van DRY FLEX® 16 bij 20 °C?", correct:1, opts:[
+        ["20 tot 25 minuten","Onjuist. Dat is DRY FLEX® 4 — en precies het verschil waar deze module over gaat."],
+        ["1,5 tot 2 uur","Juist. Dat is de reden dat je hem adviseert bij lamineren en grote oppervlakken."],
+        ["16 uur","Onjuist. De 16 slaat op de tijd tot schuren en schilderen, niet op de verwerkingstijd. Dit is het meestgemaakte misverstand."]
+      ]},
+      { q:"Na hoeveel tijd is DRY FLEX® 16 schuur- en overschilderbaar?", correct:1, opts:[
+        ["Na 4 uur","Onjuist. Dat is DRY FLEX® 4."],
+        ["Na 16 uur","Juist — vandaar de naam. In de praktijk betekent dat: vandaag repareren, morgen schilderen."],
+        ["Na 30 minuten","Onjuist. Dat is DRY FLEX® SF, voor kleine gebreken tot 6 mm."]
+      ]},
+      { q:"Een klant heeft een grote reparatie én wil vandaag nog schilderen. Wat adviseer je?", correct:2, opts:[
+        ["DRY FLEX® 16, want die is voor grote reparaties","Onvolledig. Groot klopt, maar met 16 uur wachttijd haalt hij zijn schilderwerk vandaag niet."],
+        ["DRY FLEX® SF, want die is na een half uur klaar","Onjuist. SF gaat tot 6 mm en is niet voor grote reparaties bedoeld."],
+        ["DRY FLEX® 4, en leg uit dat hij dan wel in porties moet aanmaken","Juist. Je maakt de afweging expliciet: hij levert verwerkingstijd in om vandaag te kunnen schilderen. Dát is het gesprek."]
+      ]},
+      { q:"Situatie. Een klant vraagt in januari om DRY FLEX® 16 voor buitenwerk; het is 3 °C. Wat doe je?", correct:0, opts:[
+        ["Je zegt dat 16 verwerkbaar is van 10 tot 35 °C en adviseert DRY FLEX® 4, die vanaf 0 °C kan","Juist. Dit is precies het soort detail waarop een klant terugkomt als het misgaat — en waarmee je nu laat zien dat je het weet."],
+        ["Je verkoopt de 16; epoxy hardt altijd wel uit","Onjuist en riskant. Buiten het opgegeven temperatuurbereik heb je geen zekerheid over het resultaat."],
+        ["Je adviseert te wachten tot het voorjaar","Onnodig. Er is een product dat bij deze temperatuur wél kan — dat is nu juist het verkoopargument."]
+      ]},
+    ],
+    remember: "DRY FLEX® 16 = de tijd zit aan de voorkant: bijna twee uur verwerken, daarna zestien uur wachten. En pas vanaf 10 °C.",
+    links: [
+      ["Productpagina DRY FLEX® 16","https://repair-care.nl/product/dry-flex-16/",""],
+      ["Video: DRY SHIELD® SK met DRY FLEX® 16","https://www.youtube.com/watch?v=cuUxr7jgQI8","3:29"]
+    ]
+  },
+
+  {
+    id: "bio-flex", n: "06", type: "Product", duur: "± 5 min",
+    title: "BIO FLEX™ ALLROUND: het biobased alternatief met een certificaat",
+    railTitle: "BIO FLEX™",
+    hook: "Een schilder heeft een aanbesteding van een woningcorporatie op zijn bureau waarin om biobased materialen wordt gevraagd. Hij komt binnen en vraagt of jij <em>&ldquo;iets duurzaams&rdquo;</em> hebt.<br><br>Dat heb je. En belangrijker: je kunt het onderbouwen.",
+    goals: [
+      "uitleggen wat BIO FLEX™ ALLROUND is en wat het certificaat betekent;",
+      "het praktische verschil met DRY FLEX® 4 benoemen;",
+      "herkennen welke klant hier echt iets aan heeft."
+    ],
+    video: { id:"1lNr6VYU6fI", title:"Instructievideo BIO FLEX™ ALLROUND", dur:"2:07",
+      task:"Let erop dat de werkwijze niet afwijkt van DRY FLEX®. Het verschil zit niet in het verwerken — kijk of je kunt vinden waar het dan wél in zit." },
+    core: [
+      { h:"Wat is het?", p:"De eerste gecertificeerde epoxy-reparatiepasta met <strong>40% biobased grondstoffen</strong>, met het keurmerk &lsquo;OK BIOBASED&rsquo; van TÜV Austria (1 ster). Verder werkt het als de DRY FLEX®-producten: verwerkingstijd 20–25 minuten bij 20 °C, reparatiedikte 5–50 mm, verwerkbaar van 0 tot 35 °C. Het gedraagt zich als hout en beweegt mee." },
+      { h:"Het verschil dat telt aan de balie", p:"Schuur- en overschilderbaar <strong>na 12 uur in plaats van 4</strong>. Dezelfde dag doorschilderen zit er dus niet in. Dat is de enige echte afweging die je met de klant maakt: duurzaamheidseis tegenover doorlooptijd. De verwerkingstijd is gelijk aan die van DRY FLEX® 4, dus zijn manier van werken verandert niet." },
+      { h:"Wanneer adviseer je dit?", p:"Bij opdrachtgevers die biobased of circulair inkopen: woningcorporaties, gemeenten en aanbestedingen met duurzaamheidscriteria. Voorstrijken met DRY FIX® UNI is ook hier nodig. Voor wie geen duurzaamheidseis heeft en vandaag wil schilderen, blijft DRY FLEX® 4 het logische advies." }
+    ],
+    benefits: [
+      { h:"Geld", icon:"coins", p:"Hij kan meedoen aan aanbestedingen met duurzaamheidscriteria die hij anders misloopt — dat zijn juist de grotere, meerjarige opdrachten." },
+      { h:"Tijd", icon:"clock", p:"Dezelfde verwerkingstijd als DRY FLEX® 4, dus geen ander werkritme. Alleen het uitharden duurt langer." },
+      { h:"Zekerheid", icon:"shield", p:"Onafhankelijk gecertificeerd door TÜV Austria. Dat kan hij in een offerte zetten — dat is iets anders dan zelf zeggen dat je duurzaam bent." }
+    ],
+    asks: [
+      { q:"Vraagt je opdrachtgever om biobased of circulair materiaal?", a:"Zo ja, dan is dit je product. Zo nee, dan is DRY FLEX® 4 sneller klaar — <b>verkoop het niet als het niet gevraagd wordt</b>." },
+      { q:"Wanneer moet er geschilderd worden?", a:"<b>12 uur</b> tot schuren en schilderen. Dat betekent: vandaag repareren, morgen schilderen." }
+    ],
+    attach: [
+      ["DRY FIX® UNI","2010005","Voorstrijk. Ook bij BIO FLEX™ verplicht"],
+      ["BIO FLEX™ ALLROUND","2025005 · 300 ml + 100 ml","Het reparatiemateriaal zelf"],
+      ["Modelleergereedschap","","Zelfde werkwijze als bij DRY FLEX®"],
+      ["EASY•Q™ WIPES","","Reinigen vóór het uithardt"]
+    ],
+    notes: "Er is naast ALLROUND ook een <strong>BIO FLEX™ COOL</strong>. <span class='verify'>VERIFIEER het precieze verschil tussen ALLROUND en COOL voordat je hierover adviseert — zie video Wir9yz5wJJY (2:07)</span> Combineer deze module met module 08: daar staan de CO₂-cijfers waarmee je klant het duurzaamheidsverhaal compleet maakt.",
+    say: "Als je opdrachtgever om biobased vraagt, kun je dit onderbouwen met een certificaat van TÜV Austria. Dat weegt zwaarder dan een verhaal.",
+    fig: {
+      core: [
+        { t:"bars", hi:2,
+          items:[{l:"DRY FLEX® SF",v:0.5,t:"30 min"},{l:"DRY FLEX® 4",v:4,t:"4 uur"},{l:"BIO FLEX™ ALLROUND",v:12,t:"12 uur"},{l:"DRY FLEX® 16",v:16,t:"16 uur"}],
+          alt:"Vergelijking van de tijd tot schuren en schilderen per product",
+          cap:"<b>Dit is de hele afweging in één beeld.</b> BIO FLEX™ doet alles wat DRY FLEX® 4 doet, maar je klant wacht twaalf uur in plaats van vier. Weet hij dat vooraf, dan is het geen probleem." }
+      ]
+    },
+    quiz: [
+      { q:"Hoeveel biobased grondstoffen bevat BIO FLEX™ ALLROUND?", correct:1, opts:[
+        ["10%","Onjuist, en je verkoopt het product daarmee te licht."],
+        ["40%, gecertificeerd door TÜV Austria","Juist. Noem het percentage én de certificerende instantie — dat maakt het hard."],
+        ["100%","Onjuist, en dit is een gevaarlijke belofte. Het is een epoxy met 40% biobased grondstoffen, geen volledig biobased product."]
+      ]},
+      { q:"Wat is het belangrijkste praktische verschil met DRY FLEX® 4?", correct:1, opts:[
+        ["Een langere verwerkingstijd","Onjuist. De verwerkingstijd is gelijk: 20–25 minuten bij 20 °C."],
+        ["Schuur- en overschilderbaar na 12 uur in plaats van na 4 uur","Juist. Dat is het enige dat de planning van je klant verandert."],
+        ["Er is geen voorstrijk nodig","Onjuist. Dat geldt alleen voor DRY FLEX® SF. Bij BIO FLEX™ is DRY FIX® UNI gewoon nodig."]
+      ]},
+      { q:"Voor welke klant is BIO FLEX™ het sterkste argument?", correct:2, opts:[
+        ["De klant die zo snel mogelijk klaar wil zijn","Onjuist — voor hem is DRY FLEX® 4 juist beter, met vier uur in plaats van twaalf."],
+        ["De klant die de goedkoopste oplossing zoekt","Onjuist. Dit is geen prijsargument; het is een gunningsargument."],
+        ["De klant die werkt voor een opdrachtgever met duurzaamheidscriteria","Juist. Corporaties, gemeenten en aanbestedingen — daar wint hij werk mee dat hij anders misloopt."]
+      ]},
+      { q:"Situatie. Een klant wil biobased werken én dezelfde dag schilderen. Wat doe je?", correct:0, opts:[
+        ["Je legt eerlijk uit dat dat niet samengaat en laat hem kiezen: biobased met 12 uur, of DRY FLEX® 4 met 4 uur","Juist. Een eerlijke afweging voorleggen levert je meer vertrouwen op dan een half antwoord — en hij plant zijn klus erop."],
+        ["Je adviseert BIO FLEX™ en zegt dat 12 uur meestal wel meevalt","Onjuist. Je zet hem op het verkeerde been en de klacht komt bij jou terug."],
+        ["Je adviseert DRY FLEX® 4 en laat het biobased-verhaal verder rusten","Gemiste kans. Als zijn opdrachtgever erom vraagt, heeft hij een probleem dat jij had kunnen oplossen."]
+      ]},
+    ],
+    remember: "BIO FLEX™ = 40% biobased met certificaat van TÜV Austria, werkt als DRY FLEX® 4, maar schilderen kan pas na 12 uur.",
+    links: [
+      ["Productpagina BIO FLEX™ ALLROUND","https://repair-care.nl/product/bio-flex-allround/",""],
+      ["Video: BIO FLEX™ COOL","https://www.youtube.com/watch?v=Wir9yz5wJJY","2:07"]
+    ]
+  },
+
+  {
+    id: "dry-seal-mp", n: "07", type: "Product", duur: "± 5 min",
+    title: "DRY SEAL® MP: stopverf die niet meer uit het kozijn brokkelt",
+    railTitle: "DRY SEAL® MP",
+    hook: "Een schilder komt binnen en vraagt of je nog stopverf hebt. Zijn klant heeft houten kozijnen met enkel glas en de stopverf brokkelt er aan alle kanten uit.<br><br>Je kunt hem stopverf verkopen. Of je kunt hem het product verkopen dat hetzelfde probleem over vijf jaar niet opnieuw geeft.",
+    goals: [
+      "uitleggen wat DRY SEAL® MP is en waarom het stopverf vervangt;",
+      "benoemen op welke ondergronden het hecht;",
+      "herkennen dat een beglazingsvraag iets anders is dan een houtrotvraag."
+    ],
+    video: { id:"46W_7eNgiIg", title:"Instructievideo DRY SEAL® MP wit", dur:"2:23",
+      task:"Let op hoe het materiaal wordt afgestreken, en op de plek waar het wordt aangebracht: dat is een heel andere plek in het kozijn dan bij een houtrotreparatie." },
+    core: [
+      { h:"Wat is het?", p:"Een blijvend elastische, overschilderbare vervanger van stopverf, in één koker van 290 ml. Je vervangt er stopverf mee in <strong>houten én stalen kozijnen</strong>, dicht er naden, scheuren en spijker- en schroefgaten mee, en sluit er kopse kanten en onbeschermd hout volledig mee af. Binnen en buiten." },
+      { h:"Waarom niet gewoon stopverf?", p:"Stopverf verhardt, krimpt en laat na verloop van tijd los — precies het probleem waarmee de klant binnenkomt. DRY SEAL® MP blijft elastisch en beweegt mee met het kozijn. Het hecht uitstekend op <strong>steen, glas, hout, staal en keramiek</strong>, ook op gelaagd glas en op de randafdichting van isolatieglas." },
+      { h:"Verwerking", p:"Verwerkingstijd 15 minuten bij 20 °C, <strong>na 2 uur overschilderbaar</strong>, verwerkingstemperatuur 5–40 °C. Verkrijgbaar in wit en reebruin. Het product is MEKO-vrij en geschikt onder watergedragen en VOS-2010 verfsystemen." }
+    ],
+    benefits: [
+      { h:"Geld", icon:"coins", p:"Eén product voor beglazing, naden, gaten én kopse kanten. En de klacht die stopverf na een paar jaar geeft, blijft uit." },
+      { h:"Tijd", icon:"clock", p:"Na twee uur overschilderbaar, dus de beglazing en het schilderwerk passen in dezelfde dag." },
+      { h:"Zekerheid", icon:"shield", p:"Blijvend elastisch en hecht op vrijwel alles wat in een kozijn zit — ook op isolatie- en gelaagd glas, waar veel kitten problemen geven." }
+    ],
+    asks: [
+      { q:"Gaat het om de beglazing of om het hout?", a:"Dit is de belangrijkste vraag van deze module. Brokkelende stopverf is een <b>beglazingsvraag</b> en geen houtrotvraag — maar ze komen wél vaak samen voor in hetzelfde kozijn." },
+      { q:"Welke kleur, en wat voor glas zit erin?", a:"Wit of reebruin. Gelaagd glas of isolatieglas is geen bezwaar; juist daar geeft gewone kit vaak problemen." }
+    ],
+    attach: [
+      ["DRY SEAL® MP","2511105 · koker 290 ml","Wit of reebruin"],
+      ["Kitpistool","","Standaard koker, geen speciaal pistool nodig"],
+      ["Afstrijkgereedschap","","Strak afwerken bepaalt hoe het eruitziet"],
+      ["Reinigingsdoeken","","Direct afnemen, niet laten uitharden"]
+    ],
+    notes: "<strong>Kopse kanten afsluiten is de vergeten toepassing.</strong> Daar dringt vocht het hout binnen en daar begint houtrot vaak — wijs je klant erop als hij toch met een koker in zijn hand staat. Repair Care heeft voor beglazing een eigen werkwijze: de 7 stappen naar duurzame beglazingsafdichting. <span class='verify'>VERIFIEER de actuele link naar deze werkwijze en of die aan klanten verstrekt mag worden</span>",
+    say: "Stopverf hardt uit, krimpt en laat los — dat is precies waarom je klant nu bij je staat. Dit blijft elastisch en je schildert er na twee uur overheen.",
+    fig: {
+      core: [
+        { t:"time",
+          marks:[{x:0,t:"0 min",l:"aanbrengen"},{x:0.4,t:"15 min",l:"verwerken &amp; afstrijken"},{x:1,t:"na 2 uur",l:"overschilderbaar",open:true}],
+          alt:"Tijdlijn van DRY SEAL MP",
+          cap:"<b>Beglazing en schilderwerk op dezelfde dag.</b> Vijftien minuten om af te strijken, twee uur voordat de verf erop kan." }
+      ],
+      counter: [
+        { t:"steps", hi:3,
+          items:["Oude stopverf verwijderen","Ondergrond schoon en droog","DRY SEAL® MP aanbrengen","Direct strak afstrijken","2 uur laten staan","Overschilderen"],
+          cap:"<b>Stap 4 bepaalt het eindresultaat.</b> Afstrijken moet meteen gebeuren, zolang het materiaal nog te verwerken is. <span class='verify'>VERIFIEER deze volgorde tegen de officiële werkwijze voor beglazingsafdichting</span>" }
+      ]
+    },
+    quiz: [
+      { q:"Waarvoor is DRY SEAL® MP in de eerste plaats bedoeld?", correct:1, opts:[
+        ["Het repareren van houtrot in kozijnen","Onjuist. Dat is het werk van DRY FLEX® — een andere productgroep en een andere klantvraag."],
+        ["Het blijvend vervangen van stopverf in houten en stalen kozijnen","Juist. Daarnaast dicht je er naden, gaten en kopse kanten mee af."],
+        ["Het verlijmen van glas in het kozijn","Onjuist. Het is een afdichting, geen constructieve verlijming."]
+      ]},
+      { q:"Na hoeveel tijd is DRY SEAL® MP overschilderbaar?", correct:2, opts:[
+        ["Na 15 minuten","Onjuist. Dat is de verwerkingstijd: de tijd waarin hij moet afstrijken."],
+        ["Na 30 minuten","Onjuist. Dat is DRY FLEX® SF, een heel ander product."],
+        ["Na 2 uur","Juist. Daardoor passen de beglazing en het schilderwerk in dezelfde dag."]
+      ]},
+      { q:"Op welke ondergronden hecht DRY SEAL® MP?", correct:2, opts:[
+        ["Alleen op hout","Onjuist, en je laat er verkoop mee liggen — denk aan stalen kozijnen."],
+        ["Alleen op hout en glas","Onvolledig. Je mist staal, en juist stalen kozijnen met brokkelende stopverf zijn een veelvoorkomende klus."],
+        ["Op steen, glas, hout, staal en keramiek","Juist. Daarom is het een multipurpose product en niet alleen een stopverfvervanger."]
+      ]},
+      { q:"Situatie. Een klant vraagt om stopverf. Wat doe je?", correct:1, opts:[
+        ["Je verkoopt stopverf; daar vroeg hij om","Begrijpelijk, maar over een paar jaar staat zijn klant met hetzelfde probleem — en dan is het zijn eigen werk dat faalt."],
+        ["Je vraagt waar het voor is en legt uit dat stopverf uithardt en loslaat, terwijl DRY SEAL® MP elastisch blijft","Juist. Je gaat niet in tegen zijn vraag, je vult hem aan met de reden waarom het de vorige keer misging."],
+        ["Je zegt dat stopverf niet meer gebruikt mag worden","Onjuist en te stellig. Het mag gewoon, het gaat alleen minder lang mee."]
+      ]},
+    ],
+    remember: "Vraagt een klant om stopverf, dan vraagt hij eigenlijk om een beglazingsafdichting die blijft zitten. Dat is DRY SEAL® MP.",
+    links: [
+      ["Productpagina DRY SEAL® MP","https://repair-care.nl/product/dry-seal-mp/",""],
+      ["Video: DRY SEAL® MP bruin","https://www.youtube.com/watch?v=oT9NQoPq-_I","2:21"],
+      ["Video: DRY SHIELD® SK — kopse kanten dichten","https://www.youtube.com/watch?v=2noJ78UBXvs","2:01"]
+    ]
+  },
+
+  {
+    id: "duurzaamheid", n: "08", type: "Dienstverlening", duur: "± 5 min",
+    title: "Duurzaamheid als verkoopargument: wat het onderzoek écht zegt",
+    railTitle: "Duurzaamheid",
+    hook: "Een vaste klant vertelt dat hij een offerte is kwijtgeraakt aan een kozijnenleverancier. De opdrachtgever wilde verduurzamen — en dacht dat nieuwe kozijnen dat waren.<br><br>Dat is precies andersom. En er ligt onafhankelijk onderzoek dat het aantoont.",
+    goals: [
+      "de kerncijfers uit het CE Delft-onderzoek noemen;",
+      "uitleggen waarom repareren milieuvriendelijker is dan vervangen;",
+      "herkennen bij welke klant dit argument beslissend is."
+    ],
+    video: { id:"Jy0EUa9cqM8", title:"Repareren van kozijnen is milieuvriendelijker dan vervangen", dur:"2:30",
+      task:"Let op <b>wie</b> het onderzoek heeft uitgevoerd en <b>wat er precies vergeleken wordt</b>. Dat zijn de twee dingen die je klant moet kunnen navertellen." },
+    core: [
+      { h:"Wat is er onderzocht?", p:"Onafhankelijk onderzoeksbureau <strong>CE Delft</strong> vergeleek het repareren van houten kozijnen met het vervangen ervan, met een levenscyclusanalyse (LCA) volgens de cradle-to-grave-methode en EU-richtlijnen. Daarbij wordt de hele levensloop van een product doorgerekend: van grondstof tot afval." },
+      { h:"De uitkomst", p:"Repareren scoort <strong>2 tot 5 keer beter</strong> dan een nieuw kozijn plaatsen. Blijft het bestaande glas zitten, dan is repareren zelfs <strong>9 tot 27 keer beter</strong>. In het rekenvoorbeeld — een woning met zes houten kozijnen waarvan er drie in 25 jaar gerepareerd worden — komt de besparing uit op <strong>584 kg CO₂-equivalent, oftewel 98%</strong>. Over de volle levensduur komt de besparing op ruim 90%. Bij vervanging door aluminium of kunststof is het verschil nog groter, omdat die materialen een hogere CO₂-voetafdruk hebben." },
+      { h:"De kanttekening die erbij hoort", p:"Het onderzoek ging over <strong>zuivere epoxy-reparatiematerialen</strong>. Polyesterharsen en onzuivere epoxy's halen deze duurzaamheid niet. Vertel dat er altijd bij: het is meteen het antwoord op de klant die met een goedkope plamuur hetzelfde effect denkt te bereiken." }
+    ],
+    benefits: [
+      { h:"Geld", icon:"coins", p:"Hiermee wint je klant opdrachten van corporaties, VvE's en gemeenten die op duurzaamheid gunnen — en dat zijn de meerjarige contracten." },
+      { h:"Tijd", icon:"clock", p:"Repareren is minder werk dan vervangen: geen demontage, geen herstel van het metselwerk, geen nieuwe afwerking binnen." },
+      { h:"Zekerheid", icon:"shield", p:"Onafhankelijk onderzoek volgens de LCA-methode. Dat is iets anders dan een claim van de fabrikant — en dat is precies wat een inkoper wil zien." }
+    ],
+    asks: null,
+    signals: [
+      ["&ldquo;De VvE wil verduurzamen en denkt aan nieuwe kozijnen&rdquo;","Repareren ís de duurzame keuze: 2 tot 5 keer beter, en 9 tot 27 keer als het glas blijft zitten"],
+      ["&ldquo;Ik moet in mijn offerte iets over duurzaamheid zetten&rdquo;","Verwijs naar het CE Delft-onderzoek en naar BIO FLEX™ (module 06) als er ook om biobased materiaal wordt gevraagd"],
+      ["&ldquo;Ik gebruik liever een goedkope plamuur&rdquo;","De kanttekening uit het onderzoek: polyesterharsen halen deze duurzaamheid niet — en het argument vervalt dus"]
+    ],
+    notes: "Het onderzoek is in opdracht van Repair Care uitgevoerd, maar door een <strong>onafhankelijk bureau</strong> en volgens een erkende methode. Wees daar open over als een klant ernaar vraagt; dat is sterker dan het weglaten. Het volledige rapport is openbaar en staat hieronder bij de verdieping. Combineer deze module met module 06 (BIO FLEX™) voor de klant die zowel op CO₂ als op biobased materiaal wordt beoordeeld.",
+    say: null,
+    fig: {
+      core: [
+        { t:"bars", hi:1,
+          items:[{l:"Vervangen",v:100,t:"100%"},{l:"Repareren",v:2,t:"2%"}],
+          alt:"CO2-uitstoot van repareren versus vervangen in het rekenvoorbeeld",
+          cap:"<b>Het rekenvoorbeeld van CE Delft.</b> Zes houten kozijnen, waarvan er drie in 25 jaar gerepareerd worden: <b>584 kg CO₂-equivalent minder, oftewel 98%</b>. Over de volle levensduur komt de besparing op ruim 90%." }
+      ],
+      counter: [
+        { t:"ladder",
+          items:[{n:"2–5×",l:"beter dan vervangen"},{n:"9–27×",l:"als het glas blijft"},{n:"ruim 90%",l:"minder CO₂ over de levensduur"}],
+          alt:"De drie cijfers uit het onderzoek",
+          cap:"<b>Drie cijfers, in deze volgorde te onthouden.</b> Het middelste is het sterkste: veel opdrachtgevers denken dat het glas er sowieso uit moet." }
+      ]
+    },
+    quiz: [
+      { q:"Welk bureau voerde het onderzoek uit?", correct:1, opts:[
+        ["TNO","Onjuist in dit verband. TNO test wel de duurzaamheid van de reparatiematerialen zelf — verwar die twee niet."],
+        ["CE Delft","Juist. Een onafhankelijk onderzoeksbureau op het gebied van duurzaamheid. Noem de naam; dat maakt het argument hard."],
+        ["KOMO","Onjuist. KOMO is een certificeringsinstelling, geen onderzoeksbureau."]
+      ]},
+      { q:"Hoeveel beter scoort repareren ten opzichte van vervangen?", correct:0, opts:[
+        ["2 tot 5 keer beter, en 9 tot 27 keer als het glas blijft zitten","Juist. Dat tweede getal is je sterkste kaart bij een opdrachtgever die het glas wil laten zitten."],
+        ["Ongeveer 10% beter","Onjuist, en daarmee verkoop je het argument volstrekt te licht."],
+        ["Precies twee keer beter","Onvolledig. Het is een bandbreedte, en die bovenkant is nu juist de moeite waard."]
+      ]},
+      { q:"Welke kanttekening hoort er altijd bij?", correct:2, opts:[
+        ["Dat het alleen voor houten kozijnen geldt","Deels waar, maar niet de belangrijkste kanttekening — bij aluminium en kunststof is het verschil juist gróter."],
+        ["Dat het onderzoek verouderd is","Onjuist, en niet iets wat je zonder grond moet beweren."],
+        ["Dat polyesterharsen en onzuivere epoxy's deze duurzaamheid niet halen","Juist. Dit is meteen je antwoord op de klant die met goedkope plamuur hetzelfde denkt te bereiken."]
+      ]},
+      { q:"Situatie. Een VvE-bestuurder staat aan je balie en zegt dat ze willen verduurzamen met nieuwe kozijnen. Wat doe je?", correct:2, opts:[
+        ["Je zegt dat repareren goedkoper is","Waar, maar je beantwoordt zijn vraag niet. Hij vroeg niet naar prijs, hij vroeg naar duurzaamheid."],
+        ["Je verwijst hem naar een kozijnenleverancier","Gemiste kans — en je geeft de opdracht weg die je klant had kunnen krijgen."],
+        ["Je legt uit dat onafhankelijk onderzoek van CE Delft laat zien dat repareren 2 tot 5 keer beter scoort, en verwijst hem naar repair-care.nl/diensten voor een quick scan","Juist. Je beantwoordt zijn échte vraag en zet hem door naar de dienst die het onderbouwt — en naar een opgeleid bedrijf."]
+      ]},
+    ],
+    remember: "Repareren is niet het zuinige alternatief voor vervangen — volgens CE Delft is het de duurzame keuze: 2 tot 5 keer beter, en 9 tot 27 keer als het glas blijft zitten.",
+    links: [
+      ["Het onderzoek op repair-care.nl","https://repair-care.nl/vakkennis/onderzoek-wijst-uit-repareren-van-kozijnen-is-tot-ruim-90-milieuvriendelijker-dan-vervangen/",""],
+      ["Het volledige CE Delft-rapport (pdf)","https://cedelft.eu/wp-content/uploads/sites/2/2023/04/CE_Delft_210382_Repair-Care_public_Def.pdf",""],
+      ["Diensten voor opdrachtgevers","https://repair-care.nl/diensten/",""],
+      ["Module 06 — BIO FLEX™, het biobased alternatief","https://repair-care.nl/product/bio-flex-allround/",""]
+    ]
+  }
+];
+
+KEY = "rc-academy-nl-v2";
+boot();
+</script>

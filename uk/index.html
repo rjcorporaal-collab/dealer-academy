@@ -1,0 +1,1655 @@
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Repair Care Trade Counter Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=Inter+Tight:wght@400;500;600;700&display=swap">
+<style>
+  /* ---------------------------------------------------------------
+     Repair Care brand tokens, taken from repair-care.co.uk:
+     green #007F3E, dark green #006933, bright green #00A651,
+     signal yellow #FFDC00 with green text, 5px radius,
+     Inter 800 for headings and Inter Tight for body copy.
+     Every component styles through a token, so the dark theme is a
+     token swap only — no component-level theme selectors.
+  ---------------------------------------------------------------- */
+  :root{
+    --green:#007F3E;
+    --green-bright:#00A651;
+    --yellow:#FFDC00;
+    --yellow-tint:#FFF8D1;
+
+    --ground:#F0F0F0;
+    --surface:#FFFFFF;
+    --surface-alt:#F5F6F5;
+    --ink:#333333;
+    --ink-strong:#1C1C1C;
+    --ink-soft:#5E6B64;
+    --ink-faint:#8A928D;
+    --line:#DCDCDC;
+    --line-strong:#C6CCC8;
+
+    /* green bands: top bar, module header, remember block, table heads */
+    --band-bg:#007F3E;
+    --band-ink:#FFFFFF;
+    --band-rule:rgba(255,255,255,.22);
+    --band-chip-bg:rgba(255,255,255,.18);
+    --band-chip-ink:#FFFFFF;
+    --bar-bg:#006933;
+    --tab-ink:rgba(255,255,255,.76);
+    --tab-ink-on:#FFFFFF;
+
+    /* dark green panel: the video block */
+    --panel-bg:#006933;
+    --panel-ink:#FFFFFF;
+    --panel-rule:rgba(255,255,255,.2);
+    --panel-link:#FFDC00;
+
+    /* green used as text/accent on light surfaces */
+    --accent-ink:#007F3E;
+    --tint:#E5F2EB;
+    --pill-bg:#007F3E;
+    --pill-ink:#FFFFFF;
+
+    --good:#007F3E;
+    --good-tint:#E5F2EB;
+    --bad:#C4321F;
+    --bad-tint:#FAE7E3;
+
+    --r:5px;
+    --display:"Inter","Helvetica Neue",Arial,sans-serif;
+    --body:"Inter Tight","Inter","Segoe UI",system-ui,sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --green:#00A651;
+      --green-bright:#2FC172;
+      --ground:#0D120F;
+      --surface:#161D18;
+      --surface-alt:#1B241E;
+      --ink:#DCE4DE;
+      --ink-strong:#F2F6F3;
+      --ink-soft:#A8B3AC;
+      --ink-faint:#7E8A83;
+      --line:#2A342E;
+      --line-strong:#3B4840;
+
+      --band-bg:#123024;
+      --band-ink:#F2F6F3;
+      --band-rule:#2A342E;
+      --band-chip-bg:#0D120F;
+      --band-chip-ink:#A8B3AC;
+      --bar-bg:#101812;
+      --tab-ink:#A8B3AC;
+      --tab-ink-on:#F2F6F3;
+
+      --panel-bg:#1B241E;
+      --panel-ink:#DCE4DE;
+      --panel-rule:#2A342E;
+      --panel-link:#2FC172;
+
+      --accent-ink:#2FC172;
+      --tint:#152C22;
+      --pill-bg:#152C22;
+      --pill-ink:#2FC172;
+
+      --good:#2FC172;
+      --good-tint:#12291E;
+      --bad:#E9755C;
+      --bad-tint:#2E1A16;
+      --yellow-tint:#2B2712;
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --green:#00A651;
+    --green-bright:#2FC172;
+    --ground:#0D120F;
+    --surface:#161D18;
+    --surface-alt:#1B241E;
+    --ink:#DCE4DE;
+    --ink-strong:#F2F6F3;
+    --ink-soft:#A8B3AC;
+    --ink-faint:#7E8A83;
+    --line:#2A342E;
+    --line-strong:#3B4840;
+
+    --band-bg:#123024;
+    --band-ink:#F2F6F3;
+    --band-rule:#2A342E;
+    --band-chip-bg:#0D120F;
+    --band-chip-ink:#A8B3AC;
+    --bar-bg:#101812;
+    --tab-ink:#A8B3AC;
+    --tab-ink-on:#F2F6F3;
+
+    --panel-bg:#1B241E;
+    --panel-ink:#DCE4DE;
+    --panel-rule:#2A342E;
+    --panel-link:#2FC172;
+
+    --accent-ink:#2FC172;
+    --tint:#152C22;
+    --pill-bg:#152C22;
+    --pill-ink:#2FC172;
+
+    --good:#2FC172;
+    --good-tint:#12291E;
+    --bad:#E9755C;
+    --bad-tint:#2E1A16;
+    --yellow-tint:#2B2712;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:var(--body);font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:var(--display);font-weight:800;margin:0;line-height:1.15;text-wrap:balance}
+  p{margin:0}
+
+  /* ---------- top bar ---------- */
+  .topbar{position:sticky;top:env(safe-area-inset-top, 0px);z-index:30;background:var(--band-bg);color:var(--band-ink)}
+  .topbar-inner{max-width:1060px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .logo{display:inline-flex;align-items:center;gap:7px;background:#fff;border:2px solid #00A651;border-radius:4px;padding:4px 9px 4px 6px}
+  .logo-mark{width:15px;height:15px;border-radius:2px;background:#FFDC00;border:2px solid #00A651;flex:0 0 auto}
+  .logo-text{font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:-0.02em;color:#007F3E;text-transform:uppercase}
+  .topbar .sub{font-family:var(--display);font-weight:700;font-size:13.5px;opacity:.9}
+  .topbar .right{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .count{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.04em;opacity:.92;font-variant-numeric:tabular-nums}
+  .themebtn{
+    font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    background:transparent;color:inherit;border:1.5px solid var(--band-rule);
+    border-radius:var(--r);padding:5px 11px;cursor:pointer;
+  }
+  .themebtn:hover{border-color:currentColor}
+
+  /* ---------- module tabs ---------- */
+  .tabs{background:var(--bar-bg)}
+  .tabs-inner{max-width:1060px;margin:0 auto;padding:0 20px;display:flex;gap:2px;overflow-x:auto}
+  .tab{
+    flex:0 0 auto;cursor:pointer;border:none;background:transparent;color:var(--tab-ink);
+    font-family:var(--display);font-weight:700;font-size:13.5px;
+    padding:12px 16px;border-bottom:4px solid transparent;white-space:nowrap;
+    display:flex;align-items:center;gap:8px;
+  }
+  .tab:hover{color:var(--tab-ink-on)}
+  .tab[aria-selected="true"]{color:var(--tab-ink-on);border-bottom-color:var(--yellow)}
+  .tab .tick{color:var(--yellow);font-size:12px}
+
+  /* ---------- page ---------- */
+  .page{max-width:1060px;margin:0 auto;padding-left:20px;padding-right:20px;padding-block:0 60px}
+
+  .modhead{background:var(--band-bg);color:var(--band-ink);border-radius:0 0 var(--r) var(--r);padding:26px 28px 24px;margin-bottom:22px}
+  .chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px}
+  .chip{
+    font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.07em;text-transform:uppercase;
+    padding:4px 10px;border-radius:var(--r);background:var(--band-chip-bg);color:var(--band-chip-ink);
+  }
+  .chip.solid{background:var(--yellow);color:#006933}
+  .modhead h1{font-size:clamp(24px,3.4vw,34px);letter-spacing:-0.02em}
+
+  /* ---------- phase blocks ---------- */
+  .phases{list-style:none;margin:0 0 22px;padding:0;display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+  .phase-btn{
+    width:100%;cursor:pointer;text-align:left;
+    background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--line-strong);
+    border-radius:var(--r);padding:10px 11px 11px;
+    font-family:var(--body);color:var(--ink-soft);
+    display:flex;flex-direction:column;gap:4px;min-height:76px;
+    transition:border-color .15s ease,background .15s ease;
+  }
+  .phase-btn:hover{border-top-color:var(--green-bright)}
+  .phase-btn .pn{
+    font-family:var(--display);font-weight:800;font-size:12px;color:var(--ink-faint);
+    font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:5px;
+  }
+  .phase-btn .pl{font-family:var(--display);font-weight:700;font-size:12.5px;line-height:1.25;color:var(--ink-soft)}
+  .phase-btn.done{border-top-color:var(--green-bright)}
+  .phase-btn.done .pn .dot{color:var(--green-bright)}
+  .phase-btn[aria-current="true"]{background:var(--band-bg);border-color:var(--band-bg);border-top-color:var(--yellow)}
+  .phase-btn[aria-current="true"] .pn,.phase-btn[aria-current="true"] .pl{color:var(--band-ink)}
+
+  /* ---------- content block ---------- */
+  .block{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .block-head{background:var(--surface-alt);border-bottom:1px solid var(--line);padding:14px 28px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .block-head .step{font-family:var(--display);font-weight:800;font-size:12px;color:var(--accent-ink);letter-spacing:.09em;text-transform:uppercase}
+  .block-head h2{font-size:19px;color:var(--ink-strong)}
+  .block-body{padding:26px 28px 28px;display:flex;flex-direction:column;gap:20px}
+
+  .lede{font-size:19px;line-height:1.55;color:var(--ink-strong)}
+  .lede em{color:var(--ink-soft);font-style:italic}
+
+  ol.goals{margin:0;padding:0;list-style:none;counter-reset:g;display:flex;flex-direction:column;gap:11px}
+  ol.goals li{counter-increment:g;display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;font-size:17px}
+  ol.goals li::before{
+    content:counter(g);display:grid;place-items:center;width:26px;height:26px;border-radius:var(--r);
+    background:var(--pill-bg);color:var(--pill-ink);font-family:var(--display);font-weight:800;font-size:13px;
+  }
+
+  /* video */
+  .video{background:var(--panel-bg);color:var(--panel-ink);border-radius:var(--r);overflow:hidden}
+  .video-top{
+    display:flex;gap:16px;align-items:center;padding:20px 22px;flex-wrap:wrap;
+    color:inherit;text-decoration:none;
+  }
+  .video-top:hover .playbtn{transform:scale(1.06)}
+  .video-top:hover .vt{text-decoration:underline;text-underline-offset:3px}
+  .playbtn{
+    flex:0 0 auto;width:54px;height:54px;border-radius:var(--r);border:none;
+    background:var(--yellow);color:#006933;display:grid;place-items:center;transition:transform .15s ease;
+  }
+  .playbtn svg{width:20px;height:20px;margin-left:3px;display:block}
+  .video-meta{display:flex;flex-direction:column;min-width:0}
+  .video-meta .vt{font-family:var(--display);font-weight:800;font-size:17px;line-height:1.25}
+  .video-meta .vd{font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.05em;opacity:.82;margin-top:4px;text-transform:uppercase}
+  .video-task{padding:15px 22px 19px;border-top:1px solid var(--panel-rule);font-size:16px;line-height:1.5}
+  .frame{aspect-ratio:16/9;width:100%;max-width:100%;border:0;display:block;background:#000}
+  .video-caption{padding:15px 22px 0;display:flex;flex-direction:column;gap:4px}
+  .video-caption .vd a{color:var(--panel-link);text-decoration:underline;text-underline-offset:3px}
+  .fallback{padding:12px 22px 16px;font-size:14px}
+  .fallback a{color:var(--panel-link);text-decoration:underline;text-underline-offset:3px}
+
+  /* core */
+  .core{display:flex;flex-direction:column;gap:22px}
+  .core h3{font-size:18px;color:var(--accent-ink);margin-bottom:7px}
+  .core p{color:var(--ink);font-size:16.5px}
+  .core p strong{color:var(--ink-strong);font-weight:600}
+
+  .benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .benefit{background:var(--tint);border-radius:var(--r);padding:17px 18px;border-top:4px solid var(--green)}
+  .benefit .b-h{font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:8px}
+  .benefit p{font-size:15.5px;line-height:1.5;color:var(--ink)}
+
+  /* counter */
+  .askrow{display:flex;flex-direction:column;gap:10px}
+  .ask{
+    display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start;
+    background:var(--surface-alt);border-radius:var(--r);padding:14px 16px;font-size:16px;
+    border-left:4px solid var(--green-bright);
+  }
+  .ask .q{
+    display:grid;place-items:center;width:26px;height:26px;border-radius:var(--r);
+    background:var(--pill-bg);color:var(--pill-ink);font-family:var(--display);font-weight:800;font-size:14px;
+  }
+  .ask .a b{color:var(--ink-strong);font-weight:600}
+
+  .tablewrap{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;font-size:15.5px;min-width:420px}
+  th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--band-bg);color:var(--band-ink);font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;border-bottom:none}
+  thead th:first-child{border-radius:var(--r) 0 0 0}
+  thead th:last-child{border-radius:0 var(--r) 0 0}
+  td:first-child{font-weight:600;color:var(--ink-strong)}
+  td .art{font-family:var(--display);font-weight:600;font-size:12.5px;color:var(--accent-ink);display:block;font-variant-numeric:tabular-nums;margin-top:2px}
+
+  .note{background:var(--surface-alt);border-radius:var(--r);padding:15px 17px;font-size:15.5px;line-height:1.55;color:var(--ink)}
+  .note strong{color:var(--ink-strong);font-weight:600}
+  .saythis{background:var(--yellow-tint);border-left:4px solid var(--yellow);border-radius:0 var(--r) var(--r) 0;padding:16px 19px}
+  .saythis .lbl{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent-ink);display:block;margin-bottom:7px}
+  .saythis p{font-size:17.5px;font-style:italic;color:var(--ink-strong)}
+
+  /* quiz */
+  .quiz{display:flex;flex-direction:column;gap:20px}
+  .q-card{border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .q-card .q-t{
+    background:var(--surface-alt);padding:14px 17px;
+    font-family:var(--display);font-weight:700;font-size:16.5px;line-height:1.35;color:var(--ink-strong);
+    display:grid;grid-template-columns:26px 1fr;gap:11px;align-items:start;
+  }
+  .q-card .q-n{
+    display:grid;place-items:center;width:24px;height:24px;border-radius:var(--r);
+    background:var(--pill-bg);color:var(--pill-ink);font-size:12px;font-weight:800;
+  }
+  .opts{display:flex;flex-direction:column;gap:8px;padding:14px 17px}
+  .opt{
+    display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;text-align:left;width:100%;
+    cursor:pointer;font-family:var(--body);font-size:16px;line-height:1.45;color:var(--ink);
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;
+    transition:border-color .14s ease,background .14s ease;
+  }
+  .opt:hover:not(:disabled){border-color:var(--green-bright);background:var(--surface-alt)}
+  .opt:disabled{cursor:default}
+  .opt .k{
+    display:grid;place-items:center;width:24px;height:24px;border-radius:var(--r);
+    background:var(--surface-alt);color:var(--ink-faint);font-family:var(--display);font-weight:800;font-size:12.5px;
+  }
+  .opt.picked-good{border-color:var(--good);background:var(--good-tint)}
+  .opt.picked-bad{border-color:var(--bad);background:var(--bad-tint)}
+  .opt.reveal-good{border-color:var(--good);border-style:dashed}
+  .opt.picked-good .k,.opt.reveal-good .k{background:var(--good);color:#fff}
+  .opt.picked-bad .k{background:var(--bad);color:#fff}
+  .fb{margin:0 17px 16px;font-size:15.5px;line-height:1.5;color:var(--ink);border-left:4px solid var(--line-strong);padding:10px 0 10px 14px}
+  .fb.good{border-left-color:var(--good)}
+  .fb.bad{border-left-color:var(--bad)}
+  .fb b{color:var(--ink-strong);font-weight:600}
+
+  .score{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-radius:var(--r);padding:18px 20px;background:var(--surface-alt);border:1px solid var(--line)}
+  .score .big{font-family:var(--display);font-weight:800;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+  .score .verdict{font-size:16px;color:var(--ink)}
+  .score .verdict b{color:var(--ink-strong);font-weight:600}
+  .score.pass{border-color:var(--good);background:var(--good-tint)}
+  .score.pass .big{color:var(--good)}
+  .score.fail{border-color:var(--bad);background:var(--bad-tint)}
+  .score.fail .big{color:var(--bad)}
+
+  /* remember */
+  .remember{background:var(--band-bg);color:var(--band-ink);border-radius:var(--r);padding:24px 26px}
+  .remember .lbl{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:.11em;text-transform:uppercase;opacity:.8;display:block;margin-bottom:9px}
+  .remember p{font-family:var(--display);font-weight:800;font-size:20px;line-height:1.35}
+  .links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .links li{font-size:16px;display:flex;gap:9px;align-items:baseline}
+  .links a{color:var(--accent-ink);text-decoration:none;border-bottom:2px solid var(--tint);font-weight:500}
+  .links a:hover{border-bottom-color:var(--yellow)}
+  .links .dur{font-family:var(--display);font-weight:600;font-size:12px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+
+  .verify{
+    display:inline-block;font-family:var(--display);font-weight:700;font-size:10.5px;letter-spacing:.05em;
+    background:var(--yellow);color:#006933;border-radius:3px;padding:2px 7px;vertical-align:middle;
+  }
+
+  /* ---------- figures (inline SVG, no external assets) ---------- */
+  .fig{margin:0;background:var(--surface-alt);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 14px}
+  .fig svg{display:block;width:100%;height:auto;max-width:100%;overflow:visible}
+  .fig figcaption{font-size:14px;line-height:1.45;color:var(--ink-soft);margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}
+  .fig figcaption b{color:var(--ink-strong);font-weight:600}
+  .fig text{font-family:var(--display);font-weight:700}
+
+  .sv-wood{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.5}
+  .sv-grain{stroke:var(--line-strong);stroke-width:1;opacity:.55}
+  .sv-rot{fill:var(--bad);opacity:.5}
+  .sv-prime{stroke:var(--green-bright);stroke-width:3;fill:none;stroke-linecap:round}
+  .sv-fill{fill:var(--accent-ink);opacity:.35}
+  .sv-paint{stroke:var(--accent-ink);stroke-width:2.5;fill:none;stroke-linecap:round}
+  .sv-lbl{font-size:11px;fill:var(--ink-soft)}
+  .sv-num{font-size:10px;fill:var(--band-ink)}
+  .sv-numbg{fill:var(--band-bg)}
+  .sv-crack{stroke:var(--bad);stroke-width:2;fill:none;stroke-linecap:round}
+  .sv-track{stroke:var(--line-strong);stroke-width:3;stroke-linecap:round}
+  .sv-done{stroke:var(--accent-ink);stroke-width:3;stroke-linecap:round}
+  .sv-dot{fill:var(--accent-ink)}
+  .sv-dot-open{fill:var(--surface);stroke:var(--accent-ink);stroke-width:2.5}
+  .sv-drop{fill:var(--green-bright)}
+
+  @keyframes figIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .fig-stage{animation:figIn .45s ease backwards}
+  .fig-stage:nth-of-type(2){animation-delay:.35s}
+  .fig-stage:nth-of-type(3){animation-delay:.7s}
+  .fig-stage:nth-of-type(4){animation-delay:1.05s}
+
+  @keyframes woodShift{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+  @keyframes patchStretch{0%,100%{transform:scaleX(1)}50%{transform:scaleX(1.13)}}
+  @keyframes crackPulse{0%,100%{opacity:.35}50%{opacity:1}}
+  .an-shift{animation:woodShift 4.5s ease-in-out infinite}
+  .an-stretch{animation:patchStretch 4.5s ease-in-out infinite;transform-origin:left center}
+  .an-crack{animation:crackPulse 4.5s ease-in-out infinite}
+
+  @keyframes soak{0%{transform:translateY(0);opacity:0}25%{opacity:1}100%{transform:translateY(26px);opacity:0}}
+  .an-soak{animation:soak 3s ease-in infinite}
+  .an-soak:nth-of-type(2){animation-delay:1s}
+  .an-soak:nth-of-type(3){animation-delay:2s}
+
+  @keyframes runAlong{0%{stroke-dashoffset:var(--len)}100%{stroke-dashoffset:0}}
+  .an-run{stroke-dasharray:var(--len);animation:runAlong 1.4s ease-out .2s backwards}
+
+  /* step strip */
+  .stepstrip{display:flex;flex-wrap:wrap;gap:7px;align-items:stretch}
+  .stepchip{
+    flex:1 1 118px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+    padding:10px 11px;display:flex;flex-direction:column;gap:5px;
+  }
+  .stepchip .sn{
+    width:21px;height:21px;border-radius:4px;display:grid;place-items:center;
+    background:var(--tint);color:var(--accent-ink);font-family:var(--display);font-weight:800;font-size:11px;
+  }
+  .stepchip .sl{font-size:13.5px;line-height:1.3;color:var(--ink)}
+  .stepchip.hi{border-color:var(--yellow);border-width:2px;background:var(--yellow-tint)}
+  .stepchip.hi .sn{background:var(--yellow);color:#006933}
+  .stepchip.hi .sl{color:var(--ink-strong);font-weight:600}
+
+  /* icons */
+  .ico{width:15px;height:15px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .benefit .b-h{display:flex;align-items:center;gap:7px}
+  .why-ico{
+    width:36px;height:36px;border-radius:var(--r);background:var(--tint);color:var(--accent-ink);
+    display:grid;place-items:center;margin-bottom:12px;
+  }
+  .why-ico .ico{width:19px;height:19px}
+
+  /* ---------- intro page ---------- */
+  .hero{background:var(--band-bg);color:var(--band-ink);border-radius:0 0 var(--r) var(--r);padding:38px 30px 34px;margin-bottom:22px}
+  .hero .kicker{font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.78;display:block;margin-bottom:12px}
+  .hero h1{font-size:clamp(27px,4.2vw,42px);letter-spacing:-0.025em;margin-bottom:14px}
+  .hero .promise{font-size:19px;line-height:1.5;max-width:60ch;opacity:.94}
+  .hero .stamp{
+    display:inline-block;margin-top:20px;background:var(--yellow);color:#006933;
+    font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.03em;
+    border-radius:var(--r);padding:8px 14px;
+  }
+
+  .why{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .why-card{background:var(--surface-alt);border-radius:var(--r);border-left:4px solid var(--green);padding:18px 19px}
+  .why-card h3{font-size:16.5px;color:var(--ink-strong);margin-bottom:8px}
+  .why-card p{font-size:15.5px;line-height:1.5;color:var(--ink)}
+
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .fact{background:var(--tint);border-radius:var(--r);padding:16px 17px;text-align:left}
+  .fact .fn{font-family:var(--display);font-weight:800;font-size:26px;line-height:1;color:var(--accent-ink);font-variant-numeric:tabular-nums}
+  .fact .fl{font-size:14.5px;line-height:1.4;color:var(--ink);margin-top:7px}
+
+  .closing{
+    background:var(--surface-alt);border-radius:var(--r);padding:20px 22px;
+    font-size:17.5px;line-height:1.5;color:var(--ink-strong);border-left:4px solid var(--yellow);
+  }
+  .intro-note{font-size:14px;line-height:1.5;color:var(--ink-faint)}
+
+  /* phase nav */
+  .phasenav{display:flex;justify-content:space-between;gap:12px;margin-top:20px;flex-wrap:wrap;align-items:center}
+  .btn{font-family:var(--display);font-weight:800;font-size:17px;cursor:pointer;border-radius:var(--r);padding:13px 26px;border:2px solid transparent}
+  .btn.ghost{background:transparent;border-color:var(--line-strong);color:var(--ink-soft)}
+  .btn.ghost:hover:not(:disabled){border-color:var(--green);color:var(--accent-ink)}
+  .btn.next{background:var(--yellow);color:#007F3E}
+  .btn.next:hover:not(:disabled){background:#FFE740}
+  .btn:disabled{opacity:.42;cursor:not-allowed}
+  .navhint{font-size:14.5px;color:var(--ink-faint);flex:1 1 100%;order:3}
+
+  :focus-visible{outline:3px solid var(--green-bright);outline-offset:2px}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+
+  @media (max-width: 860px){
+    .phases{grid-template-columns:repeat(4,1fr)}
+    .benefits,.why{grid-template-columns:1fr}
+    .facts{grid-template-columns:repeat(2,1fr)}
+    .modhead,.block-head,.block-body,.hero{padding-left:20px;padding-right:20px}
+  }
+  @media (max-width: 480px){
+    .phases{grid-template-columns:repeat(2,1fr)}
+    .facts{grid-template-columns:1fr}
+    .btn{width:100%;text-align:center}
+  }
+</style>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="logo"><span class="logo-mark"></span><span class="logo-text">Repair Care</span></span>
+    <span class="sub" id="sub"></span>
+    <span class="right">
+      <span class="count" id="count"></span>
+      <button class="themebtn" id="themebtn" type="button"></button>
+    </span>
+  </div>
+</header>
+<nav class="tabs"><div class="tabs-inner" id="tabs" role="tablist"></div></nav>
+
+<div class="page">
+  <div id="modhead"></div>
+  <ol class="phases" id="phases"></ol>
+  <section class="block" id="block"></section>
+  <div class="phasenav" id="phasenav"></div>
+</div>
+<script>
+let state = { view: "intro", current: 0, phase: 0, results: {}, seen: {} };
+let KEY = "rc-academy";
+
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+function load(){ try{ const s = localStorage.getItem(KEY); if (s) state = Object.assign(state, JSON.parse(s)); }catch(e){} }
+
+const esc = s => String(s).replace(/&(?![a-z#][a-z0-9]*;)/gi,"&amp;").replace(/</g,"&lt;");
+const passed = id => { const r = state.results[id]; return r && r.score >= 3; };
+
+function phasesOf(){
+  return [
+    { key:"hook",    label:L.ph.hook },
+    { key:"goals",   label:L.ph.goals },
+    { key:"video",   label:L.ph.video },
+    { key:"core",    label:L.ph.core },
+    { key:"counter", label:L.ph.counter },
+    { key:"quiz",    label:L.ph.quiz },
+    { key:"close",   label:L.ph.close }
+  ];
+}
+
+function seenKey(m, i){ return m.id + ":" + i; }
+function scrollTop(){ window.scrollTo({ top: 0, behavior: "smooth" }); }
+
+function goIntro(){ state.view = "intro"; save(); render(); scrollTop(); }
+function goModule(i, phase){ state.view = "module"; state.current = i; state.phase = phase || 0; save(); render(); scrollTop(); }
+
+function renderChrome(){
+  document.getElementById("sub").textContent = L.sub;
+  document.getElementById("themebtn").textContent = L.theme;
+  const done = MODULES.filter(m => passed(m.id)).length;
+  document.getElementById("count").textContent = done + " / " + MODULES.length + " " + L.completed;
+
+  const tabs = document.getElementById("tabs");
+  let html = '<button class="tab" role="tab" type="button" data-intro="1" aria-selected="' +
+    (state.view === "intro") + '">' + INTRO.tab + '</button>';
+  html += MODULES.map((m, i) =>
+    '<button class="tab" role="tab" type="button" data-i="' + i + '" aria-selected="' +
+      (state.view === "module" && i === state.current) + '">' +
+      m.n + ' &middot; ' + m.railTitle + (passed(m.id) ? ' <span class="tick">&#10003;</span>' : '') +
+    '</button>').join('');
+  tabs.innerHTML = html;
+  tabs.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => {
+    if (b.dataset.intro) goIntro(); else goModule(+b.dataset.i, 0);
+  }));
+}
+
+/* ---------------------------------------------------------------
+   Inline SVG icons and figures. Everything is drawn with paths and
+   theme tokens, so the page carries no image files and stays small.
+---------------------------------------------------------------- */
+const ICONS = {
+  coins:    '<circle cx="9" cy="9" r="5"/><path d="M14.5 6.2a5 5 0 0 1 0 11.6M6 20h9"/>',
+  clock:    '<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.3l3.3 2"/>',
+  shield:   '<path d="M12 3.2 19 6v6c0 4-3 7-7 8.8C8 19 5 16 5 12V6Z"/><path d="M9 12l2.2 2.2L15.4 10"/>',
+  receipt:  '<path d="M6 3.5h12v17l-2.4-1.6-2.4 1.6-2.4-1.6-2.4 1.6L6 20.5Z"/><path d="M9.2 8.5h5.6M9.2 12.5h5.6"/>',
+  chat:     '<path d="M20 12.8c0 3.6-3.6 6.5-8 6.5a9.6 9.6 0 0 1-2.6-.35L4.5 20.5l1.1-3.1A6.2 6.2 0 0 1 4 12.8c0-3.6 3.6-6.5 8-6.5s8 2.9 8 6.5Z"/><path d="M12 10v.2M12 12.6v.2"/>',
+  person:   '<circle cx="12" cy="8.2" r="3.6"/><path d="M5.4 20c.6-3.5 3.4-5.5 6.6-5.5s6 2 6.6 5.5"/>',
+  wrench:   '<path d="M15.6 4.8a4.6 4.6 0 0 0-5.9 5.9L4 16.4l3.1 3.1 5.7-5.7a4.6 4.6 0 0 0 5.9-5.9l-2.7 2.7-2.3-2.3Z"/>',
+  layers:   '<path d="M12 3.6 3.8 8 12 12.4 20.2 8Z"/><path d="M3.8 12.6 12 17l8.2-4.4M3.8 16.6 12 21l8.2-4.4"/>',
+  cert:     '<path d="M7 3.6h10v11.8l-5 2.6-5-2.6Z"/><path d="M9.6 9.2 11.5 11l3.2-3.4"/><path d="M9 18.4v2.6l3-1.4 3 1.4v-2.6"/>',
+  alert:    '<path d="M12 4.5 21 19.5H3Z"/><path d="M12 10.2v3.6M12 16.4v.2"/>',
+  spark:    '<path d="M12 3.5 13.9 9l5.6 1.9-5.6 1.9L12 18.4 10.1 12.8 4.5 10.9 10.1 9Z"/>',
+  grid:     '<path d="M4.5 4.5h6v6h-6ZM13.5 4.5h6v6h-6ZM4.5 13.5h6v6h-6ZM13.5 13.5h6v6h-6Z"/>'
+};
+function ico(name){
+  return '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[name] || ICONS.spark) + '</svg>';
+}
+
+function figWrap(svg, cap){
+  return '<figure class="fig">' + svg + (cap ? '<figcaption>' + cap + '</figcaption>' : '') + '</figure>';
+}
+
+/* Cross-section of a repair, built up in four stages. */
+function figCross(f){
+  const W = 118, G = 12;
+  const stage = (i, label) => {
+    const x = i * (W + G);
+    const notch = 'M' + (x + 6) + ' 30 h' + (W - 12) + ' v20 h-30 v14 h-24 v-14 h-32 Z';
+    let inner = '';
+    if (i === 0){
+      inner = '<rect x="' + (x + 6) + '" y="30" width="' + (W - 12) + '" height="34" rx="2" class="sv-wood"/>' +
+              '<path d="M' + (x + 44) + ' 34 q10 -3 20 2 q9 5 16 0 v26 h-36 Z" class="sv-rot"/>';
+    } else if (i === 1){
+      inner = '<path d="' + notch + '" class="sv-wood"/>';
+    } else if (i === 2){
+      inner = '<path d="' + notch + '" class="sv-wood"/>' +
+              '<path d="M' + (x + 82) + ' 50 h-24 v14 h-24" class="sv-prime"/>';
+    } else {
+      inner = '<rect x="' + (x + 6) + '" y="30" width="' + (W - 12) + '" height="34" rx="2" class="sv-wood"/>' +
+              '<path d="M' + (x + 82) + ' 50 h-24 v14 h-24 v-14 Z" class="sv-fill"/>' +
+              '<path d="M' + (x + 10) + ' 27 h' + (W - 20) + '" class="sv-paint"/>';
+    }
+    const grain = '<path d="M' + (x + 12) + ' 38 h' + (W - 24) + 'M' + (x + 12) + ' 45 h30" class="sv-grain"/>';
+    return '<g class="fig-stage">' + inner + grain +
+      '<rect x="' + (x + 6) + '" y="76" width="16" height="16" rx="4" class="sv-numbg"/>' +
+      '<text x="' + (x + 14) + '" y="87" text-anchor="middle" class="sv-num">' + (i + 1) + '</text>' +
+      '<text x="' + (x + 28) + '" y="87" class="sv-lbl">' + label + '</text></g>';
+  };
+  const svg = '<svg viewBox="0 0 ' + (4 * W + 3 * G) + ' 96" role="img" aria-label="' + esc(f.alt) + '">' +
+    f.labels.map((l, i) => stage(i, l)).join('') + '</svg>';
+  return figWrap(svg, f.cap);
+}
+
+/* Rigid filler cracks, elastic repair moves with the timber. */
+function figFlex(f){
+  const panel = (x, title, note, elastic) => {
+    const block = '<rect x="' + (x + 4) + '" y="26" width="96" height="36" rx="2" class="sv-wood"/>';
+    const moving = '<g class="an-shift"><rect x="' + (x + 112) + '" y="26" width="96" height="36" rx="2" class="sv-wood"/>' +
+      '<path d="M' + (x + 120) + ' 34 h80M' + (x + 120) + ' 54 h52" class="sv-grain"/></g>';
+    const patch = elastic
+      ? '<g class="an-stretch"><rect x="' + (x + 100) + '" y="26" width="12" height="36" class="sv-fill"/></g>'
+      : '<rect x="' + (x + 100) + '" y="26" width="12" height="36" class="sv-fill"/>' +
+        '<path d="M' + (x + 112) + ' 26 l4 9 l-4 9 l4 9 l-4 9" class="sv-crack an-crack"/>';
+    return '<g>' + block +
+      '<path d="M' + (x + 12) + ' 34 h80M' + (x + 12) + ' 54 h52" class="sv-grain"/>' +
+      moving + patch +
+      '<text x="' + (x + 4) + '" y="16" class="sv-lbl">' + title + '</text>' +
+      '<text x="' + (x + 4) + '" y="78" class="sv-lbl">' + note + '</text></g>';
+  };
+  const svg = '<svg viewBox="0 0 470 84" role="img" aria-label="' + esc(f.alt) + '">' +
+    panel(0, f.left, f.leftNote, false) +
+    '<path d="M235 20 v52" stroke="var(--line-strong)" stroke-width="1" stroke-dasharray="3 4"/>' +
+    panel(250, f.right, f.rightNote, true) + '</svg>';
+  return figWrap(svg, f.cap);
+}
+
+/* Working time versus curing time on one track. */
+function figTime(f){
+  const X0 = 14, X1 = 452, len = X1 - X0;
+  const marks = f.marks.map((m, i) => {
+    const x = X0 + m.x * len;
+    const anchor = i === 0 ? 'start' : (i === f.marks.length - 1 ? 'end' : 'middle');
+    return '<g><circle cx="' + x + '" cy="34" r="' + (m.open ? 5.5 : 6) + '" class="' + (m.open ? 'sv-dot-open' : 'sv-dot') + '"/>' +
+      '<text x="' + x + '" y="22" text-anchor="' + anchor + '" class="sv-lbl">' + m.t + '</text>' +
+      '<text x="' + x + '" y="54" text-anchor="' + anchor + '" class="sv-lbl" opacity=".8">' + m.l + '</text></g>';
+  }).join('');
+  const svg = '<svg viewBox="0 0 470 64" role="img" aria-label="' + esc(f.alt) + '">' +
+    '<path d="M' + X0 + ' 34 H' + X1 + '" class="sv-track"/>' +
+    '<path d="M' + X0 + ' 34 H' + X1 + '" class="sv-done an-run" style="--len:' + len + '"/>' +
+    marks + '</svg>';
+  return figWrap(svg, f.cap);
+}
+
+/* The working sequence, with the most-skipped step called out. */
+function figSteps(f){
+  const chips = f.items.map((s, i) =>
+    '<div class="stepchip' + (i === f.hi ? ' hi' : '') + '"><span class="sn">' + (i + 1) + '</span>' +
+    '<span class="sl">' + s + '</span></div>').join('');
+  return '<figure class="fig"><div class="stepstrip">' + chips + '</div>' +
+    (f.cap ? '<figcaption>' + f.cap + '</figcaption>' : '') + '</figure>';
+}
+
+/* Primer soaking into the timber. */
+function figSoak(f){
+  const drops = [90, 200, 310].map(x =>
+    '<g class="an-soak"><ellipse cx="' + x + '" cy="30" rx="5" ry="7" class="sv-drop"/></g>').join('');
+  const fibres = [];
+  for (let i = 0; i < 14; i++){
+    const x = 40 + i * 28;
+    fibres.push('<path d="M' + x + ' 44 v30" class="sv-grain"/>');
+  }
+  const svg = '<svg viewBox="0 0 470 92" role="img" aria-label="' + esc(f.alt) + '">' +
+    '<text x="4" y="16" class="sv-lbl">' + f.top + '</text>' +
+    drops +
+    '<rect x="14" y="42" width="442" height="34" rx="2" class="sv-wood"/>' +
+    fibres.join('') +
+    '<rect x="14" y="42" width="442" height="12" class="sv-fill"/>' +
+    '<text x="466" y="88" text-anchor="end" class="sv-lbl">' + f.bottom + '</text></svg>';
+  return figWrap(svg, f.cap);
+}
+
+/* The training levels as a rising staircase. */
+function figLadder(f){
+  const n = f.items.length, w = 470 / n, base = 132;
+  const steps = f.items.map((it, i) => {
+    const h = 34 + i * 26, x = i * w, y = base - h;
+    return '<g class="fig-stage"><rect x="' + (x + 3) + '" y="' + y + '" width="' + (w - 6) + '" height="' + h + '" rx="3" ' +
+      'fill="var(--tint)" stroke="var(--accent-ink)" stroke-width="1.5"/>' +
+      '<text x="' + (x + 12) + '" y="' + (y + 19) + '" class="sv-lbl" style="fill:var(--accent-ink)">' + it.n + '</text>' +
+      '<text x="' + (x + 12) + '" y="' + (y + 34) + '" class="sv-lbl">' + it.l + '</text></g>';
+  }).join('');
+  const svg = '<svg viewBox="0 0 470 140" role="img" aria-label="' + esc(f.alt) + '">' + steps +
+    '<path d="M0 ' + base + ' H470" stroke="var(--line-strong)" stroke-width="1.5"/></svg>';
+  return figWrap(svg, f.cap);
+}
+
+/* One-series horizontal bar chart: where a product sits in the range.
+   Every bar is labelled directly, so there is no axis and no legend;
+   the highlighted bar carries the yellow signal marker. */
+function figBars(f){
+  const rowH = 32, pad = 8, labelW = 158, x0 = labelW, x1 = 406;
+  const max = Math.max.apply(null, f.items.map(i => i.v));
+  const rows = f.items.map((it, i) => {
+    const y = pad + i * rowH;
+    const w = Math.max(4, (it.v / max) * (x1 - x0));
+    const on = i === f.hi;
+    const strong = on ? ' style="fill:var(--ink-strong)"' : '';
+    return '<g><title>' + it.l + ': ' + it.t + '</title>' +
+      '<text x="' + (labelW - 12) + '" y="' + (y + 19) + '" text-anchor="end" class="sv-lbl"' + strong + '>' + it.l + '</text>' +
+      '<rect x="' + x0 + '" y="' + (y + 7) + '" width="' + w.toFixed(1) + '" height="17" rx="4" ' +
+        (on ? 'fill="var(--accent-ink)"' : 'fill="var(--tint)" stroke="var(--accent-ink)" stroke-width="1.5"') + '/>' +
+      (on ? '<rect x="' + x0 + '" y="' + (y + 7) + '" width="5" height="17" rx="2.5" fill="var(--yellow)"/>' : '') +
+      '<text x="' + (x0 + w + 9).toFixed(1) + '" y="' + (y + 19) + '" class="sv-lbl"' + strong + '>' + it.t + '</text></g>';
+  }).join('');
+  const h = pad * 2 + f.items.length * rowH;
+  return figWrap('<svg viewBox="0 0 470 ' + h + '" role="img" aria-label="' + esc(f.alt) + '">' +
+    rows + '<path d="M' + x0 + ' ' + pad + ' V' + (h - pad) + '" stroke="var(--line-strong)" stroke-width="1"/></svg>', f.cap);
+}
+
+const FIGS = { cross:figCross, flex:figFlex, time:figTime, steps:figSteps, soak:figSoak, ladder:figLadder, bars:figBars };
+
+function figuresFor(m, key){
+  if (!m.fig || !m.fig[key]) return '';
+  return m.fig[key].map(f => (FIGS[f.t] ? FIGS[f.t](f) : '')).join('');
+}
+
+/* The Claude artifact sandbox refuses third-party iframes, so an embed there
+   renders an empty grey box. Anywhere else — a local file, your own server, an
+   LMS — the embed works. The page detects which it is and renders accordingly. */
+const CAN_EMBED = !/(^|\.)claudeusercontent\.com$/i.test(location.hostname);
+
+function videoBlock(v){
+  const watch = 'https://www.youtube.com/watch?v=' + v.id;
+
+  if (!CAN_EMBED){
+    return '<div class="video">' +
+      '<a class="video-top" href="' + watch + '" target="_blank" rel="noopener">' +
+        '<span class="playbtn" aria-hidden="true">' +
+          '<svg viewBox="0 0 18 18"><path d="M2 1.5 16 9 2 16.5Z" fill="currentColor"/></svg>' +
+        '</span>' +
+        '<span class="video-meta"><span class="vt">' + v.title + '</span>' +
+        '<span class="vd">' + L.channel + ' &middot; ' + v.dur + ' &middot; ' + L.openYT + '</span></span>' +
+      '</a>' +
+      '<div class="video-task"><b>' + L.watchTask + '</b> ' + v.task + '</div>' +
+    '</div>';
+  }
+
+  return '<div class="video">' +
+    '<iframe class="frame" src="https://www.youtube-nocookie.com/embed/' + v.id + '?rel=0" ' +
+      'title="' + esc(v.title) + '" loading="lazy" ' +
+      'allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>' +
+    '<div class="video-caption"><span class="vt">' + v.title + '</span>' +
+    '<span class="vd">' + L.channel + ' &middot; ' + v.dur + ' &middot; ' +
+      '<a href="' + watch + '" target="_blank" rel="noopener">' + L.openYT + '</a></span></div>' +
+    '<div class="video-task"><b>' + L.watchTask + '</b> ' + v.task + '</div>' +
+  '</div>';
+}
+
+function phaseBody(m, key){
+  if (key === "hook") return '<p class="lede">' + m.hook + '</p>' + figuresFor(m, "hook");
+
+  if (key === "goals") return '<ol class="goals">' + m.goals.map(g => '<li><span>' + g + '</span></li>').join('') + '</ol>';
+
+  if (key === "video") return videoBlock(m.video);
+
+  if (key === "core"){
+    let h = '<div class="core">' + m.core.map(k => '<div><h3>' + k.h + '</h3><p>' + k.p + '</p></div>').join('') + '</div>';
+    h += figuresFor(m, "core");
+    if (m.levels){
+      h += '<div class="tablewrap"><table><thead><tr>' + m.levelHead.map(x => '<th>' + x + '</th>').join('') + '</tr></thead><tbody>' +
+        m.levels.map(r => '<tr>' + r.map((c, i) => '<td' + (i === 0 ? ' style="white-space:normal"' : '') + '>' + c + '</td>').join('') + '</tr>').join('') +
+        '</tbody></table></div>';
+    }
+    h += '<div><h3 style="font-family:var(--display);font-size:18px;color:var(--accent-ink);margin-bottom:12px">' + L.benefitsTitle + '</h3><div class="benefits">' +
+      m.benefits.map(b => '<div class="benefit"><div class="b-h">' + ico(b.icon) + b.h + '</div><p>' + b.p + '</p></div>').join('') +
+      '</div></div>';
+    return h;
+  }
+
+  if (key === "counter"){
+    let h = '';
+    if (m.asks){
+      h += '<div class="askrow">' + m.asks.map(a =>
+        '<div class="ask"><span class="q">?</span><span class="a"><b>&ldquo;' + a.q + '&rdquo;</b><br>' + a.a + '</span></div>').join('') + '</div>';
+      h += '<div class="tablewrap"><table><thead><tr><th>' + L.attachHead + '</th><th>' + L.whyHead + '</th></tr></thead><tbody>' +
+        m.attach.map(r => '<tr><td>' + r[0] + (r[1] ? '<span class="art">' + L.art + ' ' + r[1] + '</span>' : '') + '</td><td>' + r[2] + '</td></tr>').join('') +
+        '</tbody></table></div>';
+    }
+    if (m.signals){
+      h += '<div class="tablewrap"><table><thead><tr><th>' + L.saysHead + '</th><th>' + L.recHead + '</th></tr></thead><tbody>' +
+        m.signals.map(r => '<tr><td style="white-space:normal">' + r[0] + '</td><td>' + r[1] + '</td></tr>').join('') +
+        '</tbody></table></div>';
+    }
+    h += figuresFor(m, "counter");
+    h += '<div class="note">' + m.notes + '</div>';
+    if (m.say) h += '<div class="saythis"><span class="lbl">' + L.sayLabel + '</span><p>&ldquo;' + m.say + '&rdquo;</p></div>';
+    return h;
+  }
+
+  if (key === "quiz"){
+    return '<div class="quiz">' + m.quiz.map((q, qi) =>
+      '<div class="q-card" data-q="' + qi + '">' +
+        '<div class="q-t"><span class="q-n">' + (qi + 1) + '</span><span>' + q.q + '</span></div>' +
+        '<div class="opts">' + q.opts.map((o, oi) =>
+          '<button class="opt" type="button" data-q="' + qi + '" data-o="' + oi + '">' +
+            '<span class="k">' + "ABC"[oi] + '</span><span>' + o[0] + '</span></button>').join('') +
+        '</div><div class="fb-slot"></div>' +
+      '</div>').join('') + '</div><div id="score-slot"></div>';
+  }
+
+  if (key === "close"){
+    return '<div class="remember"><span class="lbl">' + L.rememberLabel + '</span><p>' + m.remember + '</p></div>' +
+      '<div><h3 style="font-family:var(--display);font-size:15px;color:var(--ink-strong);margin-bottom:12px">' + L.furtherTitle + '</h3>' +
+      '<ul class="links">' + m.links.map(l =>
+        '<li><a href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + '</a>' +
+        (l[2] ? '<span class="dur">' + l[2] + '</span>' : '') + '</li>').join('') + '</ul></div>';
+  }
+  return '';
+}
+
+let answered = {};
+
+function render(){
+  renderChrome();
+  if (state.view === "intro") renderIntro();
+  else renderModule();
+}
+
+function renderIntro(){
+  document.getElementById("phases").hidden = true;
+
+  document.getElementById("modhead").innerHTML =
+    '<div class="hero">' +
+      '<span class="kicker">' + INTRO.kicker + '</span>' +
+      '<h1>' + INTRO.title + '</h1>' +
+      '<p class="promise">' + INTRO.promise + '</p>' +
+      '<span class="stamp">' + INTRO.stamp + '</span>' +
+    '</div>';
+
+  document.getElementById("block").innerHTML =
+    '<div class="block-head"><span class="step">' + INTRO.readLabel + '</span><h2>' + INTRO.whyTitle + '</h2></div>' +
+    '<div class="block-body">' +
+      '<div class="why">' + INTRO.why.map(w =>
+        '<div class="why-card"><span class="why-ico">' + ico(w.icon) + '</span><h3>' + w.h + '</h3><p>' + w.p + '</p></div>').join('') + '</div>' +
+      '<div><h3 style="font-family:var(--display);font-size:18px;color:var(--accent-ink);margin-bottom:12px">' + INTRO.benefitsTitle + '</h3>' +
+      '<div class="benefits">' + INTRO.benefits.map(b =>
+        '<div class="benefit"><div class="b-h">' + ico(b.icon) + b.h + '</div><p>' + b.p + '</p></div>').join('') + '</div></div>' +
+      '<div><h3 style="font-family:var(--display);font-size:18px;color:var(--accent-ink);margin-bottom:12px">' + INTRO.howTitle + '</h3>' +
+      '<div class="facts">' + INTRO.facts.map(f =>
+        '<div class="fact"><div class="fn">' + f.n + '</div><div class="fl">' + f.l + '</div></div>').join('') + '</div></div>' +
+      (INTRO.route ? FIGS.steps(INTRO.route) : '') +
+      '<div class="closing">' + INTRO.closing + '</div>' +
+      '<p class="intro-note">' + INTRO.note + '</p>' +
+    '</div>';
+
+  document.getElementById("phasenav").innerHTML =
+    '<span></span><button class="btn next" type="button" id="start">' + INTRO.start + '</button>';
+  document.getElementById("start").addEventListener("click", () => goModule(0, 0));
+}
+
+function renderModule(){
+  const m = MODULES[state.current];
+  const ps = phasesOf();
+  if (state.phase >= ps.length) state.phase = 0;
+  const cur = ps[state.phase];
+  answered = {};
+
+  document.getElementById("modhead").innerHTML =
+    '<div class="modhead"><div class="chips">' +
+      '<span class="chip solid">' + m.type + '</span>' +
+      '<span class="chip">' + L.module + ' ' + m.n + '</span>' +
+      '<span class="chip">' + m.duur + '</span>' +
+    '</div><h1>' + m.title + '</h1></div>';
+
+  const phasesEl = document.getElementById("phases");
+  phasesEl.hidden = false;
+  phasesEl.innerHTML = ps.map((p, i) => {
+    const done = state.seen[seenKey(m, i)] && i !== state.phase;
+    return '<li><button class="phase-btn' + (done ? ' done' : '') + '" type="button" data-p="' + i + '"' +
+      ' aria-current="' + (i === state.phase) + '">' +
+      '<span class="pn">' + String(i + 1).padStart(2, "0") + (done ? ' <span class="dot">&#10003;</span>' : '') + '</span>' +
+      '<span class="pl">' + p.label + '</span></button></li>';
+  }).join('');
+  phasesEl.querySelectorAll(".phase-btn").forEach(b =>
+    b.addEventListener("click", () => { state.phase = +b.dataset.p; save(); render(); }));
+
+  document.getElementById("block").innerHTML =
+    '<div class="block-head"><span class="step">' + L.step + ' ' + (state.phase + 1) + '/' + ps.length + '</span>' +
+    '<h2>' + cur.label + '</h2></div>' +
+    '<div class="block-body">' + phaseBody(m, cur.key) + '</div>';
+
+  state.seen[seenKey(m, state.phase)] = true;
+  save();
+
+  renderNav(m, ps);
+  wire(m, cur.key);
+}
+
+function renderNav(m, ps){
+  const last = state.phase === ps.length - 1;
+  const lastModule = state.current === MODULES.length - 1;
+  const nextLabel = last ? (lastModule ? L.finish : L.nextModule) : L.nextPhase;
+  document.getElementById("phasenav").innerHTML =
+    '<button class="btn ghost" type="button" id="prev">' + L.back + '</button>' +
+    '<button class="btn next" type="button" id="next"' + (last && lastModule ? ' disabled' : '') + '>' + nextLabel + '</button>' +
+    '<span class="navhint" id="hint"></span>';
+
+  document.getElementById("prev").addEventListener("click", () => {
+    if (state.phase > 0){ state.phase--; save(); render(); scrollTop(); }
+    else if (state.current > 0) goModule(state.current - 1, phasesOf().length - 1);
+    else goIntro();
+  });
+  const nextBtn = document.getElementById("next");
+  nextBtn.addEventListener("click", () => {
+    if (state.phase < ps.length - 1){ state.phase++; save(); render(); scrollTop(); }
+    else if (state.current < MODULES.length - 1) goModule(state.current + 1, 0);
+  });
+
+  if (ps[state.phase].key === "quiz" && !passed(m.id)){
+    nextBtn.disabled = true;
+    document.getElementById("hint").textContent = L.quizHint;
+  }
+}
+
+function wire(m, key){
+  if (key !== "quiz") return;
+
+  document.querySelectorAll(".opt").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const qi = +btn.dataset.q, oi = +btn.dataset.o;
+      if (answered[qi] !== undefined) return;
+      answered[qi] = oi;
+      const q = m.quiz[qi];
+      const card = document.querySelector('.q-card[data-q="' + qi + '"]');
+      const right = oi === q.correct;
+      card.querySelectorAll(".opt").forEach(o => {
+        o.disabled = true;
+        const k = +o.dataset.o;
+        if (k === oi) o.classList.add(right ? "picked-good" : "picked-bad");
+        else if (k === q.correct && !right) o.classList.add("reveal-good");
+      });
+      card.querySelector(".fb-slot").innerHTML =
+        '<div class="fb ' + (right ? "good" : "bad") + '"><b>' + (right ? L.correct : L.wrong) + '</b> ' + q.opts[oi][1] +
+        (right ? '' : '<br><b>' + L.rightIs + ' ' + "ABC"[q.correct] + ':</b> ' + q.opts[q.correct][1]) + '</div>';
+      if (Object.keys(answered).length === m.quiz.length) showScore(m);
+    });
+  });
+}
+
+function showScore(m){
+  let score = 0;
+  m.quiz.forEach((q, i) => { if (answered[i] === q.correct) score++; });
+  state.results[m.id] = { score };
+  save();
+  const pass = score >= 3;
+  document.getElementById("score-slot").innerHTML =
+    '<div class="score ' + (pass ? "pass" : "fail") + '" style="margin-top:20px">' +
+      '<span class="big">' + score + '/' + m.quiz.length + '</span>' +
+      '<span class="verdict">' + (pass ? L.passText : L.failText) + '</span>' +
+      '<button class="btn ghost" type="button" id="retry" style="margin-left:auto;font-size:14px;padding:9px 18px">' + L.retry + '</button>' +
+    '</div>';
+  document.getElementById("retry").addEventListener("click", () => render());
+  renderChrome();
+  renderNav(m, phasesOf());
+}
+
+document.getElementById("themebtn").addEventListener("click", () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const dark = cur ? cur === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
+});
+
+function boot(){ load(); render(); }
+
+const L = {
+  sub: "Trade Counter Academy",
+  theme: "Theme",
+  completed: "completed",
+  module: "Module",
+  step: "Step",
+  play: "Play video",
+  channel: "YouTube · Repair Care UK",
+  watchTask: "Watching task:",
+  openYT: "opens in a new tab",
+  benefitsTitle: "What&rsquo;s in it for the customer?",
+  attachHead: "Goes over the counter",
+  whyHead: "Why",
+  art: "art.",
+  saysHead: "Customer says…",
+  recHead: "You recommend…",
+  sayLabel: "The sentence that works",
+  rememberLabel: "Remember this",
+  furtherTitle: "Further reading",
+  correct: "Correct.",
+  wrong: "Not quite.",
+  rightIs: "The right answer is",
+  passText: "<b>Module complete.</b> You can use this at the counter tomorrow.",
+  failText: "<b>Not passed yet.</b> Watch the video again and retry — you need 3 out of 4.",
+  retry: "Retry",
+  quizHint: "Answer all four questions and score 3 out of 4 to continue.",
+  back: "← Back",
+  nextPhase: "Next step →",
+  nextModule: "Next module →",
+  finish: "Training complete",
+  ph: {
+    hook: "The situation",
+    goals: "Outcomes",
+    video: "Video",
+    core: "The core",
+    counter: "At the counter",
+    quiz: "Check questions",
+    close: "Remember this"
+  }
+};
+
+const INTRO = {
+  tab: "Welcome",
+  kicker: "Repair Care Trade Counter Academy",
+  title: "You stand where the decision gets made",
+  promise: "Eight short modules on the products and services your customers ask about most. Not a product catalogue — answers you can use at the counter tomorrow, and that put more on the ticket.",
+  stamp: "8 modules · about 40 minutes in total",
+  readLabel: "Read this first",
+  whyTitle: "Why Repair Care built this training",
+  why: [
+    { h: "Customers arrive with a problem, not an article code", icon:"chat",
+      p: "A decorator walks in with a rotten cill front and a scaffold booked for one day. What he leaves with depends on what you can explain in thirty seconds. That is the moment it is decided whether the job becomes a repair or a replacement — and whether it is done properly." },
+    { h: "Most complaints are not product failures", icon:"alert",
+      p: "When a repair lets go, a step was nearly always skipped: no primer, not routed out far enough, the wrong product for the situation. And that complaint does not land at Repair Care — it lands at your counter." },
+    { h: "Repair Care is a system, not a single pack", icon:"layers",
+      p: "Product, working method, training and guarantee belong together. Sell one part without the rest and the system cannot do what it was designed to do. This training shows how those parts connect." }
+  ],
+  benefitsTitle: "What it does for you",
+  benefits: [
+    { h: "More on the ticket", icon:"receipt",
+      p: "The primer, the mixing cups, the shaping tools: items that stay on the shelf because nobody asks for them. You learn exactly which question to ask, and why the customer is glad you did." },
+    { h: "Less hassle afterwards", icon:"shield",
+      p: "A customer who gets it right first time does not come back with a complaint, a return or an argument. That saves you the worst conversations of the week." },
+    { h: "You become the adviser", icon:"person",
+      p: "Customers come back to the person who solved their problem, not to the shelf. After these three modules you can answer a question without fetching a colleague." }
+  ],
+  howTitle: "How it works",
+  facts: [
+    { n: "8", l: "modules: six on a product, two on our service offer" },
+    { n: "5 min", l: "per module including the video — doable between two customers" },
+    { n: "4", l: "check questions at the end, with feedback on every answer" },
+    { n: "3 of 4", l: "correct and the module counts as complete" }
+  ],
+  closing: "You do not need to memorise anything you can look up. What you will have ready after this training: which question to ask, what goes over the counter with it, and one sentence on why the customer is better off.",
+  note: "Your progress is stored on this device, so you can stop halfway and pick it up later. — This introduction is a proposal and still needs sign-off from Repair Care.",
+  route: { t:"steps", hi:-1,
+    items:["01 · DRY FLEX® 4","02 · DRY FIX® UNI","03 · Training","04 · Super Finish","05 · DRY FLEX® 16","06 · BIO FLEX™","07 · DRY SEAL™ MP","08 · Sustainability"],
+    cap:"<b>From single pack to regular customer.</b> Start at 01: the product every conversation begins with. Modules 04 to 07 teach you to tell the range apart; 03 and 08 cover what Repair Care offers beyond products." },
+  start: "Start module 01 →"
+};
+
+const MODULES = [
+  {
+    id: "dry-flex-4", n: "01", type: "Product", duur: "± 5 min",
+    title: "DRY FLEX® 4: repair the rot and paint it the same day",
+    railTitle: "DRY FLEX® 4",
+    hook: "There&rsquo;s a decorator at your counter. He&rsquo;s got four windows with rotten cill fronts and the scaffold is booked for <em>one</em> day. He asks: <em>&ldquo;Have you got anything I can fill this with and still get a coat of paint on it today?&rdquo;</em><br><br>After this module you can answer that in thirty seconds.",
+    goals: [
+      "explain in your own words what DRY FLEX® 4 is and how it differs from ordinary filler;",
+      "recognise when DRY FLEX® 4 is the right recommendation — and when it isn&rsquo;t;",
+      "name the three customer benefits that win the argument."
+    ],
+    fig: {
+      core: [
+        { t:"cross", labels:["Decay","Rout out","Primer","Fill &amp; paint"],
+          alt:"Cross-section of a repair in four stages",
+          cap:"<b>How a repair is built up.</b> Stage 3 is the DRY FIX® UNI primer — it is in every sound repair, even though you never see it again." },
+        { t:"flex", left:"Ordinary filler", leftNote:"cracks away as timber moves",
+          right:"DRY FLEX® 4", rightNote:"moves with it, stays intact",
+          alt:"Rigid filler cracks while the elastic repair moves with the timber",
+          cap:"<b>Timber moves with moisture and temperature.</b> A rigid filler cannot follow that movement and lets go at the edges; an elastic repair stretches with it. This is the answer to check question 1." }
+      ],
+      counter: [
+        { t:"time",
+          marks:[{x:0,t:"0 min",l:"mix A and B"},{x:0.34,t:"20–25 min",l:"application period at 20 °C"},{x:1,t:"after 4 hours",l:"sand &amp; paint",open:true}],
+          alt:"Timeline from application period to paintable",
+          cap:"<b>Two timings that get confused.</b> The 20–25 minutes is the application period — that is how long the decorator has to use the mixed compound. The 4 hours is the wait before sanding and painting." }
+      ]
+    },
+    video: { id:"BFVxS9fCovA", title:"DRY FLEX® 4 How-To-Video Tutorial", dur:"2:06",
+      task:"Look for two things. <b>(1)</b> What happens to the timber <i>before</i> the compound goes in? <b>(2)</b> How long does the decorator wait before he can sand and paint?" },
+    core: [
+      { h:"What is it?", p:"A two-component, epoxy-based elastic repair compound for the permanent repair of decayed and damaged timber. You mix components A and B, press the compound into the routed-out area and model it to shape. The difference from ordinary filler: <strong>DRY FLEX® 4 stays elastic and moves with the timber.</strong> Wood moves with moisture and temperature — a rigid filler cracks away, this doesn&rsquo;t. Once cured it can be planed, sawn, nailed, drilled, screwed, sanded, painted and stained." },
+      { h:"When do you recommend it?", p:"<strong>Yes:</strong> decayed and rotten timber in windows, doors, fascias, soffits, stairs and furniture; filling cracks and gaps; quick emergency repairs. Internal and external, and also on masonry, plaster, concrete and metal.<br><strong>Careful:</strong> it&rsquo;s a repair material, not a structural replacement. If a cill has gone along its full length that&rsquo;s a splice or a cill front renewal — Level 2 territory, so point them at the training (module 3) or at a trained contractor." }
+    ],
+    benefits: [
+      { h:"Money", icon:"coins", p:"Repair instead of replace. Independent research by CE Delft found repairing a timber window scores two to five times better environmentally than replacing it — and repair costs the customer far less than new joinery." },
+      { h:"Time", icon:"clock", p:"Sanded and painted after about 4 hours (1 cm thickness at 20 °C). Same-day turnaround, and the scaffold goes up once rather than twice." },
+      { h:"Certainty", icon:"shield", p:"The repair moves with the timber. Repair Care&rsquo;s own FAQ puts it plainly: with correct preparation and application, DRY FLEX® repairs &ldquo;will last for the lifetime of the substrate&rdquo; — and they significantly extend redecoration cycles." }
+    ],
+    asks: [
+      { q:"How deep and how large is the damage?", a:"Designed for repair thicknesses of <b>5–20 mm at 10–35 °C</b>, and 5–50 mm at 0–10 °C. Deeper or larger means laminating or a splice." },
+      { q:"Inside or out, and what temperature are you working in?", a:"Application range is <b>0 to 35 °C</b>. That&rsquo;s your winter argument: your customer keeps working through the cold months while his competitors stop." }
+    ],
+    attach: [
+      ["DRY FIX® UNI","2010005","Primer. No optimal adhesion without it. The most important attach sale you make — see module 2"],
+      ["DRY FLEX® 4","2022005 · 300 ml + 100 ml","The repair compound itself"],
+      ["EASY•Q™ knives &amp; gun","","No shaping tools, no clean repair"],
+      ["EASY•Q™ WIPES","","Cleaning tools before the compound cures"]
+    ],
+    notes: "Application period is <strong>20–25 minutes at 20 °C</strong> — mix what you&rsquo;ll use in that window, not the whole cartridge. There&rsquo;s also a <strong>2-in-1</strong> version: components A and B in a single cartridge, used with a standard caulking gun. The DRY FIX® UNI primer is still required. <span class='verify'>VERIFY the UK 2-in-1 article code</span> Repair Care products have been tested to the TNO method since 1995 and the DRY FLEX® system has been used extensively on historic buildings — the FAQ invites conservation officers to make contact directly. <span class='verify'>VERIFY the permitted wording on listed buildings</span>",
+    say: null,
+    quiz: [
+      { q:"Why does DRY FLEX® 4 stay elastic?", correct:1, opts:[
+        ["So that it cures faster","Wrong. Curing is separate from elasticity; it&rsquo;s sandable and paintable after about 4 hours."],
+        ["Because timber moves with moisture and temperature, and a rigid filler would crack away","Right. That&rsquo;s the whole difference from ordinary filler and the reason the repair stays put."],
+        ["So that it&rsquo;s easier to sand","Wrong. It sands well, but that isn&rsquo;t why it&rsquo;s elastic."]
+      ]},
+      { q:"How long before DRY FLEX® 4 can be sanded and painted?", correct:1, opts:[
+        ["About 20 minutes","Wrong. 20–25 minutes at 20 °C is the <b>application period</b>: the time the decorator has to use the mixed compound."],
+        ["About 4 hours","Right — hence the name. Guide figure at 1 cm thickness and 20 °C; temperature, thickness and humidity all affect it."],
+        ["24 hours","Wrong. Say this and you&rsquo;ve given away the strongest selling point: same-day turnaround."]
+      ]},
+      { q:"What goes over the counter with a pack of DRY FLEX® 4?", correct:1, opts:[
+        ["A brush cleaner","Incomplete. Cleaning matters, but it isn&rsquo;t what determines adhesion."],
+        ["DRY FIX® UNI primer","Right. Without the primer there&rsquo;s no optimal adhesion to the substrate — and that means a repair that can let go."],
+        ["Nothing, it&rsquo;s a complete system in one pack","Wrong. DRY FLEX® 4 is the repair compound; the primer is a separate product."]
+      ]},
+      { q:"A decorator says: &ldquo;That epoxy of yours is far too dear, I&rsquo;ll just grab a tub of two-pack filler for a tenner.&rdquo; What do you do?", correct:2, opts:[
+        ["Offer him a discount on the DRY FLEX® 4","That doesn&rsquo;t answer the objection and it costs you margin. He still hasn&rsquo;t heard why the product is worth more."],
+        ["Sell him the cheap filler — the customer&rsquo;s always right","Understandable, but in a year he&rsquo;s back at your counter with a complaint. You lose the repeat business and the trust."],
+        ["Cost it per job rather than per pack: one repair that lasts, against going back, re-scaffolding and re-painting","Right. Point him at the DRY FLEX® vs Polyester Filler comparison video — it shows the difference rather than arguing about it. The CE Delft study specifically found polyester resins don&rsquo;t achieve the same durability."]
+      ]}
+    ],
+    remember: "DRY FLEX® 4 = rot gone, painted by the afternoon, and no callback. And it never leaves the counter without DRY FIX® UNI.",
+    links: [
+      ["Product page DRY FLEX® 4","https://repair-care.co.uk/product/dry-flex-4/",""],
+      ["Video: DRY FLEX® vs Polyester Filler Comparison","https://www.youtube.com/watch?v=Vn-IsokOcF0","1:24"],
+      ["Video: shape a repair in 5 simple steps","https://www.youtube.com/watch?v=H7Zeqj7r_r0","1:00"],
+      ["Video: DRY FLEX® 4 2-in-1 tutorial","https://www.youtube.com/watch?v=E3xmq5Xx5Ts","2:09"]
+    ]
+  },
+
+  {
+    id: "dry-fix-uni", n: "02", type: "Product", duur: "± 4 min",
+    title: "DRY FIX® UNI: the step that decides whether the repair holds",
+    railTitle: "DRY FIX® UNI",
+    hook: "A regular walks back in. Not happy. The repair he did last year is lifting at the edges. <em>&ldquo;That stuff of yours is rubbish.&rdquo;</em><br><br>Nine times out of ten one step was skipped. Exactly the step this module is about — and exactly the product <em>you</em> didn&rsquo;t put in his hand last year.",
+    goals: [
+      "explain what DRY FIX® UNI does and why it isn&rsquo;t an optional extra;",
+      "give the correct sequence and penetration time when a customer asks;",
+      "offer DRY FIX® UNI on every sale of a repair compound, using one sentence that works."
+    ],
+    fig: {
+      core: [
+        { t:"steps", hi:4,
+          items:["Remove decayed timber","Mix A and B","Brush on all surfaces","20–45 min penetration","Wipe off the excess","Apply repair compound"],
+          cap:"<b>Step 5 is the one most often skipped on site.</b> Wipe off the excess with absorbent paper — then the compound goes on while the surface is still tacky." },
+        { t:"soak", top:"DRY FIX® UNI goes on", bottom:"sound timber",
+          alt:"Primer penetrating the timber fibres",
+          cap:"<b>Why it works.</b> The primer is low-viscosity and solvent-free, so it penetrates deep into the fibres. That is where the bond between substrate and repair is made — not at the surface." }
+      ]
+    },
+    video: { id:"DYvzpKoje_A", title:"DRY FIX® Universal (UNI) How-To-Video Tutorial", dur:"0:55",
+      task:"Watch how it&rsquo;s applied and what happens <b>after</b> it has soaked in. That last action is the one most often skipped on site." },
+    core: [
+      { h:"What is it?", p:"A two-component universal wood stabiliser and epoxy primer, brushed onto the routed-out, clean timber before the repair compound goes in. Low-viscosity and solvent-free, so it penetrates quickly and deeply, and it <strong>ensures maximum adhesion between any DRY FLEX® repair product and the substrate</strong>. Think of it as the primer under a paint system: nobody sees it, but it decides whether the whole thing is still sound in ten years." },
+      { h:"When do you recommend it?", p:"On <strong>every</strong> repair with DRY FLEX® 4, DRY FLEX® 16 and BIO FLEX™. One exception: <strong>DRY FLEX® Super Finish needs no primer</strong> — see module 04. Suitable on timber, masonry, plaster and concrete — hence &lsquo;UNI&rsquo;: one primer for every substrate, so there&rsquo;s nothing to choose at the counter." },
+      { h:"The sequence you explain", p:"<strong>1.</strong> Remove all decayed timber back to sound wood · <strong>2.</strong> Dispense A and B into the EASY•Q™ cup and stir · <strong>3.</strong> Brush onto all contact surfaces · <strong>4.</strong> Allow 20 to 45 minutes penetration · <strong>5.</strong> Wipe off the excess with absorbent paper — <em>the forgotten step</em> · <strong>6.</strong> Apply the compound while the surface is still tacky.<br>Pot life after mixing is 1 hour, and the repair can be completed <strong>up to 24 hours after the primer was applied</strong> — useful when a job gets interrupted." }
+    ],
+    benefits: [
+      { h:"Money", icon:"coins", p:"No failure costs. A repair that lets go means travelling back, re-scaffolding and an unhappy client — many times the cost of the primer." },
+      { h:"Time", icon:"clock", p:"Five minutes of work and a half-hour wait, while he routs out the next window. In practice it costs him no time at all." },
+      { h:"Certainty", icon:"shield", p:"Priming is part of the specified working method. Repair Care guarantees its products for 10 years, subject to conditions — and correct preparation is what those conditions are about." }
+    ],
+    asks: [
+      { q:"Have you still got DRY FIX® UNI?", a:"Ask it <b>straight</b>. Not &lsquo;do you want anything else with that?&rsquo;" },
+      { q:"What substrate are you repairing?", a:"Timber, masonry, plaster or concrete — DRY FIX® UNI works on <b>all</b> of them. An easy, credible story to tell." }
+    ],
+    attach: [
+      ["DRY FIX® UNI","2010005 · 200 ml + 100 ml","The primer itself"],
+      ["Brushes","","For applying it"],
+      ["EASY•Q™ mixing cups","","Correct dosing of A and B"],
+      ["Absorbent paper","","For wiping off the excess — step 5"]
+    ],
+    notes: "The <strong>one-hour pot life</strong> means he can mix once for several windows. That takes the sting out of the &lsquo;it costs me time&rsquo; objection. DRY FIX® UNI now comes in a new and improved colour. <span class='verify'>VERIFY the exact benefit of the new colour</span> And be precise about the guarantee: the UK FAQ says products are guaranteed for 10 years <em>subject to conditions</em> — that is not a guarantee on workmanship. <span class='verify'>VERIFY the exact conditions before staff repeat this</span>",
+    say: "That pack is what makes the repair stay put. Without the primer you won&rsquo;t get maximum adhesion, and you&rsquo;ll be back doing the same job in two years.",
+    quiz: [
+      { q:"What does DRY FIX® UNI do?", correct:1, opts:[
+        ["It speeds up curing of the repair compound","Wrong. Curing time comes from the compound itself, the temperature and the thickness."],
+        ["It ensures maximum adhesion between the DRY FLEX® repair and the substrate","Right. It&rsquo;s the bond between substrate and repair."],
+        ["It fills small cracks in the timber","Wrong. Filling is the compound&rsquo;s job; the primer soaks in."]
+      ]},
+      { q:"How long should DRY FIX® UNI penetrate before the compound goes on?", correct:1, opts:[
+        ["Carry straight on","Wrong. Without penetration time the primer can&rsquo;t do its job."],
+        ["20 to 45 minutes, then wipe off the excess","Right. And don&rsquo;t forget the wiping — that&rsquo;s the step most often skipped on site."],
+        ["At least 24 hours","Wrong. 24 hours is the maximum window in which the repair must be completed, not a waiting time."]
+      ]},
+      { q:"Which substrates can DRY FIX® UNI be used on?", correct:2, opts:[
+        ["Timber only","Wrong — and you&rsquo;re leaving sales on the table. Think about repairs in masonry and concrete."],
+        ["Timber and metal only","Incomplete — and those are exactly the two you would forget on a repair in masonry or concrete."],
+        ["Timber, masonry, plaster and concrete","Right. Hence &lsquo;UNI&rsquo;: one primer for every substrate — though Super Finish needs no primer at all."]
+      ]},
+      { q:"A decorator is paying for two packs of DRY FLEX® 4 and says: &ldquo;I&rsquo;ll skip the primer, I rout it out properly anyway.&rdquo; What do you do?", correct:1, opts:[
+        ["Leave it — he&rsquo;s the tradesman","Understandable, but you&rsquo;re letting him carry a risk that comes back to you as a complaint. Routing out properly is essential, but it doesn&rsquo;t create adhesion."],
+        ["Explain that routing out and priming are two different jobs: one removes the decay, the other makes the repair bond","Right. You&rsquo;re not correcting him, you&rsquo;re adding to what he knows — and you tie it to something he cares about: no failure costs."],
+        ["Tell him he&rsquo;ll have no guarantee then, and take the money","You&rsquo;re close on the facts, but put like that it sounds like a threat. Frame it as his advantage, not his punishment."]
+      ]}
+    ],
+    remember: "No pack of DRY FLEX® 4, 16 or BIO FLEX™ leaves the counter without DRY FIX® UNI. The primer isn&rsquo;t an add-on sale — it&rsquo;s half the repair.",
+    links: [
+      ["Product page DRY FIX® UNI","https://repair-care.co.uk/product/dry-fix-uni/",""],
+      ["Video: how to achieve adhesion","https://www.youtube.com/watch?v=MbjocALaoMI","0:50"],
+      ["Video: DRY FIX® Universal dispensing instructions","https://www.youtube.com/watch?v=A-QnFpG68tI","0:36"],
+      ["Video: DRY FIX® UNI — new and improved colour","https://www.youtube.com/watch?v=6Vz0sA-fCkI","0:50"]
+    ]
+  },
+
+  {
+    id: "training", n: "03", type: "Service", duur: "± 5 min",
+    title: "Training and the Trained Contractor listing: the service that locks in your customer",
+    railTitle: "Training &amp; listing",
+    hook: "Two decorators buy from you. One picks up a pack now and then when something&rsquo;s gone wrong. The other did the Repair Care course, sells timber repair to his clients, gets enquiries sent to him from the Repair Care website, and buys a box a month.<br><br>The difference is <em>one day&rsquo;s training</em> — and you&rsquo;re the one who makes that referral.",
+    goals: [
+      "explain the two training levels and what each one costs in under a minute;",
+      "explain what the Trained Contractor listing does for your customer;",
+      "recognise which customer to point at which level, and when."
+    ],
+    fig: {
+      core: [
+        { t:"ladder",
+          items:[{n:"Level 1",l:"Trained Contractor"},{n:"Level 2",l:"Advanced Contractor"}],
+          alt:"The two training levels as a rising staircase",
+          cap:"<b>Each step is one full day.</b> Level 2 is only open to people who have completed Level 1 — so a customer asking about cill fronts needs to plan both." }
+      ],
+      counter: [
+        { t:"steps", hi:4,
+          items:["Customer asks a question","You make the referral","Training day","Pass card + listing","Regular customer"],
+          cap:"<b>The last step is the one that matters to you.</b> Repair Care refers enquiries to listed trained contractors, and a trained customer buys the whole system rather than the odd pack." }
+      ]
+    },
+    video: { id:"XSLURHmkxFI", title:"Repairing window frames is more environmentally friendly than replacement", dur:"2:30",
+      task:"Note <b>who did the research</b> and <b>what the comparison actually is</b>. These are the numbers your customer needs when he&rsquo;s quoting against a replacement-windows firm." },
+    core: [
+      { h:"What is it?", p:"Repair Care trains tradespeople in durable timber repair. Not a classroom course: delegates work on real window sections and take their own practice piece home. More than <strong>150 training days a year in the UK</strong>, at the Tamworth head office and partner venues including Thurrock, Slough and Thirsk." },
+      { h:"Why the listing matters more than the certificate", p:"Everyone who completes a course gets a personal Repair Care pass card. But the part that makes your customer money is this: <strong>his company is listed on the Repair Care website as a trained contractor</strong>, and Repair Care refers enquiries to local trained specialists. There are over 9,000 trained specialists and 25,000+ completed projects in the UK." },
+      { h:"And what&rsquo;s in it for you?", p:"A trained customer buys <strong>systematically</strong> rather than occasionally, and buys the whole system — primer, compound, tools — instead of single packs. Fewer complaints at your counter, because he works to the correct method. And courses run at partner venues as well as Tamworth, so your branch could host one and spend a day full of your own customers. <span class='verify'>VERIFY how a stockist requests an on-site course</span>" }
+    ],
+    levelHead: ["Level","What it covers","Details"],
+    levels: [
+      ["Level 1 — Trained Contractor","Introduction to wood rot and prevention, durable repair knowledge, correct rot removal, the 7 Steps to a Durable Repair, health and safety, extensive hands-on practice","1 day, 09:00–16:00 · 6–8 delegates · £149 + VAT · no experience needed"],
+      ["Level 2 — Advanced Contractor","Review of working methods and the 7 Steps, wood knowledge, case studies. Workshops: resin repair, cill front renewal, splice, glazing repair with putty replacement, on a lifelike window frame simulator","1 day · 4–6 delegates · £249 + VAT · Level 1 required first"]
+    ],
+    benefits: [
+      { h:"Money", icon:"coins", p:"£149 for a day, against the enquiries the listing generates and the failure costs he stops paying. He starts selling timber repair rather than just carrying it out." },
+      { h:"Time", icon:"clock", p:"He works faster because he knows the 7 Steps instead of improvising. One day invested, years of return." },
+      { h:"Certainty", icon:"shield", p:"Personal pass card, company listed on repair-care.co.uk, and a 10-year product guarantee — subject to conditions — to put in front of his own client." }
+    ],
+    asks: null,
+    signals: [
+      ["&ldquo;First time I&rsquo;ve tackled this — where do I start?&rdquo;","Level 1 Trained Contractor"],
+      ["&ldquo;I can never get that corner right&rdquo; or &ldquo;how do you do a cill front?&rdquo;","Level 2 Advanced Contractor — cill front renewal and splice are on the syllabus"],
+      ["&ldquo;The housing association wants a guarantee on the work&rdquo;","Level 1 now, and a conversation with Repair Care about the guarantee conditions"]
+    ],
+    notes: "Book via <strong>repair-care.co.uk/training</strong> — dates run through 2026 and popular ones sell out. Take his name and company and pass it to your Repair Care account manager. <span class='verify'>VERIFY the preferred booking route for stockists</span> Course fees are the published rates. <span class='verify'>VERIFY current pricing before quoting</span> Getting a question from a conservation officer or listed-building client? The FAQ invites them to contact Repair Care directly — pass that on rather than guessing.",
+    say: null,
+    quiz: [
+      { q:"How many training levels are there, and how long is each one?", correct:1, opts:[
+        ["Two levels of half a day each","Wrong. You&rsquo;d be underselling it — each is a full practical day, 09:00 to 16:00."],
+        ["Two levels of one day each: Level 1 Trained Contractor and Level 2 Advanced Contractor","Right. Level 2 is only open to people who&rsquo;ve done Level 1."],
+        ["One course lasting a week","Wrong. That sounds like an impossible ask — no contractor can lose a week."]
+      ]},
+      { q:"What does a customer get from completing Level 1, beyond the knowledge?", correct:1, opts:[
+        ["A discount on products","Wrong — and don&rsquo;t promise it. That isn&rsquo;t what the course is about."],
+        ["A personal pass card and his company listed on the Repair Care website as a trained contractor","Right. The listing is what generates enquiries — that&rsquo;s the commercial argument."],
+        ["An extended guarantee on everything he buys","Careful. Repair Care guarantees its products for 10 years subject to conditions; that isn&rsquo;t something the course itself unlocks. Don&rsquo;t over-promise at the counter."]
+      ]},
+      { q:"A customer asks how to do a cill front renewal. Which level covers it?", correct:1, opts:[
+        ["Level 1","Not quite. Level 1 is the foundation: causes of decay, rot removal, the 7 Steps, basic repairs."],
+        ["Level 2 — cill front renewal, splice and glazing repair are the practical workshops","Right, and he&rsquo;ll need Level 1 first. Tell him both, so he can plan it."],
+        ["Neither — that&rsquo;s a joinery job","Wrong, and you&rsquo;d be sending away work the Repair Care system is designed for."]
+      ]},
+      { q:"A decorator has to quote a housing association and they&rsquo;re asking for a guarantee on the work. He asks whether that&rsquo;s possible. What do you do?", correct:2, opts:[
+        ["Tell him Repair Care gives a 10-year guarantee, no problem","Too quick and not precise. The guarantee is on the products, subject to conditions — and those conditions are about correct preparation and application."],
+        ["Say you don&rsquo;t know and point him at the website","Missed opportunity. This is exactly the moment you go from supplier to adviser."],
+        ["Explain that products are guaranteed for 10 years subject to conditions, that correct preparation is what those conditions rest on, and offer to put him in touch with Repair Care","Right. You answer his real question — winning that quote — and you put him on the path that makes him a regular."]
+      ]}
+    ],
+    remember: "A trained customer is a regular customer. Two levels, one day each, £149 and £249 — and the listing on the Repair Care site sends him work.",
+    links: [
+      ["All UK training","https://repair-care.co.uk/training/",""],
+      ["Level 1 Trained Contractor","https://repair-care.co.uk/training/trained-contractor-course/",""],
+      ["Level 2 Advanced Contractor","https://repair-care.co.uk/training/advanced-contractor-course/",""],
+      ["Trained companies directory","https://repair-care.co.uk/trained-companies/",""],
+      ["The CE Delft research on repair vs replacement","https://repair-care.co.uk/blogs/co2-saving-repairing/",""]
+    ]
+  }
+  ,{
+    id: "dry-flex-sf", n: "04", type: "Product", duur: "± 4 min",
+    title: "DRY FLEX® Super Finish: the small one, for small defects",
+    railTitle: "Super Finish",
+    hook: "A decorator has sanded a window back and finds nail holes and small blemishes all over it. He wants it in primer this afternoon. <em>&ldquo;Do I really have to mix up a whole epoxy set for that?&rdquo;</em><br><br>No. There is a separate product for exactly this — and plenty of counter staff don&rsquo;t know it.",
+    goals: [
+      "explain what DRY FLEX® Super Finish is and is not for;",
+      "draw the line between Super Finish and DRY FLEX® 4 in one sentence;",
+      "say why no primer belongs with this one."
+    ],
+    video: { id:"n-68RzixIqY", title:"DRY FLEX® Super Finish A&amp;B How-To-Video Tutorial", dur:"1:24",
+      task:"Look for two things. <b>(1)</b> How thin the layers are. <b>(2)</b> How quickly it can be sanded." },
+    core: [
+      { h:"What is it?", p:"A durable fine surface filler that combines the best of a fine surface filler and an epoxy in one product. <strong>Application period 7–10 minutes at 20 °C, paintable after 30 minutes</strong> (1 hour at 5 °C). Repair thickness 0–6 mm, application temperature 0–30 °C. Also usable on masonry, plaster, concrete and metal." },
+      { h:"When do you recommend it?", p:"<strong>Yes:</strong> nail holes, screw holes, cracks and small blemishes — and repairs to small defects in an existing DRY FLEX® repair. Internal and external.<br><strong>No:</strong> damage caused by decay or by stress in the substrate. Super Finish will not solve that; it needs DRY FLEX® 4 or 16." },
+      { h:"The exception to the primer rule", p:"With DRY FLEX® Super Finish <strong>no pre-treatment is required</strong> — the product page states it plainly. It is the only repair product in this training for which that is true: DRY FLEX® 4, DRY FLEX® 16 and BIO FLEX™ all still need DRY FIX® UNI. Know the difference, or you will sell a customer a pack he does not need. <span class='verify'>VERIFY whether the full range holds any further exceptions</span>" }
+    ],
+    benefits: [
+      { h:"Money", icon:"coins", p:"No separate primer and a small pack: the customer solves a small defect without opening a full repair set." },
+      { h:"Time", icon:"clock", p:"Sanded and painted after half an hour. He stays in the rhythm of his painting rather than losing a day." },
+      { h:"Certainty", icon:"shield", p:"A permanent repair rather than a temporary fix — and it cures fast in cold weather too." }
+    ],
+    asks: [
+      { q:"How deep is the defect?", a:"Up to <b>6 mm</b> is Super Finish work. Deeper means DRY FLEX® 4 or 16." },
+      { q:"What caused the damage?", a:"A nail hole or a blemish: Super Finish. <b>Decay or stress in the substrate: not Super Finish</b> — he would only be moving the problem along." }
+    ],
+    attach: [
+      ["DRY FLEX® Super Finish","2027005 · 200 ml + 100 ml","The product itself"],
+      ["Filling knives","","Thin layers need a clean edge"],
+      ["Abrasive paper","","He can be sanding within half an hour"],
+      ["EASY•Q™ WIPES","","Cleaning tools before it cures"]
+    ],
+    notes: "<strong>Mind the short 7–10 minute application period.</strong> Mix what he will use in those ten minutes, no more. At 5 °C it is ready in an hour and at 20 °C in half an hour, which makes it a useful cold-weather product for anyone who wants to keep moving. There are also a 2-in-1 cartridge and a MINI version. <span class='verify'>VERIFY the UK article codes for the 2-in-1 and MINI</span>",
+    say: "For nail holes and small blemishes you don&rsquo;t need the big set. This is the product made for it, and you can paint over it in half an hour.",
+    fig: {
+      core: [
+        { t:"bars", hi:0,
+          items:[{l:"Super Finish",v:0.5,t:"30 min"},{l:"DRY FLEX® 4",v:4,t:"4 hours"},{l:"BIO FLEX™ ALLROUND",v:12,t:"12 hours"},{l:"DRY FLEX® 16",v:16,t:"16 hours"}],
+          alt:"Comparison of time to sanding and painting per product",
+          cap:"<b>How long before it can be sanded and painted</b> (at 20 °C). This is the figure a decorator plans his day around, so always ask about it." }
+      ],
+      counter: [
+        { t:"time",
+          marks:[{x:0,t:"0 min",l:"mix A and B"},{x:0.3,t:"7–10 min",l:"application period at 20 °C"},{x:1,t:"after 30 min",l:"sand &amp; paint",open:true}],
+          alt:"Timeline for DRY FLEX Super Finish",
+          cap:"<b>Ten minutes of work, half an hour of waiting.</b> Compare that with DRY FLEX® 4: 20–25 minutes of work and four hours of waiting." }
+      ]
+    },
+    quiz: [
+      { q:"Up to what repair thickness do you use DRY FLEX® Super Finish?", correct:0, opts:[
+        ["Up to 6 mm","Right. Beyond that it stops being a Super Finish job and becomes DRY FLEX® 4 or 16."],
+        ["Up to 20 mm","Wrong. That is the DRY FLEX® 4 range at normal temperatures."],
+        ["Up to 50 mm","Wrong. That is DRY FLEX® 16 or BIO FLEX™ — the large repairs."]
+      ]},
+      { q:"What pre-treatment goes with DRY FLEX® Super Finish?", correct:1, opts:[
+        ["DRY FIX® UNI, as with every other product","Wrong — and you would be selling the customer something he does not need here. No pre-treatment is required."],
+        ["None; no pre-treatment is required for Super Finish","Right. This is the exception. DRY FLEX® 4, 16 and BIO FLEX™ all still need the primer."],
+        ["A coat of primer paint","Wrong. The repair comes before the paint system."]
+      ]},
+      { q:"A customer wants to use Super Finish where the timber has rotted. What do you say?", correct:2, opts:[
+        ["Fine, as long as he builds it up in thin layers","Wrong. Layer thickness is not the problem — the cause of the damage is."],
+        ["Fine, as long as he primes first","Wrong. Priming does not change the fact that Super Finish is not for decay."],
+        ["Super Finish is for small defects, not decay: cut the rot out first, then DRY FLEX® 4 or 16","Right. Otherwise he simply moves the problem and is back at your counter next year."]
+      ]},
+      { q:"Situation. A customer says: &ldquo;It&rsquo;s three nail holes — do I really have to buy a set for that?&rdquo; What do you do?", correct:1, opts:[
+        ["Give him what is left in an opened pack","Don&rsquo;t. You have no idea of its shelf life and no ground to stand on if it fails."],
+        ["Explain that Super Finish is exactly the small, fast product for this and that he can paint over it in half an hour","Right. You sell a solution rather than a set, and he remembers that you didn&rsquo;t oversell him."],
+        ["Point him at the ordinary filler on the shelf","Missed opportunity. Ordinary filler is not a permanent repair, and you lose both the sale and the advice moment."]
+      ]},
+    ],
+    remember: "Super Finish = small defect, up to 6 mm, no primer, painted over in half an hour.",
+    links: [
+      ["Product page DRY FLEX® Super Finish","https://repair-care.co.uk/product/dry-flex-sf/",""],
+      ["Video: Super Finish 2-in-1 tutorial","https://www.youtube.com/watch?v=RUc9TYFFLHI","1:24"],
+      ["Video: Super Finish MINI","https://www.youtube.com/watch?v=MIK7R-erQcU","1:29"]
+    ]
+  },
+
+  {
+    id: "dry-flex-16", n: "05", type: "Product", duur: "± 5 min",
+    title: "DRY FLEX® 16: nearly two hours to get it right",
+    railTitle: "DRY FLEX® 16",
+    hook: "A decorator has a cill to splice over a metre and a half. With a compound that stiffens after twenty minutes that is hopeless: he is not halfway before he has to mix again.<br><br>DRY FLEX® 16 exists for exactly that problem.",
+    goals: [
+      "explain what DRY FLEX® 16 is for;",
+      "state the difference from DRY FLEX® 4 in one sentence;",
+      "recognise when to move a customer from DRY FLEX® 4 to 16 — and when not to."
+    ],
+    video: { id:"WDMfN1IrgI0", title:"DRY FLEX® 16 How-To-Video Tutorial", dur:"2:04",
+      task:"Note the size of the repair being made, and what is said about the time the applicator has." },
+    core: [
+      { h:"What is it?", p:"An elastic repair compound for large timber repairs and splicing, with a <strong>working window of 1.5 to 2 hours at 20 °C</strong>. That lets the applicator fill, laminate and model large areas without the material stiffening under his hands. Repair thickness 5–50 mm, with excellent modelling qualities and slump resistance." },
+      { h:"The difference from DRY FLEX® 4 — this is the point", p:"Both are elastic compounds that behave like timber once cured. The difference is <strong>where the time sits</strong>. DRY FLEX® 4: short working window (20–25 min), short wait (4 hours). DRY FLEX® 16: long working window (1.5–2 hours), long wait (16 hours). So you are not choosing on quality but on one question: does he need time <em>during</em> the job, or <em>after</em> it?" },
+      { h:"Mind the temperature", p:"DRY FLEX® 16 applies at <strong>10 to 35 °C</strong> — not from 0 °C like DRY FLEX® 4. In cold weather it is not the product to keep working outside with. DRY FIX® UNI pre-treatment is required, as usual." }
+    ],
+    benefits: [
+      { h:"Money", icon:"coins", p:"No waste from mixed compound going off before it is used, and large repairs done in one pass instead of in sections." },
+      { h:"Time", icon:"clock", p:"Nearly two hours of unhurried work. It cures overnight, so on a multi-day job it costs him no time at all." },
+      { h:"Certainty", icon:"shield", p:"A permanent, elastic repair up to 50 mm thick that can be planed, sawn, nailed, screwed, sanded and painted once cured." }
+    ],
+    asks: [
+      { q:"How big is the repair, and do you need time while applying it?", a:"Splicing or modelling a large area: <b>16</b>. A handful of small spots: DRY FLEX® 4." },
+      { q:"When does it need painting?", a:"Does it need a coat today? Then 16 is out — <b>16 hours</b> is the wait. If tomorrow is fine, it is the better choice." }
+    ],
+    attach: [
+      ["DRY FIX® UNI","2010005","Primer. Required here, unlike DRY FLEX® Super Finish"],
+      ["DRY FLEX® 16","2021005 · 300 ml + 100 ml","The repair compound itself"],
+      ["EASY•Q™ dispensing gun","","For an even output of A and B"],
+      ["Shaping tools","","On a large repair, clean modelling is half the job"]
+    ],
+    notes: "The name says it: <strong>16 hours</strong> to sanding and painting at 20 °C. The commonest misunderstanding at the counter is that people think the 16 refers to the working time. Application temperature is 10–35 °C, so this is not a frost-season product — DRY FLEX® 4, which goes from 0 °C, is the one for that.",
+    say: "Don&rsquo;t ask which product he wants, ask how much time he needs — during the job or after it. That decides whether it is the 4 or the 16.",
+    fig: {
+      core: [
+        { t:"bars", hi:3,
+          items:[{l:"Super Finish",v:0.5,t:"30 min"},{l:"DRY FLEX® 4",v:4,t:"4 hours"},{l:"BIO FLEX™ ALLROUND",v:12,t:"12 hours"},{l:"DRY FLEX® 16",v:16,t:"16 hours"}],
+          alt:"Comparison of time to sanding and painting per product",
+          cap:"<b>Time to sanding and painting</b> (at 20 °C). DRY FLEX® 16 sits at the far right — that is the price of nearly two hours of working time." }
+      ],
+      counter: [
+        { t:"time",
+          marks:[{x:0,t:"0 min",l:"mix A and B"},{x:0.42,t:"1.5–2 hours",l:"working window at 20 °C"},{x:1,t:"after 16 hours",l:"sand &amp; paint",open:true}],
+          alt:"Timeline for DRY FLEX 16",
+          cap:"<b>Here the time sits at the front.</b> Nearly two hours to make the repair, then a night to cure." }
+      ]
+    },
+    quiz: [
+      { q:"How long is the working window of DRY FLEX® 16 at 20 °C?", correct:1, opts:[
+        ["20 to 25 minutes","Wrong. That is DRY FLEX® 4 — and precisely the difference this module is about."],
+        ["1.5 to 2 hours","Right. That is why you recommend it for splicing and large areas."],
+        ["16 hours","Wrong. The 16 refers to the time before sanding and painting, not the working window. This is the commonest mix-up."]
+      ]},
+      { q:"After how long can DRY FLEX® 16 be sanded and painted?", correct:1, opts:[
+        ["After 4 hours","Wrong. That is DRY FLEX® 4."],
+        ["After 16 hours","Right — hence the name. In practice: repair today, paint tomorrow."],
+        ["After 30 minutes","Wrong. That is Super Finish, for small defects up to 6 mm."]
+      ]},
+      { q:"A customer has a large repair and wants to paint today. What do you recommend?", correct:2, opts:[
+        ["DRY FLEX® 16, because it is for large repairs","Incomplete. Large is right, but with a 16-hour wait he will not be painting today."],
+        ["Super Finish, because it is ready in half an hour","Wrong. Super Finish goes to 6 mm and is not for large repairs."],
+        ["DRY FLEX® 4, explaining that he will need to mix in batches","Right. You make the trade-off explicit: he gives up working time in order to paint today. That is the conversation."]
+      ]},
+      { q:"Situation. In January a customer asks for DRY FLEX® 16 for outside work; it is 3 °C. What do you do?", correct:0, opts:[
+        ["Tell him 16 applies from 10 to 35 °C and recommend DRY FLEX® 4, which goes from 0 °C","Right. This is exactly the sort of detail a customer comes back about when it fails — and you have just shown you know it."],
+        ["Sell him the 16; epoxy always cures eventually","Wrong and risky. Outside the stated temperature range you have no assurance about the result."],
+        ["Advise him to wait until spring","Unnecessary. There is a product that works at this temperature — and that is the selling point."]
+      ]},
+    ],
+    remember: "DRY FLEX® 16 = the time sits at the front: nearly two hours working, then sixteen hours waiting. And only from 10 °C.",
+    links: [
+      ["Product page DRY FLEX® 16","https://repair-care.co.uk/product/dry-flex-16/",""],
+      ["Video: how to avoid air pockets in your repair","https://www.youtube.com/watch?v=j1vJlo5Chr4","1:32"]
+    ]
+  },
+
+  {
+    id: "bio-flex", n: "06", type: "Product", duur: "± 5 min",
+    title: "BIO FLEX™ ALLROUND: the biobased option, with a certificate",
+    railTitle: "BIO FLEX™",
+    hook: "A decorator has a housing association tender on his desk asking for biobased materials. He comes in and asks whether you have <em>&ldquo;anything sustainable&rdquo;</em>.<br><br>You do. And more importantly, you can back it up.",
+    goals: [
+      "explain what BIO FLEX™ ALLROUND is and what the certification means;",
+      "state the practical difference from DRY FLEX® 4;",
+      "recognise which customer this genuinely helps."
+    ],
+    video: { id:"886hVPHqqC4", title:"BIO FLEX™ ALLROUND How-To-Video Tutorial", dur:"2:06",
+      task:"Notice that the working method does not differ from DRY FLEX®. The difference is not in the application — see whether you can spot where it <i>is</i>." },
+    core: [
+      { h:"What is it?", p:"The first certified epoxy wood repair paste with <strong>40% biobased raw materials</strong>, carrying the &lsquo;OK BIOBASED&rsquo; mark from TÜV Austria (1 star). Otherwise it works like the DRY FLEX® range: application period 20–25 minutes at 20 °C, repair thickness 5–50 mm, application temperature 0–35 °C. It behaves like timber and moves with it." },
+      { h:"The difference that matters at the counter", p:"Ready for sanding and painting <strong>after 12 hours rather than 4</strong>. Same-day painting is therefore out. That is the one real trade-off you put to the customer: the sustainability requirement against the turnaround. The working window is identical to DRY FLEX® 4, so nothing about his method changes." },
+      { h:"When do you recommend it?", p:"For clients buying on biobased or circular criteria: housing associations, local authorities and tenders with sustainability requirements. DRY FIX® UNI pre-treatment is required here too. For a customer with no sustainability requirement who wants to paint today, DRY FLEX® 4 remains the sensible answer." }
+    ],
+    benefits: [
+      { h:"Money", icon:"coins", p:"He can bid for work with sustainability criteria that he would otherwise be shut out of — and those tend to be the larger, multi-year contracts." },
+      { h:"Time", icon:"clock", p:"The same working window as DRY FLEX® 4, so no change of rhythm. Only the curing takes longer." },
+      { h:"Certainty", icon:"shield", p:"Independently certified by TÜV Austria. He can put that in a tender document — which is not the same as calling yourself sustainable." }
+    ],
+    asks: [
+      { q:"Is your client asking for biobased or circular materials?", a:"If yes, this is the product. If no, DRY FLEX® 4 is quicker — <b>don&rsquo;t sell it where it isn&rsquo;t asked for</b>." },
+      { q:"When does it need painting?", a:"<b>12 hours</b> to sanding and painting. In practice: repair today, paint tomorrow." }
+    ],
+    attach: [
+      ["DRY FIX® UNI","2010005","Primer. Required with BIO FLEX™ as well"],
+      ["BIO FLEX™ ALLROUND","2025005 · 300 ml + 100 ml","The repair compound itself"],
+      ["Shaping tools","","Same method as DRY FLEX®"],
+      ["EASY•Q™ WIPES","","Cleaning before it cures"]
+    ],
+    notes: "Alongside ALLROUND there is also a <strong>BIO FLEX™ COOL</strong>. <span class='verify'>VERIFY the exact difference between ALLROUND and COOL before advising on it — see video Vr0Xd3a4ohg (2:04)</span> Pair this module with module 08, which carries the CO₂ evidence that completes the sustainability argument for your customer.",
+    say: "If your client is asking for biobased, you can back this up with a TÜV Austria certificate. That carries more weight than a claim.",
+    fig: {
+      core: [
+        { t:"bars", hi:2,
+          items:[{l:"Super Finish",v:0.5,t:"30 min"},{l:"DRY FLEX® 4",v:4,t:"4 hours"},{l:"BIO FLEX™ ALLROUND",v:12,t:"12 hours"},{l:"DRY FLEX® 16",v:16,t:"16 hours"}],
+          alt:"Comparison of time to sanding and painting per product",
+          cap:"<b>The whole trade-off in one picture.</b> BIO FLEX™ does everything DRY FLEX® 4 does, but your customer waits twelve hours instead of four. Tell him up front and it is not a problem." }
+      ]
+    },
+    quiz: [
+      { q:"How much biobased raw material does BIO FLEX™ ALLROUND contain?", correct:1, opts:[
+        ["10%","Wrong, and you would be underselling the product."],
+        ["40%, certified by TÜV Austria","Right. Give the figure and the certifying body — that is what makes it stand up."],
+        ["100%","Wrong, and a dangerous promise. It is an epoxy with 40% biobased raw materials, not a fully biobased product."]
+      ]},
+      { q:"What is the main practical difference from DRY FLEX® 4?", correct:1, opts:[
+        ["A longer working window","Wrong. The working window is the same: 20–25 minutes at 20 °C."],
+        ["Sanding and painting after 12 hours instead of 4","Right. That is the only thing that changes your customer&rsquo;s planning."],
+        ["No primer required","Wrong. That applies only to Super Finish. BIO FLEX™ needs DRY FIX® UNI."]
+      ]},
+      { q:"For which customer is BIO FLEX™ the strongest argument?", correct:2, opts:[
+        ["The one who wants to finish as fast as possible","Wrong — for him DRY FLEX® 4 is better, at four hours rather than twelve."],
+        ["The one looking for the cheapest option","Wrong. This is not a price argument, it is a tender argument."],
+        ["The one working for a client with sustainability criteria","Right. Housing associations, councils and tenders — work he would otherwise miss out on."]
+      ]},
+      { q:"Situation. A customer wants to work biobased and paint the same day. What do you do?", correct:0, opts:[
+        ["Explain honestly that the two don&rsquo;t go together and let him choose: biobased at 12 hours, or DRY FLEX® 4 at 4 hours","Right. Putting an honest trade-off to him earns more trust than half an answer — and he can plan the job around it."],
+        ["Recommend BIO FLEX™ and say twelve hours usually works out fine","Wrong. You set him up to fail and the complaint comes back to you."],
+        ["Recommend DRY FLEX® 4 and let the biobased question drop","Missed opportunity. If his client is asking for it, he has a problem you could have solved."]
+      ]},
+    ],
+    remember: "BIO FLEX™ = 40% biobased with a TÜV Austria certificate, works like DRY FLEX® 4, but painting waits 12 hours.",
+    links: [
+      ["Product page BIO FLEX™ ALLROUND","https://repair-care.co.uk/product/bio-flex-allround/",""],
+      ["Video: BIO FLEX™ COOL","https://www.youtube.com/watch?v=Vr0Xd3a4ohg","2:04"]
+    ]
+  },
+
+  {
+    id: "dry-seal-mp", n: "07", type: "Product", duur: "± 5 min",
+    title: "DRY SEAL™ MP: putty that stops falling out of the frame",
+    railTitle: "DRY SEAL™ MP",
+    hook: "A decorator comes in and asks whether you still stock linseed oil putty. His client has timber frames with single glazing and the putty is crumbling out everywhere.<br><br>You can sell him putty. Or you can sell him the product that stops the same call-back in five years&rsquo; time.",
+    goals: [
+      "explain what DRY SEAL™ MP is and why it replaces putty;",
+      "say which substrates it bonds to;",
+      "recognise that a glazing question is not a decay question."
+    ],
+    video: { id:"dojnkvOgkXI", title:"DRY SEAL™ MP White How-To-Video Tutorial", dur:"2:24",
+      task:"Watch how the material is tooled off, and where in the frame it goes — a very different place from a decay repair." },
+    core: [
+      { h:"What is it?", p:"A permanently elastic, paintable replacement for traditional linseed oil putty, in a single 290 ml cartridge. It permanently replaces putty in <strong>timber and steel frames</strong>, beds in timber and metal glazing beads, fills nail and screw holes, and seals exposed end grain. Internal and external." },
+      { h:"Why not just putty?", p:"Linseed oil putty hardens, shrinks and eventually lets go — exactly the problem the customer is standing in front of you with. DRY SEAL™ MP stays flexible and moves with the frame. It is also <strong>UV-resistant and can be left unpainted</strong>, and it is compatible with acoustic, laminated and double glazing and with polycarbonate." },
+      { h:"Application", p:"Application period 15 minutes at 20 °C, <strong>ready for sanding and painting after 2 hours</strong>, application temperature 5–40 °C. Colour: brilliant white. A brown version is available as a separate product." }
+    ],
+    benefits: [
+      { h:"Money", icon:"coins", p:"One product for glazing, joints, holes and end grain. And the call-back that putty generates after a few years does not happen." },
+      { h:"Time", icon:"clock", p:"Paintable after two hours, so the glazing and the painting fit into the same day." },
+      { h:"Certainty", icon:"shield", p:"Permanently flexible and compatible with the glazing types that often cause trouble for ordinary sealants — laminated, acoustic, double glazing and polycarbonate." }
+    ],
+    asks: [
+      { q:"Is this about the glazing or about the timber?", a:"The key question of this module. Crumbling putty is a <b>glazing</b> problem, not a decay problem — though the two often turn up in the same frame." },
+      { q:"What glazing is in it, and does it need painting?", a:"Laminated, acoustic, double glazing and polycarbonate are all fine. And it is UV-resistant, so it <b>can</b> be left unpainted." }
+    ],
+    attach: [
+      ["DRY SEAL™ MP","2511105 · 290 ml cartridge","Brilliant white; brown is a separate product"],
+      ["Caulking gun","","A standard gun — nothing special needed"],
+      ["Tooling knife","","Tooling it off cleanly decides how it looks"],
+      ["Cleaning cloths","","Wipe off straight away, don&rsquo;t let it cure"]
+    ],
+    notes: "<strong>Sealing exposed end grain is the forgotten use.</strong> That is where moisture gets into the timber and where decay usually starts — worth mentioning while the customer already has a cartridge in his hand. Repair Care has a separate method for glazing: the 7 Steps to a durable glazing seal. <span class='verify'>VERIFY the current link to that method and whether it may be handed to customers</span>",
+    say: "Putty hardens, shrinks and lets go — which is exactly why your client is calling you back. This stays flexible, and you can paint it after two hours.",
+    fig: {
+      core: [
+        { t:"time",
+          marks:[{x:0,t:"0 min",l:"apply"},{x:0.4,t:"15 min",l:"tool off"},{x:1,t:"after 2 hours",l:"sand &amp; paint",open:true}],
+          alt:"Timeline for DRY SEAL MP",
+          cap:"<b>Glazing and painting on the same day.</b> Fifteen minutes to tool it off, two hours before paint can go on." }
+      ],
+      counter: [
+        { t:"steps", hi:3,
+          items:["Remove old putty","Substrate clean and dry","Apply DRY SEAL™ MP","Tool off immediately","Leave 2 hours","Overpaint"],
+          cap:"<b>Step 4 decides the finish.</b> Tooling has to happen straight away, while the material is still workable. <span class='verify'>VERIFY this sequence against the official glazing method</span>" }
+      ]
+    },
+    quiz: [
+      { q:"What is DRY SEAL™ MP primarily for?", correct:1, opts:[
+        ["Repairing decayed timber in frames","Wrong. That is DRY FLEX® work — a different product group and a different customer question."],
+        ["Permanently replacing putty in timber and steel frames","Right. It also seals joints, holes and end grain."],
+        ["Bonding the glass into the frame","Wrong. It is a seal, not a structural bond."]
+      ]},
+      { q:"After how long can DRY SEAL™ MP be painted?", correct:2, opts:[
+        ["After 15 minutes","Wrong. That is the application period — the time he has to tool it off."],
+        ["After 30 minutes","Wrong. That is Super Finish, a completely different product."],
+        ["After 2 hours","Right, which is why the glazing and the painting fit into one day."]
+      ]},
+      { q:"Which glazing types is it compatible with?", correct:2, opts:[
+        ["Single glazing only","Wrong, and you would be leaving sales on the table."],
+        ["Single and double glazing only","Incomplete. You are missing laminated and acoustic glazing, which is where ordinary sealants most often fail."],
+        ["Acoustic, laminated, double glazing and polycarbonate","Right. That is exactly where ordinary sealants often cause problems."]
+      ]},
+      { q:"Situation. A customer asks for linseed oil putty. What do you do?", correct:1, opts:[
+        ["Sell him putty — it is what he asked for","Understandable, but in a few years his client has the same problem, and this time it is his own work that failed."],
+        ["Ask what it is for and explain that putty hardens and lets go, while DRY SEAL™ MP stays flexible","Right. You are not contradicting his request, you are adding the reason it failed last time."],
+        ["Tell him putty is no longer allowed","Wrong and far too absolute. It is perfectly legal — it just does not last as long."]
+      ]},
+    ],
+    remember: "When a customer asks for putty, what he actually wants is a glazing seal that stays put. That is DRY SEAL™ MP.",
+    links: [
+      ["Product page DRY SEAL™ MP","https://repair-care.co.uk/product/dry-seal-mp/",""],
+      ["Video: DRY SEAL™ MP Brown","https://www.youtube.com/watch?v=sxEOG_qDt58","2:22"]
+    ]
+  },
+
+  {
+    id: "sustainability", n: "08", type: "Service", duur: "± 5 min",
+    title: "Sustainability as a sales argument: what the research actually says",
+    railTitle: "Sustainability",
+    hook: "A regular tells you he has just lost a quote to a replacement-windows firm. The client wanted to improve the building&rsquo;s sustainability — and assumed new windows were how you did that.<br><br>It is the other way round. And there is independent research proving it.",
+    goals: [
+      "quote the key figures from the CE Delft study;",
+      "explain why repair beats replacement environmentally;",
+      "recognise the customer for whom this argument decides the job."
+    ],
+    video: { id:"XSLURHmkxFI", title:"Repairing window frames is more environmentally friendly than replacement", dur:"2:30",
+      task:"Note <b>who</b> carried out the research and <b>what exactly is being compared</b>. Those are the two things your customer has to be able to repeat." },
+    core: [
+      { h:"What was studied?", p:"The independent sustainability research agency <strong>CE Delft</strong> compared repairing timber window frames with replacing them, using a life cycle assessment (LCA) on a cradle-to-grave basis and following EU guidelines. That means the entire life of the product is counted, from raw material to disposal." },
+      { h:"The result", p:"Repair scores <strong>two to five times better</strong> than fitting a new frame. Where the existing glass is retained, repair scores <strong>nine to twenty-seven times better</strong>. In the worked example — a home with six timber frames of which three are repaired over 25 years — the saving is <strong>584 kg CO₂ eq., or 98%</strong>. Across the life of the repair the reduction reaches 90% or more. Against aluminium or uPVC replacements the gap is wider still, because those materials carry a higher footprint." },
+      { h:"The caveat that goes with it", p:"The study looked at <strong>pure epoxy repair materials</strong>. Polyester resins and impure epoxy-based materials do not achieve the same sustainability. Always say so: it is simultaneously your answer to the customer who thinks a cheap two-pack filler gets him the same result." }
+    ],
+    benefits: [
+      { h:"Money", icon:"coins", p:"It wins your customer work from housing associations, management companies and councils that award on sustainability — the multi-year contracts." },
+      { h:"Time", icon:"clock", p:"Repair is less work than replacement: no removal, no making good the brickwork, no redecoration inside." },
+      { h:"Certainty", icon:"shield", p:"Independent research using a recognised method. That is not a manufacturer&rsquo;s claim — and it is what a buyer wants to see." }
+    ],
+    asks: null,
+    signals: [
+      ["&ldquo;The client wants to improve sustainability and is thinking about new windows&rdquo;","Repair <i>is</i> the sustainable option: two to five times better, and nine to twenty-seven times if the glass stays"],
+      ["&ldquo;I need something about sustainability in my quote&rdquo;","Point them at the CE Delft study, and at BIO FLEX™ (module 06) if biobased material is also being asked for"],
+      ["&ldquo;I&rsquo;d rather use a cheap two-pack filler&rdquo;","The caveat from the study: polyester resins do not achieve this — so the argument falls away"]
+    ],
+    notes: "The study was commissioned by Repair Care but carried out by an <strong>independent agency</strong> using a recognised method. Be open about that if a customer asks; it is stronger than leaving it out. The full report is public and linked below. Pair this module with module 06 (BIO FLEX™) for the customer being judged on both carbon and biobased content.",
+    say: null,
+    fig: {
+      core: [
+        { t:"bars", hi:1,
+          items:[{l:"Replacement",v:100,t:"100%"},{l:"Repair",v:2,t:"2%"}],
+          alt:"CO2 emissions of repair versus replacement in the worked example",
+          cap:"<b>The CE Delft worked example.</b> Six timber frames, three of them repaired over 25 years: <b>584 kg CO₂ eq. less, or 98%</b>. Across the life of the repair the reduction reaches 90% or more." }
+      ],
+      counter: [
+        { t:"ladder",
+          items:[{n:"2–5×",l:"better than replacing"},{n:"9–27×",l:"if the glass stays"},{n:"90%+",l:"less CO₂ over the lifetime"}],
+          alt:"The three figures from the study",
+          cap:"<b>Three figures, in this order.</b> The middle one is the strongest: many clients assume the glass has to come out anyway." }
+      ]
+    },
+    quiz: [
+      { q:"Which agency carried out the research?", correct:1, opts:[
+        ["TNO","Not in this context. TNO tests the durability of the repair materials themselves — don&rsquo;t confuse the two."],
+        ["CE Delft","Right. An independent research agency specialising in sustainability. Name it — that is what makes the argument stand up."],
+        ["BBA","Wrong. That is a certification body, not a research agency."]
+      ]},
+      { q:"How much better does repair score than replacement?", correct:0, opts:[
+        ["Two to five times better, and nine to twenty-seven times if the glass stays","Right. That second figure is your strongest card with a client who wants to keep the glass."],
+        ["About 10% better","Wrong, and it sells the argument far too cheaply."],
+        ["Exactly twice as good","Incomplete. It is a range, and the upper end is the part worth quoting."]
+      ]},
+      { q:"Which caveat always belongs with it?", correct:2, opts:[
+        ["That it only applies to timber frames","Partly true, but not the key caveat — against aluminium and uPVC the gap is in fact wider."],
+        ["That the research is out of date","Wrong, and not something to assert without grounds."],
+        ["That polyester resins and impure epoxies do not achieve the same sustainability","Right. This is also your answer to the customer who thinks cheap filler gets the same result."]
+      ]},
+      { q:"Situation. A managing agent at your counter says they want to improve sustainability by fitting new windows. What do you do?", correct:2, opts:[
+        ["Tell them repair is cheaper","True, but it doesn&rsquo;t answer their question. They asked about sustainability, not price."],
+        ["Refer them to a window company","Missed opportunity — and you give away the job your customer could have had."],
+        ["Explain that independent CE Delft research shows repair scores two to five times better, and point them at a trained contractor","Right. You answer the real question and route them to someone who can carry out the work properly."]
+      ]},
+    ],
+    remember: "Repair is not the cheap alternative to replacement — according to CE Delft it is the sustainable choice: two to five times better, and nine to twenty-seven times if the glass stays.",
+    links: [
+      ["The research on repair-care.co.uk","https://repair-care.co.uk/blogs/co2-saving-repairing/",""],
+      ["The full CE Delft report (pdf)","https://cedelft.eu/wp-content/uploads/sites/2/2023/04/CE_Delft_210382_Repair-Care_public_Def.pdf",""],
+      ["Trained companies directory","https://repair-care.co.uk/trained-companies/",""]
+    ]
+  }
+];
+
+KEY = "rc-academy-uk-v2";
+boot();
+</script>
